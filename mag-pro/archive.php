@@ -12,78 +12,74 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<div class="magpro-container">
-	<div class="magpro-main-layout">
-		<main id="primary" class="site-main magpro-content-area">
+<div class="container row-x1">
+	<div class="content-wrapper">
+		<main id="main-wrapper" class="blog-posts">
 
 			<?php if ( have_posts() ) : ?>
 
-				<header class="page-header magpro-archive-header" style="background: var(--magpro-card-bg); border: 1px solid var(--magpro-border); border-radius: var(--magpro-radius); padding: 28px; margin-bottom: 30px;">
+				<header class="page-header magpro-archive-header" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 25px; border-left: 4px solid var(--main-color);">
 					<?php
-					the_archive_title( '<h1 class="page-title" style="margin: 0 0 8px; font-size: 26px; font-weight: 800; color: var(--magpro-text);">', '</h1>' );
-					the_archive_description( '<div class="archive-description" style="color: var(--magpro-text-muted); font-size: 15px; margin: 0;">', '</div>' );
+					the_archive_title( '<h1 class="page-title" style="margin: 0 0 6px; font-size: 24px; font-weight: 800; color: var(--title-color);">', '</h1>' );
+					the_archive_description( '<div class="archive-description" style="color: var(--meta-color); font-size: 14px; margin: 0;">', '</div>' );
 					?>
 				</header>
 
-				<div class="magpro-posts-grid">
+				<div class="index-post-wrap">
 					<?php
 					while ( have_posts() ) :
 						the_post();
 						?>
-						<article id="post-<?php the_ID(); ?>" <?php post_class( 'magpro-post-card' ); ?>>
+						<article id="post-<?php the_ID(); ?>" <?php post_class( 'index-post' ); ?>>
 							<?php if ( has_post_thumbnail() ) : ?>
-								<div class="magpro-post-thumbnail-wrap">
+								<div class="entry-image">
 									<a href="<?php the_permalink(); ?>">
-										<?php the_post_thumbnail( 'large', array( 'class' => 'magpro-post-thumb-img' ) ); ?>
+										<?php the_post_thumbnail( 'magpro-medium' ); ?>
 									</a>
 								</div>
 							<?php endif; ?>
 
-							<div class="magpro-post-content">
+							<div class="entry-header">
 								<?php
 								$categories = get_the_category();
 								if ( ! empty( $categories ) ) :
 									?>
-									<a href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>" class="magpro-cat-badge">
+									<a href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>" class="entry-category">
 										<?php echo esc_html( $categories[0]->name ); ?>
 									</a>
 								<?php endif; ?>
 
-								<h2 class="magpro-post-title">
+								<h2 class="entry-title">
 									<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 								</h2>
 
-								<div class="magpro-post-meta">
-									<span class="magpro-meta-item magpro-meta-author">
-										<?php echo get_avatar( get_the_author_meta( 'ID' ), 22, '', '', array( 'style' => 'border-radius:50%; vertical-align:middle; margin-right:4px;' ) ); ?>
+								<div class="entry-meta">
+									<span class="entry-author">
+										<i class="far fa-user"></i>
 										<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php echo esc_html( get_the_author() ); ?></a>
 									</span>
 
-									<span class="magpro-meta-item magpro-meta-date">
-										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+									<span class="entry-time">
+										<i class="far fa-clock"></i>
 										<?php echo esc_html( get_the_date() ); ?>
 									</span>
 
-									<span class="magpro-meta-item magpro-meta-views">
-										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+									<span class="entry-views">
+										<i class="far fa-eye"></i>
 										<?php echo esc_html( magpro_get_post_views() ); ?>
 									</span>
 
 									<?php if ( comments_open() || get_comments_number() ) : ?>
-										<span class="magpro-meta-item magpro-meta-comments">
-											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+										<span class="entry-comments">
+											<i class="far fa-comment-alt"></i>
 											<?php comments_number( '0', '1', '%' ); ?>
 										</span>
 									<?php endif; ?>
 								</div>
 
-								<div class="magpro-post-excerpt">
-									<?php the_excerpt(); ?>
-								</div>
-
-								<a href="<?php the_permalink(); ?>" class="magpro-read-more-btn">
-									<?php esc_html_e( 'Read More', 'mag-pro' ); ?> &rarr;
-								</a>
+								<p class="excerpt">
+									<?php echo wp_trim_words( get_the_excerpt(), 24, '...' ); ?>
+								</p>
 							</div>
 						</article>
 						<?php
@@ -91,18 +87,20 @@ get_header();
 					?>
 				</div>
 
-				<?php
-				the_posts_pagination(
-					array(
-						'prev_text' => '&larr; ' . esc_html__( 'Previous', 'mag-pro' ),
-						'next_text' => esc_html__( 'Next', 'mag-pro' ) . ' &rarr;',
-					)
-				);
-				?>
+				<div class="blog-pager">
+					<?php
+					the_posts_pagination(
+						array(
+							'prev_text' => '<i class="fas fa-chevron-left"></i>',
+							'next_text' => '<i class="fas fa-chevron-right"></i>',
+						)
+					);
+					?>
+				</div>
 
 			<?php else : ?>
 
-				<div class="magpro-no-results" style="padding: 40px; background: var(--magpro-card-bg); border: 1px solid var(--magpro-border); border-radius: var(--magpro-radius); text-align: center;">
+				<div class="magpro-no-results" style="padding: 40px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); text-align: center;">
 					<h2><?php esc_html_e( 'Nothing Found', 'mag-pro' ); ?></h2>
 					<p><?php esc_html_e( 'It seems there are no posts in this archive.', 'mag-pro' ); ?></p>
 				</div>

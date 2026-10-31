@@ -1,7 +1,7 @@
 /**
  * Mag Pro Theme Stylesheet
- * Ultra-fast, lightweight, responsive magazine & blog styling
- * Version: 2.0.0
+ * Faithfully re-engineered from the original MagPro XML template
+ * Version: 2.1.0
  * Author: Developer Zahir (https://developerzahir.com/)
  */
 
@@ -9,105 +9,125 @@
    1. Theme Variables & Base
    ========================================================================== */
 :root {
-  --magpro-primary: #0066cc;
-  --magpro-primary-hover: #0052a3;
-  --magpro-bg: #f8fafc;
-  --magpro-card-bg: #ffffff;
-  --magpro-surface: #f1f5f9;
-  --magpro-text: #1e293b;
-  --magpro-text-muted: #64748b;
-  --magpro-border: #e2e8f0;
-  --magpro-radius: 8px;
-  --magpro-radius-lg: 12px;
-  --magpro-shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --magpro-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
-  --magpro-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -4px rgba(0,0,0,0.07);
-  --magpro-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  --magpro-font-heading: inherit;
-  --magpro-container: 1200px;
-  --magpro-transition: 0.25s ease;
+  --main-color: #ff2232;
+  --main-color-hover: #e01b2a;
+  --body-font: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --title-font: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --body-bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --outer-bg: #ffffff;
+  --title-color: #111111;
+  --title-hover-color: #ff2232;
+  --meta-color: #777777;
+  --text-color: #444444;
+  --link-color: #ff2232;
+  --tag-bg: #ff2232;
+  --tag-color: #ffffff;
+  --topbar-bg: #ffffff;
+  --topbar-color: #555555;
+  --header-bg: #ffffff;
+  --header-ads-bg: #f5f5f5;
+  --menu-bg: #ff2232;
+  --menu-color: #ffffff;
+  --submenu-bg: #ffffff;
+  --submenu-color: #222222;
+  --border-color: #ebebeb;
+  --radius: 4px;
+  --container-width: 1140px;
+  --transition: 0.25s ease;
 }
 
-[data-theme="dark"] {
-  --magpro-bg: #0b1120;
-  --magpro-card-bg: #1e293b;
-  --magpro-surface: #334155;
-  --magpro-text: #f1f5f9;
-  --magpro-text-muted: #94a3b8;
-  --magpro-border: #283548;
-  --magpro-primary: #38bdf8;
-  --magpro-primary-hover: #0ea5e9;
-  --magpro-shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --magpro-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3);
-  --magpro-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -4px rgba(0,0,0,0.4);
+html[data-theme="dark"] {
+  --body-bg: #15181f;
+  --card-bg: #212530;
+  --outer-bg: #212530;
+  --title-color: #ffffff;
+  --title-hover-color: #ff2232;
+  --meta-color: #a9b4ba;
+  --text-color: #cccccc;
+  --link-color: #ff3b49;
+  --topbar-bg: #212530;
+  --topbar-color: #ffffff;
+  --header-bg: #212530;
+  --header-ads-bg: #282c36;
+  --menu-bg: #171921;
+  --menu-color: #ffffff;
+  --submenu-bg: #1e2028;
+  --submenu-color: #ffffff;
+  --border-color: #282c36;
 }
 
 /* ==========================================================================
    2. Layout Container & Grid
    ========================================================================== */
-.magpro-container {
+.container.row-x1 {
   width: 100%;
-  max-width: var(--magpro-container);
+  max-width: var(--container-width);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
 }
 
-.magpro-main-layout {
+.content-wrapper {
   display: flex;
-  gap: 36px;
-  padding-top: 40px;
-  padding-bottom: 60px;
+  gap: 30px;
+  padding-top: 30px;
+  padding-bottom: 50px;
 }
 
-.magpro-content-area {
+#main-wrapper {
   flex: 1;
   min-width: 0;
 }
 
-.magpro-sidebar-area {
-  width: 340px;
+#sidebar-wrapper {
+  width: 320px;
   flex-shrink: 0;
 }
 
 @media (max-width: 991px) {
-  .magpro-main-layout {
+  .content-wrapper {
     flex-direction: column;
     gap: 30px;
-    padding-top: 24px;
-    padding-bottom: 40px;
   }
-  .magpro-sidebar-area {
+  #sidebar-wrapper {
     width: 100%;
   }
 }
 
 /* ==========================================================================
-   3. Fallback Header & Navigation
+   3. MagPro Header (Topbar, Logo + Ads, Red Menu Bar)
    ========================================================================== */
-.magpro-topbar {
-  background-color: var(--magpro-card-bg);
-  border-bottom: 1px solid var(--magpro-border);
-  font-size: 13px;
-  padding: 8px 0;
-  transition: background-color var(--magpro-transition), border-color var(--magpro-transition);
+#magpro-pro-header-wrapper {
+  position: relative;
+  width: 100%;
+  background-color: var(--header-bg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: background-color var(--transition);
 }
 
-.magpro-topbar-inner {
+/* 3.1 Topbar (32px) */
+.topbar-wrap {
+  position: relative;
+  width: 100%;
+  height: 34px;
+  background-color: var(--topbar-bg);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+  line-height: 34px;
+  transition: all var(--transition);
+}
+
+.topbar-wrap .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 34px;
 }
 
-.magpro-topbar-left {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  color: var(--magpro-text-muted);
-}
-
-.magpro-top-menu {
+.main-navbar-menu .top-menu-list {
   display: flex;
   list-style: none;
   margin: 0;
@@ -115,198 +135,393 @@
   gap: 16px;
 }
 
-.magpro-top-menu a {
-  color: var(--magpro-text-muted);
-}
-
-.magpro-top-menu a:hover {
-  color: var(--magpro-primary);
-}
-
-.magpro-main-header {
-  background-color: var(--magpro-card-bg);
-  border-bottom: 1px solid var(--magpro-border);
-  transition: background-color var(--magpro-transition), border-color var(--magpro-transition);
-  position: relative;
-  z-index: 100;
-}
-
-.magpro-main-header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 76px;
-}
-
-.magpro-site-title {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-.magpro-site-title a {
-  color: var(--magpro-text);
-}
-
-.magpro-site-description {
-  margin: 2px 0 0;
+.main-navbar-menu .top-menu-list li a {
+  color: var(--topbar-color);
+  font-weight: 500;
   font-size: 12px;
-  color: var(--magpro-text-muted);
 }
 
-.magpro-primary-nav {
-  display: flex;
-  align-items: center;
+.main-navbar-menu .top-menu-list li a:hover {
+  color: var(--main-color);
 }
 
-.magpro-main-menu {
+.main-navbar-social .social {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 8px;
+  gap: 12px;
 }
 
-.magpro-main-menu > li {
+.main-navbar-social .social li a {
+  color: var(--topbar-color);
+  font-size: 13px;
+  transition: color var(--transition);
+}
+
+.main-navbar-social .social li a:hover {
+  color: var(--main-color);
+}
+
+/* 3.2 Header Content (Logo + 728x90 Ad) */
+.header-content {
+  position: relative;
+  width: 100%;
+  padding: 22px 0;
+  background-color: var(--header-bg);
+}
+
+.header-content .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo-wrap .blog-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.header-logo-wrap .blog-title a {
+  color: var(--title-color);
+}
+
+.toggle-content {
+  display: none;
+}
+
+.header-ads-wrap {
+  flex-shrink: 0;
+  max-width: 728px;
+}
+
+.header-ad-placeholder {
+  width: 728px;
+  max-width: 100%;
+  height: 90px;
+  background-color: var(--header-ads-bg);
+  border: 1px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--meta-color);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+}
+
+/* 3.3 Main Navigation Menu Bar (50px, MagPro Red) */
+.main-menu-wrap {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: var(--menu-bg);
+  z-index: 100;
+  transition: background-color var(--transition);
+}
+
+.main-menu-frame .container {
+  position: relative;
+  height: 50px;
+}
+
+.main-menu-items {
+  display: flex;
+  align-items: center;
+  height: 50px;
   position: relative;
 }
 
-.magpro-main-menu a {
-  display: block;
-  padding: 10px 14px;
-  font-size: 15px;
+.home-icon-link {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.12);
+  color: #ffffff;
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: background-color var(--transition);
+}
+
+.home-icon-link:hover {
+  background-color: rgba(0, 0, 0, 0.22);
+  color: #ffffff;
+}
+
+.magpro-pro-main-menu {
+  flex: 1;
+  height: 50px;
+  margin-right: 100px; /* Leave room for dark toggle & search toggle */
+}
+
+.main-nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+}
+
+.main-nav-list > li {
+  position: relative;
+}
+
+.main-nav-list > li > a {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 16px;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--magpro-text);
-  border-radius: var(--magpro-radius);
-  transition: all var(--magpro-transition);
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: background-color var(--transition);
 }
 
-.magpro-main-menu a:hover,
-.magpro-main-menu .current-menu-item > a {
-  color: var(--magpro-primary);
-  background-color: var(--magpro-surface);
+.main-nav-list > li:hover > a,
+.main-nav-list > li.current-menu-item > a {
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #ffffff;
 }
 
-/* Dropdowns */
-.magpro-main-menu .sub-menu {
+/* Dropdown submenus */
+.main-nav-list .sub-menu {
   position: absolute;
   top: 100%;
   left: 0;
   min-width: 200px;
-  background-color: var(--magpro-card-bg);
-  border: 1px solid var(--magpro-border);
-  border-radius: var(--magpro-radius);
-  box-shadow: var(--magpro-shadow-lg);
-  padding: 8px 0;
+  background-color: var(--submenu-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
   list-style: none;
+  margin: 0;
+  padding: 8px 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
+  transform: translateY(6px);
   transition: all 0.2s ease;
   z-index: 999;
 }
 
-.magpro-main-menu li:hover > .sub-menu,
-.magpro-main-menu li:focus-within > .sub-menu {
+.main-nav-list li:hover > .sub-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-.magpro-main-menu .sub-menu a {
+.main-nav-list .sub-menu a {
+  display: block;
   padding: 8px 18px;
-  font-size: 14px;
-  border-radius: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--submenu-color);
+  transition: background-color var(--transition), color var(--transition);
 }
 
-.magpro-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.main-nav-list .sub-menu a:hover {
+  background-color: rgba(155, 155, 155, 0.08);
+  color: var(--main-color);
 }
 
-.magpro-header-btn {
-  background: none;
-  border: none;
-  color: var(--magpro-text);
-  cursor: pointer;
-  padding: 8px;
-  border-radius: var(--magpro-radius);
+/* 3.4 Dark Mode Toggle (50x50px box) */
+.darkmode-toggle {
+  position: absolute;
+  top: 0;
+  right: 50px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--magpro-transition), color var(--magpro-transition);
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color var(--transition);
 }
 
-.magpro-header-btn:hover {
-  background-color: var(--magpro-surface);
-  color: var(--magpro-primary);
+.darkmode-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-.magpro-mobile-toggle {
-  display: none;
+.darkmode-toggle::after {
+  content: '\f186'; /* Font Awesome moon */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 16px;
 }
 
+html[data-theme="dark"] .darkmode-toggle::after {
+  content: '\f185'; /* Font Awesome sun */
+}
+
+/* 3.5 Search Toggle (50x50px box) */
+.search-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.search-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.search-toggle::after {
+  content: '\f002'; /* Font Awesome search */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.search-active .search-toggle::after {
+  content: '\f00d'; /* Font Awesome close */
+}
+
+/* 3.6 Slide-out Search Bar (#nav-search) */
+#nav-search {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 50px);
+  height: 50px;
+  z-index: 25;
+  background-color: var(--menu-bg);
+  box-sizing: border-box;
+  padding: 10px 15px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+}
+
+.search-active #nav-search {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#nav-search .search-form {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+#nav-search .search-input {
+  float: left;
+  width: calc(100% - 40px);
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+#nav-search .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#nav-search .search-action {
+  float: right;
+  width: 40px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Mobile Responsive Header Styles */
 @media (max-width: 991px) {
-  .magpro-primary-nav {
+  .topbar-wrap {
     display: none;
   }
-  .magpro-mobile-toggle {
+  .header-content {
+    padding: 15px 0;
+  }
+  .header-content .container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .header-ads-wrap {
+    display: none;
+  }
+  .header-logo-wrap {
+    width: 100%;
+  }
+  .logo-content {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .toggle-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mobile-darkmode-toggle,
+  .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background-color: rgba(155, 155, 155, 0.1);
+    color: var(--title-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .mobile-darkmode-toggle::after {
+    content: '\f186';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+  }
+  html[data-theme="dark"] .mobile-darkmode-toggle::after {
+    content: '\f185';
+  }
+  .main-menu-wrap {
+    display: none;
   }
 }
 
-/* ==========================================================================
-   4. Dark Mode Switcher Elements
-   ========================================================================== */
-.magpro-theme-toggle {
-  background: var(--magpro-surface);
-  border: 1px solid var(--magpro-border);
-  color: var(--magpro-text);
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--magpro-transition);
-}
-
-.magpro-theme-toggle:hover {
-  background: var(--magpro-border);
-}
-
-.magpro-icon-sun {
-  display: none;
-}
-.magpro-icon-moon {
-  display: inline-flex;
-}
-
-[data-theme="dark"] .magpro-icon-sun {
-  display: inline-flex;
-}
-[data-theme="dark"] .magpro-icon-moon {
-  display: none;
-}
-
-/* ==========================================================================
-   5. Mobile Drawer Navigation
-   ========================================================================== */
+/* Mobile Drawer */
 .magpro-mobile-drawer {
   position: fixed;
   top: 0;
   left: 0;
-  width: 300px;
+  width: 290px;
   max-width: 85vw;
   height: 100vh;
-  background-color: var(--magpro-card-bg);
+  background-color: var(--card-bg);
   z-index: 10000;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
-  box-shadow: 2px 0 15px rgba(0,0,0,0.15);
+  box-shadow: 2px 0 15px rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -321,23 +536,45 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--magpro-border);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .magpro-mobile-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--magpro-text);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--title-color);
 }
 
 .magpro-mobile-close {
-  background: none;
-  border: none;
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1;
-  color: var(--magpro-text-muted);
+  color: var(--meta-color);
+}
+
+.mobile-search-form {
+  display: flex;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.mobile-search-form input {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  background: var(--body-bg);
+  color: var(--text-color);
+  outline: none;
+}
+
+.mobile-search-form button {
+  background: var(--main-color);
+  color: #ffffff;
+  border: none;
+  padding: 0 14px;
   cursor: pointer;
 }
 
@@ -350,10 +587,10 @@
 .magpro-mobile-menu-list li a {
   display: block;
   padding: 10px 0;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  color: var(--magpro-text);
-  border-bottom: 1px solid var(--magpro-border);
+  color: var(--title-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .magpro-mobile-overlay {
@@ -376,343 +613,451 @@
 }
 
 /* ==========================================================================
-   6. Search Functionality & Modal
+   4. Archive & Blog Posts Loop (.index-post)
    ========================================================================== */
-.magpro-search-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 99999;
+.index-post {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
+  gap: 20px;
+  padding: 0 0 20px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  padding: 16px;
+  border-radius: var(--radius);
+  transition: background-color var(--transition);
 }
 
-.magpro-search-fullscreen.is-open {
-  opacity: 1;
-  visibility: visible;
+.index-post .entry-image {
+  position: relative;
+  width: 240px;
+  height: 155px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background-color: rgba(155,155,155,0.08);
 }
 
-.magpro-search-modal-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
+.index-post .entry-image img {
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(6px);
-}
-
-.magpro-search-modal-container {
-  position: relative;
-  z-index: 2;
-  width: 90%;
-  max-width: 650px;
-}
-
-.magpro-search-close {
-  position: absolute;
-  top: -60px;
-  right: 0;
-  background: none;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 8px;
-  transition: transform 0.2s ease;
-}
-
-.magpro-search-close:hover {
-  transform: scale(1.1);
-}
-
-.magpro-search-modal-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #38bdf8;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-}
-
-.magpro-modal-search-input-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.magpro-modal-search-field {
-  width: 100%;
-  background: #ffffff;
-  border: 2px solid transparent;
-  color: #0f172a;
-  font-size: 20px;
-  padding: 18px 60px 18px 24px;
-  border-radius: var(--magpro-radius-lg);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-  outline: none;
-  transition: border-color var(--magpro-transition);
-}
-
-.magpro-modal-search-field:focus {
-  border-color: #38bdf8;
-}
-
-.magpro-modal-search-submit {
-  position: absolute;
-  right: 14px;
-  background: none;
-  border: none;
-  color: #0066cc;
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.magpro-search-modal-hint {
-  color: #94a3b8;
-  font-size: 13px;
-  margin-top: 12px;
-  text-align: center;
-}
-
-/* ==========================================================================
-   7. Blog Posts, Cards & Elements
-   ========================================================================== */
-.magpro-post-card {
-  background: var(--magpro-card-bg);
-  border: 1px solid var(--magpro-border);
-  border-radius: var(--magpro-radius);
-  overflow: hidden;
-  margin-bottom: 30px;
-  transition: transform var(--magpro-transition), box-shadow var(--magpro-transition);
-}
-
-.magpro-post-thumbnail-wrap {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--magpro-surface);
-}
-
-.magpro-post-thumb-img {
-  width: 100%;
-  height: 260px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.magpro-post-card:hover .magpro-post-thumb-img {
-  transform: scale(1.03);
+.index-post:hover .entry-image img {
+  transform: scale(1.05);
 }
 
-.magpro-post-content {
-  padding: 24px;
+.index-post .entry-header {
+  flex: 1;
+  min-width: 0;
 }
 
-.magpro-cat-badge {
+.entry-category {
   display: inline-block;
-  background-color: var(--magpro-primary);
+  background-color: var(--main-color);
   color: #ffffff !important;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 4px;
-  margin-bottom: 12px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-bottom: 8px;
   letter-spacing: 0.3px;
 }
 
-.magpro-post-title {
-  margin: 0 0 12px;
-  font-size: 22px;
+.index-post h2.entry-title {
+  margin: 0 0 8px;
+  font-size: 19px;
   font-weight: 700;
   line-height: 1.35;
 }
 
-.magpro-post-title a {
-  color: var(--magpro-text);
+.index-post h2.entry-title a {
+  color: var(--title-color);
 }
 
-.magpro-post-title a:hover {
-  color: var(--magpro-primary);
+.index-post h2.entry-title a:hover {
+  color: var(--title-hover-color);
 }
 
-.magpro-post-meta {
+.entry-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 14px;
-  font-size: 13px;
-  color: var(--magpro-text-muted);
-  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--meta-color);
+  margin-bottom: 10px;
 }
 
-.magpro-meta-item {
+.entry-meta span {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
 }
 
-.magpro-post-excerpt {
-  color: var(--magpro-text-muted);
-  font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 18px;
+.entry-meta i {
+  margin-right: 5px;
+  color: var(--main-color);
 }
 
-.magpro-read-more-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.index-post .excerpt {
+  color: var(--text-color);
   font-size: 14px;
-  font-weight: 600;
-  color: var(--magpro-primary);
-}
-
-/* ==========================================================================
-   8. Single Post Layout
-   ========================================================================== */
-.magpro-single-post {
-  background: var(--magpro-card-bg);
-  border: 1px solid var(--magpro-border);
-  border-radius: var(--magpro-radius);
-  padding: 36px;
-}
-
-.magpro-single-title {
-  font-size: 34px;
-  font-weight: 800;
-  line-height: 1.25;
-  margin: 12px 0 16px;
-  color: var(--magpro-text);
-}
-
-.magpro-single-thumb {
-  margin: 24px 0 28px;
-  border-radius: var(--magpro-radius);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-.magpro-single-content {
-  font-size: 17px;
-  line-height: 1.8;
-  color: var(--magpro-text);
-}
-
-.magpro-single-content p {
-  margin-bottom: 24px;
-}
-
-.magpro-single-content h2,
-.magpro-single-content h3,
-.magpro-single-content h4 {
-  color: var(--magpro-text);
-  margin-top: 36px;
-  margin-bottom: 16px;
-}
-
-.magpro-single-content blockquote {
-  border-left: 4px solid var(--magpro-primary);
-  margin: 28px 0;
-  padding: 12px 24px;
-  background: var(--magpro-surface);
-  border-radius: 0 var(--magpro-radius) var(--magpro-radius) 0;
-  font-style: italic;
-}
-
-.magpro-post-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid var(--magpro-border);
-}
-
-.magpro-tag-link {
-  background: var(--magpro-surface);
-  color: var(--magpro-text);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-}
-
-.magpro-tag-link:hover {
-  background: var(--magpro-primary);
-  color: #fff;
-}
-
-/* Author Box */
-.magpro-author-box {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 36px;
-  padding: 24px;
-  background: var(--magpro-surface);
-  border-radius: var(--magpro-radius);
-}
-
-.magpro-author-avatar img {
-  border-radius: 50%;
-}
-
-.magpro-author-name {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0 0 6px;
-}
-
-.magpro-author-bio {
-  font-size: 14px;
-  color: var(--magpro-text-muted);
   margin: 0;
 }
 
+@media (max-width: 650px) {
+  .index-post {
+    flex-direction: column;
+  }
+  .index-post .entry-image {
+    width: 100%;
+    height: 180px;
+  }
+}
+
+/* Pagination (.blog-pager) */
+.blog-pager {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.blog-pager .nav-links {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.blog-pager .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--title-color);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+}
+
+.blog-pager .page-numbers.current,
+.blog-pager .page-numbers:hover {
+  background-color: var(--main-color);
+  border-color: var(--main-color);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   5. Single Blog Post Template (.item-post)
+   ========================================================================== */
+.item-post {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.item-post .breadcrumb {
+  font-size: 12px;
+  color: var(--meta-color);
+  margin-bottom: 12px;
+}
+
+.item-post .breadcrumb a {
+  color: var(--meta-color);
+}
+
+.item-post .breadcrumb a:hover {
+  color: var(--main-color);
+}
+
+.item-post .blog-entry-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+
+.item-post h1.entry-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 10px 0 14px;
+  color: var(--title-color);
+}
+
+.item-post .entry-thumb {
+  margin: 20px 0 24px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.item-post .entry-thumb img {
+  width: 100%;
+  height: auto;
+}
+
+.item-post .entry-content {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.item-post .entry-content p {
+  margin-bottom: 22px;
+}
+
+.item-post .entry-content h2,
+.item-post .entry-content h3 {
+  color: var(--title-color);
+  font-weight: 700;
+  margin-top: 30px;
+  margin-bottom: 14px;
+}
+
+.item-post .entry-content blockquote {
+  border-left: 4px solid var(--main-color);
+  padding: 12px 20px;
+  margin: 24px 0;
+  background-color: rgba(155, 155, 155, 0.05);
+  font-style: italic;
+}
+
+.post-tags {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.post-tag-link {
+  background-color: rgba(155, 155, 155, 0.08);
+  color: var(--title-color);
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: var(--radius);
+  font-weight: 500;
+}
+
+.post-tag-link:hover {
+  background-color: var(--main-color);
+  color: #ffffff;
+}
+
+/* Post Share Box (MagPro Styled) */
+.post-share {
+  margin-top: 25px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.share-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--title-color);
+  margin-bottom: 10px;
+}
+
+.share-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff !important;
+  border-radius: var(--radius);
+}
+
+.share-facebook { background-color: #1877f2; }
+.share-twitter  { background-color: #1da1f2; }
+.share-pinterest{ background-color: #bd081c; }
+.share-whatsapp { background-color: #25d366; }
+.share-telegram { background-color: #0088cc; }
+.share-linkedin { background-color: #0077b5; }
+
+/* About Author Box */
+.about-author {
+  display: flex;
+  gap: 18px;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+.about-author .avatar-container {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.about-author .author-name {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--title-color);
+}
+
+.about-author .author-bio {
+  font-size: 14px;
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Post Navigation (Prev / Next) */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.post-nav a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--title-color);
+}
+
+.post-nav a:hover {
+  color: var(--main-color);
+}
+
+/* Related Posts */
+.related-posts-wrap {
+  margin-top: 35px;
+}
+
+.related-title {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  color: var(--title-color);
+  border-bottom: 2px solid var(--main-color);
+  padding-bottom: 6px;
+}
+
+.related-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.related-post-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.related-post-thumb {
+  height: 120px;
+  overflow: hidden;
+}
+
+.related-post-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.related-post-card:hover .related-post-thumb img {
+  transform: scale(1.05);
+}
+
+.related-post-content {
+  padding: 12px;
+}
+
+.related-post-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 6px 0;
+}
+
+.related-post-title a {
+  color: var(--title-color);
+}
+
+.related-post-title a:hover {
+  color: var(--main-color);
+}
+
+@media (max-width: 600px) {
+  .related-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Comments */
-.magpro-comments-area {
-  margin-top: 40px;
+#comments {
+  margin-top: 35px;
 }
 
 .comment-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 40px;
+  margin: 0 0 30px;
 }
 
 .comment-body {
-  padding: 20px;
-  background: var(--magpro-surface);
-  border-radius: var(--magpro-radius);
-  margin-bottom: 16px;
+  padding: 18px;
+  background-color: rgba(155, 155, 155, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
 }
 
 /* ==========================================================================
-   9. Sidebar & Widgets
+   6. Sidebar Widgets
    ========================================================================== */
 .magpro-widget {
-  background: var(--magpro-card-bg);
-  border: 1px solid var(--magpro-border);
-  border-radius: var(--magpro-radius);
-  padding: 24px;
-  margin-bottom: 30px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 25px;
 }
 
 .magpro-widget-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
-  margin: 0 0 18px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--magpro-primary);
-  color: var(--magpro-text);
-  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--title-color);
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--main-color);
 }
 
 .magpro-widget ul {
@@ -723,92 +1068,60 @@
 
 .magpro-widget li {
   padding: 8px 0;
-  border-bottom: 1px solid var(--magpro-border);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 14px;
 }
 
 .magpro-widget li:last-child {
   border-bottom: none;
 }
 
+.magpro-widget li a {
+  color: var(--title-color);
+}
+
+.magpro-widget li a:hover {
+  color: var(--main-color);
+}
+
 /* ==========================================================================
-   10. Fallback Footer
+   7. MagPro Footer
    ========================================================================== */
-.magpro-default-footer {
-  background-color: var(--magpro-card-bg);
-  border-top: 1px solid var(--magpro-border);
-  transition: background-color var(--magpro-transition), border-color var(--magpro-transition);
+#footer-wrapper {
+  background-color: var(--card-bg);
+  border-top: 1px solid var(--border-color);
+  margin-top: 30px;
 }
 
-.magpro-footer-widgets-area {
-  padding: 50px 0;
-  border-bottom: 1px solid var(--magpro-border);
+.footer-widgets-wrap {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.magpro-footer-grid {
+.footer-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
 }
 
-.magpro-bottom-bar {
-  padding: 20px 0;
-  font-size: 14px;
-  color: var(--magpro-text-muted);
+.footer-copyright-wrap {
+  padding: 16px 0;
+  font-size: 13px;
+  color: var(--meta-color);
 }
 
-.magpro-bottom-bar-inner {
+.footer-bottom-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 12px;
 }
 
-.magpro-bottom-bar p {
-  margin: 0;
+.footer-copyright-wrap a {
+  color: var(--title-color);
 }
 
-.magpro-bottom-bar a {
-  color: var(--magpro-text);
-}
-
-.magpro-bottom-bar a:hover {
-  color: var(--magpro-primary);
-}
-
-/* ==========================================================================
-   11. Pagination
-   ========================================================================== */
-.pagination {
-  margin: 30px 0;
-}
-
-.pagination .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-}
-
-.pagination .page-numbers {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  height: 40px;
-  padding: 0 12px;
-  font-size: 14px;
-  font-weight: 600;
-  background: var(--magpro-card-bg);
-  border: 1px solid var(--magpro-border);
-  color: var(--magpro-text);
-  border-radius: var(--magpro-radius);
-  transition: all var(--magpro-transition);
-}
-
-.pagination .page-numbers.current,
-.pagination .page-numbers:hover {
-  background: var(--magpro-primary);
-  border-color: var(--magpro-primary);
-  color: #ffffff;
+.footer-copyright-wrap a:hover {
+  color: var(--main-color);
 }

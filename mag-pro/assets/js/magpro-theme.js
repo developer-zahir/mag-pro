@@ -1,6 +1,6 @@
 /**
  * Mag Pro Theme JavaScript
- * Version: 2.0.0
+ * Version: 2.1.0
  * Author: Developer Zahir (https://developerzahir.com/)
  */
 
@@ -8,7 +8,7 @@
   'use strict';
 
   // ==========================================================================
-  // 1. Dark / Light Mode Engine
+  // 1. Dark / Light Mode Engine (MagPro Style)
   // ==========================================================================
   function initThemeToggle() {
     function getTheme() {
@@ -30,13 +30,13 @@
       window.dispatchEvent(event);
     }
 
-    // Set initial theme if not set
+    // Set initial theme
     var currentTheme = document.documentElement.getAttribute('data-theme') || getTheme();
     setTheme(currentTheme);
 
-    // Toggle button clicks
+    // Click handler for all dark mode toggles (desktop, mobile, and Elementor widget)
     document.addEventListener('click', function (e) {
-      var toggleBtn = e.target.closest('.magpro-theme-toggle, [data-magpro-toggle="theme"]');
+      var toggleBtn = e.target.closest('.darkmode-toggle, .mobile-darkmode-toggle, .magpro-theme-toggle, [data-magpro-toggle="theme"]');
       if (toggleBtn) {
         e.preventDefault();
         var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
@@ -45,7 +45,7 @@
       }
     });
 
-    // Listen to OS theme changes if user hasn't explicitly set preference
+    // Listen to system OS theme changes if user hasn't explicitly set preference
     if (window.matchMedia) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
         if (!localStorage.getItem('magpro_theme')) {
@@ -56,7 +56,47 @@
   }
 
   // ==========================================================================
-  // 2. Mobile Drawer Navigation
+  // 2. Search Toggle Engine (MagPro Nav Search)
+  // ==========================================================================
+  function initSearchToggle() {
+    var header = document.getElementById('magpro-pro-header-wrapper');
+
+    document.addEventListener('click', function (e) {
+      // MagPro Main Nav Search Toggle (50x50 icon)
+      var searchToggle = e.target.closest('.search-toggle');
+      if (searchToggle) {
+        e.preventDefault();
+        if (header) {
+          header.classList.toggle('search-active');
+          if (header.classList.contains('search-active')) {
+            var searchInput = header.querySelector('#nav-search .search-input');
+            if (searchInput) {
+              setTimeout(function () {
+                searchInput.focus();
+              }, 100);
+            }
+          }
+        }
+        return;
+      }
+
+      // Close search when clicking outside
+      if (header && header.classList.contains('search-active')) {
+        if (!e.target.closest('#nav-search') && !e.target.closest('.search-toggle')) {
+          header.classList.remove('search-active');
+        }
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && header && header.classList.contains('search-active')) {
+        header.classList.remove('search-active');
+      }
+    });
+  }
+
+  // ==========================================================================
+  // 3. Mobile Navigation Drawer
   // ==========================================================================
   function initMobileMenu() {
     var drawer = document.querySelector('.magpro-mobile-drawer');
@@ -77,7 +117,7 @@
     }
 
     document.addEventListener('click', function (e) {
-      if (e.target.closest('.magpro-mobile-toggle')) {
+      if (e.target.closest('.mobile-menu-toggle, .magpro-mobile-toggle')) {
         e.preventDefault();
         openDrawer();
       } else if (e.target.closest('.magpro-mobile-close') || e.target === overlay) {
@@ -93,112 +133,16 @@
     });
   }
 
-  // ==========================================================================
-  // 3. Search Modals & Triggers
-  // ==========================================================================
-  function initSearch() {
-    var fullModal = document.getElementById('magpro-search-fullscreen');
-
-    function openFullscreenSearch() {
-      if (!fullModal) return;
-      fullModal.classList.add('is-open');
-      fullModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      var input = fullModal.querySelector('.magpro-modal-search-field');
-      if (input) {
-        setTimeout(function () {
-          input.focus();
-        }, 100);
-      }
-    }
-
-    function closeFullscreenSearch() {
-      if (!fullModal) return;
-      fullModal.classList.remove('is-open');
-      fullModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    document.addEventListener('click', function (e) {
-      // Trigger Fullscreen Modal
-      var trigger = e.target.closest('.magpro-search-trigger[data-search-style="fullscreen"], a[href="#magpro-search-fullscreen"]');
-      if (trigger) {
-        e.preventDefault();
-        openFullscreenSearch();
-        return;
-      }
-
-      // Close Fullscreen Modal
-      if (e.target.closest('.magpro-search-close') || (fullModal && e.target.classList.contains('magpro-search-modal-backdrop'))) {
-        e.preventDefault();
-        closeFullscreenSearch();
-        return;
-      }
-
-      // Slide-down Search Bar
-      var slideTrigger = e.target.closest('.magpro-search-trigger[data-search-style="slidedown"], .magpro-search-trigger[data-search-style="slide-down"]');
-      if (slideTrigger) {
-        e.preventDefault();
-        var wrapper = slideTrigger.closest('.magpro-search-widget, .magpro-main-header');
-        var slideBar = wrapper ? wrapper.querySelector('.magpro-search-slidedown-bar') : document.querySelector('.magpro-search-slidedown-bar');
-        if (slideBar) {
-          slideBar.classList.toggle('is-active');
-          var slideInput = slideBar.querySelector('input[type="search"]');
-          if (slideInput && slideBar.classList.contains('is-active')) {
-            slideInput.focus();
-          }
-        }
-        return;
-      }
-
-      // Header Replace Search Bar
-      var replaceTrigger = e.target.closest('.magpro-search-trigger[data-search-style="replace"], .magpro-search-trigger[data-search-style="header-replace"]');
-      if (replaceTrigger) {
-        e.preventDefault();
-        var container = replaceTrigger.closest('.magpro-header-search-wrap, .magpro-search-widget, .magpro-main-header');
-        if (container) {
-          container.classList.toggle('magpro-header-search-active');
-          var replaceInput = container.querySelector('.magpro-search-replace-input, input[type="search"]');
-          if (replaceInput && container.classList.contains('magpro-header-search-active')) {
-            replaceInput.focus();
-          }
-        }
-        return;
-      }
-
-      // Close Header Replace on close button
-      if (e.target.closest('.magpro-search-replace-close')) {
-        e.preventDefault();
-        var activeContainer = e.target.closest('.magpro-header-search-active');
-        if (activeContainer) {
-          activeContainer.classList.remove('magpro-header-search-active');
-        }
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        if (fullModal && fullModal.classList.contains('is-open')) {
-          closeFullscreenSearch();
-        }
-        var activeReplace = document.querySelector('.magpro-header-search-active');
-        if (activeReplace) {
-          activeReplace.classList.remove('magpro-header-search-active');
-        }
-      }
-    });
-  }
-
-  // Initialize all components when DOM is ready
+  // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initThemeToggle();
+      initSearchToggle();
       initMobileMenu();
-      initSearch();
     });
   } else {
     initThemeToggle();
+    initSearchToggle();
     initMobileMenu();
-    initSearch();
   }
 })();

@@ -31,3 +31,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 
 	<div id="content" class="site-content magpro-site-content">
+

@@ -17,36 +17,41 @@ get_header();
 	while ( have_posts() ) :
 		the_post();
 
-		// If built with Elementor, render clean content directly
+		// If built with Elementor, render full page content directly
 		if ( did_action( 'elementor/loaded' ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() )->is_built_with_elementor() ) :
 			the_content();
 		else :
 			?>
-			<div class="magpro-container" style="padding-top: 40px; padding-bottom: 60px;">
-				<article id="post-<?php the_ID(); ?>" <?php post_class( 'magpro-standard-page' ); ?> style="background: var(--magpro-card-bg); border: 1px solid var(--magpro-border); border-radius: var(--magpro-radius); padding: 40px;">
-					<header class="entry-header" style="margin-bottom: 24px;">
-						<h1 class="entry-title" style="font-size: 32px; font-weight: 800; margin: 0; color: var(--magpro-text);"><?php the_title(); ?></h1>
-					</header>
+			<div class="container row-x1" style="padding-top: 30px; padding-bottom: 50px;">
+				<div class="content-wrapper" style="padding-top:0;">
+					<main id="main-wrapper">
+						<article id="post-<?php the_ID(); ?>" <?php post_class( 'item-post' ); ?>>
+							<header class="blog-entry-header" style="margin-bottom: 20px;">
+								<h1 class="entry-title" style="margin: 0; font-size: 28px; font-weight: 800; color: var(--title-color);"><?php the_title(); ?></h1>
+							</header>
 
-					<div class="entry-content magpro-single-content">
-						<?php
-						the_content();
+							<div class="entry-content">
+								<?php
+								the_content();
 
-						wp_link_pages(
-							array(
-								'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'mag-pro' ),
-								'after'  => '</div>',
-							)
-						);
-						?>
-					</div>
+								wp_link_pages(
+									array(
+										'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'mag-pro' ),
+										'after'  => '</div>',
+									)
+								);
+								?>
+							</div>
 
-					<?php
-					if ( comments_open() || get_comments_number() ) :
-						comments_template();
-					endif;
-					?>
-				</article>
+							<?php
+							if ( comments_open() || get_comments_number() ) :
+								comments_template();
+							endif;
+							?>
+						</article>
+					</main>
+					<?php get_sidebar(); ?>
+				</div>
 			</div>
 			<?php
 		endif;

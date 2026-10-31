@@ -220,3 +220,4 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		<?php
 	}
 }
+

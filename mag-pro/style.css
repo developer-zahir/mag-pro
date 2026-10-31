@@ -3,8 +3,8 @@ Theme Name: Mag Pro
 Theme URI: https://developerzahir.com/
 Author: Developer Zahir
 Author URI: https://developerzahir.com/
-Description: Mag Pro is an ultra-fast, modern, lightweight, and fully responsive magazine and blog WordPress theme with built-in Elementor Header & Footer Builder, Dark & Light Mode, and advanced post widgets.
-Version: 2.0.0
+Description: Mag Pro is an ultra-fast, modern, lightweight, and fully responsive magazine and blog WordPress theme with built-in Elementor Header & Footer Builder, Dark & Light Mode, and advanced post widgets modeled after the classic MagPro design.
+Version: 2.1.0
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -14,32 +14,54 @@ Text Domain: mag-pro
 Tags: blog, news, entertainment, grid-layout, custom-menu, custom-logo, featured-images, translation-ready
 */
 
-/* Baseline Reset & Variables */
+/* MagPro Base Styling */
 :root {
-  --magpro-primary: #0066cc;
-  --magpro-primary-hover: #0052a3;
-  --magpro-bg: #f8fafc;
-  --magpro-card-bg: #ffffff;
-  --magpro-surface: #f1f5f9;
-  --magpro-text: #1e293b;
-  --magpro-text-muted: #64748b;
-  --magpro-border: #e2e8f0;
-  --magpro-radius: 8px;
-  --magpro-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  --magpro-font-heading: inherit;
-  --magpro-container: 1200px;
-  --magpro-transition: 0.25s ease;
+  --main-color: #ff2232;
+  --main-color-hover: #e01b2a;
+  --body-font: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --title-font: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --body-bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --outer-bg: #ffffff;
+  --title-color: #111111;
+  --title-hover-color: #ff2232;
+  --meta-color: #777777;
+  --text-color: #444444;
+  --link-color: #ff2232;
+  --tag-bg: #ff2232;
+  --tag-color: #ffffff;
+  --topbar-bg: #ffffff;
+  --topbar-color: #555555;
+  --header-bg: #ffffff;
+  --header-ads-bg: #f5f5f5;
+  --menu-bg: #ff2232;
+  --menu-color: #ffffff;
+  --submenu-bg: #ffffff;
+  --submenu-color: #222222;
+  --border-color: #ebebeb;
+  --radius: 4px;
+  --container-width: 1140px;
+  --transition: 0.25s ease;
 }
 
-[data-theme="dark"] {
-  --magpro-bg: #0f172a;
-  --magpro-card-bg: #1e293b;
-  --magpro-surface: #334155;
-  --magpro-text: #f1f5f9;
-  --magpro-text-muted: #94a3b8;
-  --magpro-border: #334155;
-  --magpro-primary: #38bdf8;
-  --magpro-primary-hover: #0ea5e9;
+html[data-theme="dark"] {
+  --body-bg: #15181f;
+  --card-bg: #212530;
+  --outer-bg: #212530;
+  --title-color: #ffffff;
+  --title-hover-color: #ff2232;
+  --meta-color: #a9b4ba;
+  --text-color: #cccccc;
+  --link-color: #ff3b49;
+  --topbar-bg: #212530;
+  --topbar-color: #ffffff;
+  --header-bg: #212530;
+  --header-ads-bg: #282c36;
+  --menu-bg: #171921;
+  --menu-color: #ffffff;
+  --submenu-bg: #1e2028;
+  --submenu-color: #ffffff;
+  --border-color: #282c36;
 }
 
 *, *::before, *::after {
@@ -49,23 +71,23 @@ Tags: blog, news, entertainment, grid-layout, custom-menu, custom-logo, featured
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--magpro-font);
-  font-size: 16px;
+  font-family: var(--body-font);
+  font-size: 15px;
   line-height: 1.6;
-  color: var(--magpro-text);
-  background-color: var(--magpro-bg);
-  transition: background-color var(--magpro-transition), color var(--magpro-transition);
+  color: var(--text-color);
+  background-color: var(--body-bg);
+  transition: background-color var(--transition), color var(--transition);
   -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: var(--magpro-primary);
+  color: inherit;
   text-decoration: none;
-  transition: color var(--magpro-transition);
+  transition: color var(--transition);
 }
 
 a:hover, a:focus {
-  color: var(--magpro-primary-hover);
+  color: var(--title-hover-color);
 }
 
 img {
