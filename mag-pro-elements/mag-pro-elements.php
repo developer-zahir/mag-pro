@@ -3,7 +3,7 @@
  * Plugin Name:       Mag Pro Elements
  * Plugin URI:        https://developerzahir.com/
  * Description:       Companion plugin for Mag Pro theme. Provides magazine post widgets, featured hero grids, video blocks, breaking news tickers, and tabbed posts with full Elementor support.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Developer Zahir
  * Author URI:        https://developerzahir.com/
  * Text Domain:       mag-pro-elements
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MAGPRO_ELEMENTS_VERSION', '1.0.0' );
+define( 'MAGPRO_ELEMENTS_VERSION', '1.0.1' );
 define( 'MAGPRO_ELEMENTS_FILE', __FILE__ );
 define( 'MAGPRO_ELEMENTS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MAGPRO_ELEMENTS_URL', plugin_dir_url( __FILE__ ) );

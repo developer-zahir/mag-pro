@@ -428,35 +428,10 @@ if ( ! class_exists( 'Astra_Builder_Header' ) ) {
 		}
 
 		/**
-		 *  Call Mobile Cart Flyout UI.
+		 *  Call Mobile Cart Flyout UI (Disabled - blog/magazine theme only).
 		 */
 		public function mobile_cart_flyout() {
-			// Get the responsive cart click action setting.
-			$responsive_cart_action = astra_get_option( 'responsive-cart-click-action' );
-			$desktop_cart_action    = astra_get_option( 'woo-header-cart-click-action' );
-
-			/**
-			 * Filters whether the page requires the cart flyout, which then renders even when the header cart click actions redirect.
-			 *
-			 * @since 4.14.1
-			 * @param bool $flyout_required True when the shop Add To Cart action is "Slide In Cart".
-			 */
-			$flyout_required = apply_filters( 'astra_cart_flyout_required', class_exists( 'WooCommerce' ) && ! is_product() && 'slide_in_cart' === astra_get_option( 'shop-add-to-cart-action' ) );
-
-			// Hide cart flyout only if current page is checkout/cart or if redirect option is selected.
-			if (
-				(
-					Astra_Builder_Helper::is_component_loaded( 'woo-cart', 'header' ) &&
-					class_exists( 'WooCommerce' ) &&
-					! is_cart() &&
-					! is_checkout() &&
-					( 'redirect' !== $responsive_cart_action || // Prevent flyout markup when 'redirect' option is selected.
-					'redirect' !== $desktop_cart_action ||
-					$flyout_required )
-				) || ( Astra_Builder_Helper::is_component_loaded( 'edd-cart', 'header' ) && class_exists( 'Easy_Digital_Downloads' ) )
-			) {
-				Astra_Builder_UI_Controller::render_mobile_cart_flyout_markup();
-			}
+			// No-op for blog/magazine theme.
 		}
 
 		/**

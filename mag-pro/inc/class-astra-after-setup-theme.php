@@ -157,14 +157,6 @@ if ( ! class_exists( 'Astra_After_Setup_Theme' ) ) {
 			// Enable support for responsive embedded content.
 			add_theme_support( 'responsive-embeds' );
 
-			// WooCommerce.
-			add_theme_support( 'woocommerce' );
-
-			// Rank Math Breadcrumb.
-			if ( true === apply_filters( 'astra_rank_math_theme_support', true ) ) {
-				add_theme_support( 'rank-math-breadcrumbs' );
-			}
-
 			// Native AMP Support.
 			if ( true === apply_filters( 'astra_amp_support', true ) ) {
 				add_theme_support(
@@ -180,11 +172,6 @@ if ( ! class_exists( 'Astra_After_Setup_Theme' ) ) {
 
 			// Remove Template Editor support until WP 5.9 since more Theme Blocks are going to be introduced.
 			remove_theme_support( 'block-templates' );
-
-			// Let WooCommerce know, Astra is not compatible with New Product Editor.
-			add_filter( 'option_woocommerce_feature_product_block_editor_enabled', '__return_false' );
-
-			add_filter( 'woocommerce_create_pages', array( $this, 'astra_enforce_woo_shortcode_pages' ), 99 );
 
 			if ( function_exists( 'wp_theme_has_theme_json' ) && wp_theme_has_theme_json() ) {
 				add_filter( 'wp_theme_json_data_theme', array( $this, 'modify_theme_palette_names' ) );
@@ -418,26 +405,6 @@ if ( ! class_exists( 'Astra_After_Setup_Theme' ) ) {
 			}
 
 			return $html;
-		}
-
-		/**
-		 * Enforce WooCommerce shortcode pages due to following reasons.
-		 *
-		 * 1. In WooCommerce 8.3 version cart & checkout pages are directly added with blocks and not with shortcodes.
-		 * 2. Due to which most of Astra extended features are not working on cart & checkout pages.
-		 *
-		 * This is temporary workaround, once Astra ready with WooCommerce 8.3 version, this will be removed.
-		 *
-		 * @since 4.5.1
-		 * @param array $pages_data Array of WooCommerce pages.
-		 *
-		 * @return array
-		 */
-		public function astra_enforce_woo_shortcode_pages( $pages_data ) {
-			$pages_data['cart']['content']     = '<!-- wp:shortcode -->[woocommerce_cart]<!-- /wp:shortcode -->';
-			$pages_data['checkout']['content'] = '<!-- wp:shortcode -->[woocommerce_checkout]<!-- /wp:shortcode -->';
-
-			return $pages_data;
 		}
 	}
 }

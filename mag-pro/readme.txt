@@ -4,10 +4,10 @@ Author URI: https://developerzahir.com/
 Plugin URI: https://developerzahir.com/
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Tags: custom-menu, custom-logo, entertainment, featured-images, full-width-template, one-column, two-columns, left-sidebar, e-commerce, right-sidebar, custom-colors, editor-style, featured-images, full-width-template, microformats, post-formats, rtl-language-support, theme-options, threaded-comments, translation-ready, blog
+Tags: custom-menu, custom-logo, entertainment, featured-images, full-width-template, one-column, two-columns, left-sidebar, right-sidebar, custom-colors, editor-style, featured-images, full-width-template, microformats, post-formats, rtl-language-support, theme-options, threaded-comments, translation-ready, blog
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 Mag Pro is a modern, fast, magazine and blog WordPress theme converted from MagPro with Dark/Light mode toggle and Elementor post widgets.
 
@@ -22,7 +22,8 @@ https://developerzahir.com/
 
 = From within WordPress =
 1. Visit "Appearance > Themes > Add New"
-2. Search for "Astra"
+2. Click "Upload Theme" and choose "mag-pro.zip"
+3. Install and activate Mag Pro
 3. Install and activate
 
 == License ==

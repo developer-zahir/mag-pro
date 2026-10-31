@@ -293,49 +293,14 @@ if ( ! class_exists( 'Astra_Enqueue_Scripts' ) ) {
 		 * @since 4.11.13
 		 */
 		public static function should_load_woocommerce_js() {
-			// Allow users to disable WooCommerce JS loading on specific pages/posts/post types.
-			return apply_filters( 'astra_load_woocommerce_js', true );
+			return false;
 		}
 
-		/**
-		 * Check if WooCommerce CSS assets should be loaded based on filter settings
-		 *
-		 * @return bool Whether WooCommerce CSS should be loaded
-		 * @since 4.11.13
-		 */
 		public static function should_load_woocommerce_css() {
-			// Allow users to disable WooCommerce CSS loading on specific pages/posts/post types.
-			return apply_filters( 'astra_load_woocommerce_css', true );
+			return false;
 		}
 
-		/**
-		 * Check if add to cart quantity button script should be loaded based on specific conditions
-		 *
-		 * @since 4.11.18
-		 *
-		 * @return bool Whether add to cart quantity button script should be loaded
-		 */
 		public static function should_load_add_to_cart_quantity_btn_script() {
-			// 1. Check if the Cart Widget is present in the header.
-			if ( self::has_cart_widget_in_header() ) {
-				return true;
-			}
-
-			// 2. Check for Product Block or Shortcode.
-			if ( self::has_product_block_or_shortcode() ) {
-				return true;
-			}
-
-			// 3. Check if we are on the Single Product or the Cart Page.
-			if ( is_product() || is_cart() || is_shop() ) {
-				return true;
-			}
-
-			// 4. Check with Elementor's product widget.
-			if ( self::has_elementor_product_widget() ) {
-				return true;
-			}
-
 			return false;
 		}
 

@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define Constants
  */
-define( 'ASTRA_THEME_VERSION', '4.14.2' );
+define( 'ASTRA_THEME_VERSION', '1.0.1' );
 define( 'ASTRA_THEME_SETTINGS', 'astra-settings' );
 define( 'ASTRA_THEME_DIR', trailingslashit( get_template_directory() ) );
 define( 'ASTRA_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
@@ -163,8 +163,6 @@ require_once ASTRA_THEME_DIR . 'inc/modules/related-posts/class-astra-related-po
  */
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-gutenberg.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-jetpack.php';
-require_once ASTRA_THEME_DIR . 'inc/compatibility/woocommerce/class-astra-woocommerce.php';
-require_once ASTRA_THEME_DIR . 'inc/compatibility/edd/class-astra-edd.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/lifterlms/class-astra-lifterlms.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/learndash/class-astra-learndash.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-beaver-builder.php';
@@ -178,7 +176,6 @@ require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-ubermeu.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-divi-builder.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-amp.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-yoast-seo.php';
-require_once ASTRA_THEME_DIR . 'inc/compatibility/surecart/class-astra-surecart.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-starter-content.php';
 require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-buddypress.php';
 require_once ASTRA_THEME_DIR . 'inc/addons/transparent-header/class-astra-ext-transparent-header.php';

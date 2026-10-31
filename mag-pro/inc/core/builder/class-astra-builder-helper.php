@@ -847,27 +847,6 @@ final class Astra_Builder_Helper {
 			self::$footer_desktop_items = array_merge( self::$footer_desktop_items, $pro_footer_desktop_items );
 		}
 
-		if ( class_exists( 'Astra_Woocommerce' ) ) {
-
-			$woo_cart_name = class_exists( 'Easy_Digital_Downloads' ) ? __( 'Woo Cart', 'astra' ) : __( 'Cart', 'astra' );
-
-			self::$header_desktop_items['woo-cart'] = array(
-				'name'    => $woo_cart_name,
-				'icon'    => 'cart',
-				'section' => 'section-header-woo-cart',
-			);
-		}
-		if ( class_exists( 'Easy_Digital_Downloads' ) ) {
-
-			$edd_cart_name = class_exists( 'Astra_Woocommerce' ) ? __( 'EDD Cart', 'astra' ) : __( 'Cart', 'astra' );
-
-			self::$header_desktop_items['edd-cart'] = array(
-				'name'    => $edd_cart_name,
-				'icon'    => 'cart',
-				'section' => 'section-header-edd-cart',
-			);
-		}
-
 		self::$header_mobile_items = apply_filters(
 			'astra_header_mobile_items',
 			array(
@@ -957,21 +936,6 @@ final class Astra_Builder_Helper {
 
 			// Merge the additional items into the existing header desktop items.
 			self::$header_mobile_items = array_merge( self::$header_mobile_items, $pro_header_mobile_items );
-		}
-
-		if ( class_exists( 'Astra_Woocommerce' ) ) {
-			self::$header_mobile_items['woo-cart'] = array(
-				'name'    => $woo_cart_name,
-				'icon'    => 'cart',
-				'section' => 'section-header-woo-cart',
-			);
-		}
-		if ( class_exists( 'Easy_Digital_Downloads' ) ) {
-			self::$header_mobile_items['edd-cart'] = array(
-				'name'    => $edd_cart_name,
-				'icon'    => 'cart',
-				'section' => 'section-header-edd-cart',
-			);
 		}
 
 		add_filter( 'astra_addon_list', array( $this, 'deprecate_old_header_and_footer' ) );
