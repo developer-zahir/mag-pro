@@ -55,6 +55,7 @@ class MagPro_Elementor_Loader {
 		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-tabs.php';
 		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-social.php';
 		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-slider.php';
+		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-search.php';
 	}
 
 	/**
@@ -73,6 +74,7 @@ class MagPro_Elementor_Loader {
 		$widgets_manager->register( new \MagPro_Widget_Tabs() );
 		$widgets_manager->register( new \MagPro_Widget_Social() );
 		$widgets_manager->register( new \MagPro_Widget_Slider() );
+		$widgets_manager->register( new \MagPro_Widget_Search() );
 	}
 
 	/**
@@ -92,6 +94,7 @@ class MagPro_Elementor_Loader {
 			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \MagPro_Widget_Tabs() );
 			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \MagPro_Widget_Social() );
 			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \MagPro_Widget_Slider() );
+			\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new \MagPro_Widget_Search() );
 		}
 	}
 }

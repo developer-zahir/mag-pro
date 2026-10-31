@@ -158,20 +158,60 @@ function magpro_render_header_ticker() {
 add_action( 'astra_header_before', 'magpro_render_header_ticker', 5 );
 
 /**
- * Render Floating Dark/Light Mode Toggle
+ * Filter Astra Header Search HTML to provide Mag Pro Search Trigger
  */
-function magpro_render_floating_toggle() {
-	if ( ! apply_filters( 'magpro_show_floating_toggle', true ) ) {
-		return;
-	}
+function magpro_filter_header_search( $search_html, $option = '', $device = '' ) {
+	$search_style = astra_get_option( 'magpro-search-style', 'full-screen' );
+	ob_start();
 	?>
-	<button type="button" class="magpro-floating-toggle" aria-label="<?php esc_attr_e( 'Toggle Dark/Light Mode', 'mag-pro' ); ?>" title="<?php esc_attr_e( 'Toggle Dark/Light Mode', 'mag-pro' ); ?>">
-		<i class="fas fa-moon icon-moon"></i>
-		<i class="fas fa-sun icon-sun"></i>
-	</button>
+	<div class="magpro-header-search-wrap" data-search-style="<?php echo esc_attr( $search_style ); ?>">
+		<button type="button" class="magpro-search-trigger" data-target-style="<?php echo esc_attr( $search_style ); ?>" aria-label="<?php esc_attr_e( 'Open Search', 'mag-pro' ); ?>" title="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>">
+			<i class="fas fa-search"></i>
+		</button>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+add_filter( 'astra_get_search', 'magpro_filter_header_search', 20, 3 );
+
+/**
+ * Render Search Elements (Full Screen Modal & Header Content Cover)
+ */
+function magpro_render_search_elements() {
+	?>
+	<!-- Style 1: Full-Screen Modal Search (Center-Center) -->
+	<div class="magpro-search-modal" id="magpro-search-modal" aria-hidden="true" role="dialog" aria-modal="true">
+		<div class="magpro-search-modal-backdrop"></div>
+		<button type="button" class="magpro-search-modal-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
+		<div class="magpro-search-modal-inner">
+			<form role="search" method="get" class="magpro-search-modal-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<label class="screen-reader-text" for="magpro-search-modal-input"><?php esc_html_e( 'Search for:', 'mag-pro' ); ?></label>
+				<div class="magpro-search-input-wrap">
+					<i class="fas fa-search magpro-search-modal-icon"></i>
+					<input type="search" id="magpro-search-modal-input" class="magpro-search-modal-input" placeholder="<?php esc_attr_e( 'Type to search and hit enter...', 'mag-pro' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+					<button type="submit" class="magpro-search-modal-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>">
+						<i class="fas fa-arrow-right"></i>
+					</button>
+				</div>
+				<div class="magpro-search-modal-hint"><?php esc_html_e( 'Press ESC to close or click anywhere outside', 'mag-pro' ); ?></div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Style 2: Replace Header Content Search Bar -->
+	<div class="magpro-search-cover" id="magpro-search-cover" aria-hidden="true">
+		<div class="magpro-search-cover-container">
+			<form role="search" method="get" class="magpro-search-cover-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<i class="fas fa-search magpro-search-cover-icon"></i>
+				<input type="search" class="magpro-search-cover-input" placeholder="<?php esc_attr_e( 'Search news, topics, articles...', 'mag-pro' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+				<button type="submit" class="magpro-search-cover-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>"><?php esc_html_e( 'Search', 'mag-pro' ); ?></button>
+				<button type="button" class="magpro-search-cover-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
+			</form>
+		</div>
+	</div>
 	<?php
 }
-add_action( 'wp_footer', 'magpro_render_floating_toggle', 99 );
+add_action( 'wp_footer', 'magpro_render_search_elements', 95 );
 
 /**
  * Post Views Counter & Formatter

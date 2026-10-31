@@ -184,7 +184,7 @@ class MagPro_Helpers {
 	/**
 	 * Get hover animation class for images
 	 */
-	public static function get_hover_animation_class( $animation = 'zoom-in' ) {
+	public static function get_hover_animation_class( $animation = 'none' ) {
 		if ( empty( $animation ) || 'none' === $animation ) {
 			return 'magpro-hover-none';
 		}
@@ -208,36 +208,66 @@ class MagPro_Helpers {
 	}
 
 	/**
-	 * Render Section Header with 3 distinct styles and View All button
+	 * Render Section Header with multiple professional magazine styles and View All button
 	 *
 	 * @param string $title
-	 * @param string $style 'style-1' (Left Accent Bar), 'style-2' (Solid Badge), 'style-3' (Underline Dual Bar)
+	 * @param string $style 'style-1' (Left Accent), 'style-2' (Solid Badge), 'style-3' (Underline Dual), 'style-4' (Bordered Box), 'style-5' (Line Divider), 'style-6' (Gradient Accent)
 	 * @param bool   $show_view_all
 	 * @param string $view_all_text
 	 * @param string $view_all_url
-	 * @param string $icon FontAwesome icon class
+	 * @param mixed  $icon FontAwesome icon string or Elementor icon array
+	 * @param int    $category Selected category ID (for auto-linking)
+	 * @param bool   $auto_link Whether to automatically link View All to selected category
 	 */
-	public static function render_section_title( $title, $style = 'style-1', $show_view_all = false, $view_all_text = 'View All', $view_all_url = '', $icon = '' ) {
+	public static function render_section_title( $title, $style = 'style-1', $show_view_all = false, $view_all_text = 'View All', $view_all_url = '', $icon = '', $category = 0, $auto_link = true ) {
 		if ( empty( $title ) ) {
 			return;
 		}
 
-		$style = in_array( $style, array( 'style-1', 'style-2', 'style-3' ), true ) ? $style : 'style-1';
+		$valid_styles = array( 'style-1', 'style-2', 'style-3', 'style-4', 'style-5', 'style-6' );
+		$style        = in_array( $style, $valid_styles, true ) ? $style : 'style-1';
+
+		// Auto-link to selected category if enabled
+		if ( $show_view_all && $auto_link && ! empty( $category ) && intval( $category ) > 0 ) {
+			$cat_link = get_category_link( intval( $category ) );
+			if ( ! is_wp_error( $cat_link ) && ! empty( $cat_link ) ) {
+				$view_all_url = $cat_link;
+			}
+		}
+
+		// Fallback to blog archive if View All is enabled but URL is still empty
+		if ( $show_view_all && empty( $view_all_url ) ) {
+			$page_for_posts = get_option( 'page_for_posts' );
+			$view_all_url   = $page_for_posts ? get_permalink( $page_for_posts ) : home_url( '/' );
+		}
 		?>
 		<div class="magpro-section-header magpro-header-<?php echo esc_attr( $style ); ?>">
 			<div class="magpro-section-title-wrap">
 				<h3 class="magpro-widget-title">
 					<?php if ( ! empty( $icon ) ) : ?>
-						<i class="<?php echo esc_attr( $icon ); ?>"></i>
+						<span class="magpro-section-icon">
+							<?php
+							if ( is_array( $icon ) && ! empty( $icon['value'] ) && class_exists( '\Elementor\Icons_Manager' ) ) {
+								\Elementor\Icons_Manager::render_icon( $icon, array( 'aria-hidden' => 'true' ) );
+							} elseif ( is_string( $icon ) && ! empty( $icon ) ) {
+								echo '<i class="' . esc_attr( $icon ) . '" aria-hidden="true"></i>';
+							}
+							?>
+						</span>
 					<?php endif; ?>
-					<span><?php echo esc_html( $title ); ?></span>
+					<span class="magpro-title-text"><?php echo esc_html( $title ); ?></span>
 				</h3>
 			</div>
+
+			<?php if ( 'style-5' === $style ) : ?>
+				<div class="magpro-header-line-fill" aria-hidden="true"></div>
+			<?php endif; ?>
+
 			<?php if ( $show_view_all && ! empty( $view_all_url ) ) : ?>
 				<div class="magpro-view-all-wrap">
 					<a href="<?php echo esc_url( $view_all_url ); ?>" class="magpro-view-all">
-						<span><?php echo esc_html( ! empty( $view_all_text ) ? $view_all_text : esc_html__( 'View All', 'mag-pro-elements' ) ); ?></span>
-						<i class="fas fa-angle-right"></i>
+						<span class="magpro-view-all-text"><?php echo esc_html( ! empty( $view_all_text ) ? $view_all_text : esc_html__( 'View All', 'mag-pro-elements' ) ); ?></span>
+						<i class="fas fa-angle-right" aria-hidden="true"></i>
 					</a>
 				</div>
 			<?php endif; ?>

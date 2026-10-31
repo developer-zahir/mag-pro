@@ -46,6 +46,24 @@ function astra_header_search_configuration() {
 		),
 
 		/**
+		 * Option: Mag Pro Search Display Style
+		 */
+		array(
+			'name'       => ASTRA_THEME_SETTINGS . '[magpro-search-style]',
+			'default'    => astra_get_option( 'magpro-search-style', 'full-screen' ),
+			'type'       => 'control',
+			'control'    => 'ast-select',
+			'section'    => $_section,
+			'priority'   => 1,
+			'title'      => __( 'Search Style', 'mag-pro' ),
+			'choices'    => array(
+				'full-screen'  => __( 'Full Screen Modal (Center Center)', 'mag-pro' ),
+				'header-cover' => __( 'Replace Header Content', 'mag-pro' ),
+			),
+			'context'    => Astra_Builder_Helper::$general_tab,
+		),
+
+		/**
 		 * Option: Search Color.
 		 */
 		array(

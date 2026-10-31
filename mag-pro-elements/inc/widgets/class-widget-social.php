@@ -59,12 +59,25 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
 					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
 					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
+					'style-4' => esc_html__( 'Style 4: Refined Bordered Box', 'mag-pro-elements' ),
+					'style-5' => esc_html__( 'Style 5: Sleek Line Divider', 'mag-pro-elements' ),
+					'style-6' => esc_html__( 'Style 6: Gradient Accent Bar', 'mag-pro-elements' ),
 				),
 				'condition' => array(
 					'widget_title!' => '',
 				),
 			)
 		);
+
+		$this->add_control(
+			'section_icon',
+			array(
+				'label'   => esc_html__( 'Section Icon', 'mag-pro-elements' ),
+				'type'    => \Elementor\Controls_Manager::ICONS,
+				'default' => array(),
+			)
+		);
+
 
 		$this->add_control(
 			'facebook_url',
@@ -248,7 +261,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 					false,
 					'',
 					'',
-					'fas fa-share-alt'
+					! empty( $settings['section_icon']['value'] ) ? $settings['section_icon'] : 'fas fa-share-alt'
 				);
 			}
 			?>

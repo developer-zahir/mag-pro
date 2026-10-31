@@ -12,7 +12,7 @@
   // Dark / Light Mode Toggle
   // =========================================================================
   function initThemeToggle() {
-    var toggleButtons = document.querySelectorAll('.magpro-theme-toggle, .magpro-floating-toggle');
+    var toggleButtons = document.querySelectorAll('.magpro-theme-toggle');
     if (!toggleButtons.length) return;
 
     function getActiveTheme() {
@@ -234,16 +234,97 @@
     });
   }
 
-  // Document Ready
+  
+  // =========================================================================
+  // Header & Widget Search Interactions (Modal & Cover Bar)
+  // =========================================================================
+  function initMagProSearch() {
+    var triggers = document.querySelectorAll('.magpro-search-trigger');
+    if (!triggers.length) return;
+
+    function openSearch(style, targetId) {
+      if (style === 'header-cover') {
+        var cover = targetId ? document.getElementById(targetId) : document.getElementById('magpro-search-cover');
+        if (!cover) cover = document.querySelector('.magpro-search-cover');
+        if (cover) {
+          cover.classList.add('active');
+          cover.setAttribute('aria-hidden', 'false');
+          var input = cover.querySelector('input[type="search"]');
+          if (input) setTimeout(function () { input.focus(); }, 120);
+        }
+      } else {
+        var modal = targetId ? document.getElementById(targetId) : document.getElementById('magpro-search-modal');
+        if (!modal) modal = document.querySelector('.magpro-search-modal');
+        if (modal) {
+          modal.classList.add('active');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('magpro-search-modal-open');
+          var mInput = modal.querySelector('input[type="search"]');
+          if (mInput) setTimeout(function () { mInput.focus(); }, 150);
+        }
+      }
+    }
+
+    function closeAllSearch() {
+      var modals = document.querySelectorAll('.magpro-search-modal');
+      modals.forEach(function (m) {
+        m.classList.remove('active');
+        m.setAttribute('aria-hidden', 'true');
+      });
+      var covers = document.querySelectorAll('.magpro-search-cover');
+      covers.forEach(function (c) {
+        c.classList.remove('active');
+        c.setAttribute('aria-hidden', 'true');
+      });
+      document.body.classList.remove('magpro-search-modal-open');
+    }
+
+    triggers.forEach(function (btn) {
+      if (btn.dataset.searchInit === 'true') return;
+      btn.dataset.searchInit = 'true';
+
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var style = btn.getAttribute('data-target-style') || (btn.closest('[data-search-style]') ? btn.closest('[data-search-style]').getAttribute('data-search-style') : 'full-screen');
+        var widgetWrap = btn.closest('.magpro-widget-search-wrap');
+        var targetId = null;
+        if (widgetWrap) {
+          var siblingModal = widgetWrap.querySelector('.magpro-search-modal, .magpro-search-cover');
+          if (siblingModal && siblingModal.id) {
+            targetId = siblingModal.id;
+          }
+        }
+        openSearch(style, targetId);
+      });
+    });
+
+    var closeButtons = document.querySelectorAll('.magpro-search-modal-close, .magpro-search-modal-backdrop, .magpro-search-cover-close');
+    closeButtons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        closeAllSearch();
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.keyCode === 27) {
+        closeAllSearch();
+      }
+    });
+  }
+
+// Document Ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initThemeToggle();
       initNewsTickers();
       initThemeSliders();
+      initMagProSearch();
     });
   } else {
     initThemeToggle();
     initNewsTickers();
     initThemeSliders();
+      initMagProSearch();
   }
 })();

@@ -60,9 +60,22 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
 					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
 					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
+					'style-4' => esc_html__( 'Style 4: Refined Bordered Box', 'mag-pro-elements' ),
+					'style-5' => esc_html__( 'Style 5: Sleek Line Divider', 'mag-pro-elements' ),
+					'style-6' => esc_html__( 'Style 6: Gradient Accent Bar', 'mag-pro-elements' ),
 				),
 			)
 		);
+
+		$this->add_control(
+			'section_icon',
+			array(
+				'label'   => esc_html__( 'Section Icon', 'mag-pro-elements' ),
+				'type'    => \Elementor\Controls_Manager::ICONS,
+				'default' => array(),
+			)
+		);
+
 
 		$this->add_control(
 			'show_view_all',
@@ -73,6 +86,22 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 				'return_value' => 'yes',
 			)
 		);
+
+		$this->add_control(
+			'view_all_auto_link',
+			array(
+				'label'        => esc_html__( 'Auto-Link to Category', 'mag-pro-elements' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'mag-pro-elements' ),
+				'label_off'    => esc_html__( 'No', 'mag-pro-elements' ),
+				'default'      => 'yes',
+				'return_value' => 'yes',
+				'condition'    => array(
+					'show_view_all' => 'yes',
+				),
+			)
+		);
+
 
 		$this->add_control(
 			'view_all_text',
@@ -253,7 +282,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 			array(
 				'label'   => esc_html__( 'Hover Animation', 'mag-pro-elements' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => 'zoom-in',
+				'default' => 'none',
 				'options' => array(
 					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro-elements' ),
 					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro-elements' ),
@@ -336,7 +365,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 			array(
 				'label'   => esc_html__( 'Hover Animation', 'mag-pro-elements' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
-				'default' => 'zoom-in',
+				'default' => 'none',
 				'options' => array(
 					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro-elements' ),
 					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro-elements' ),
@@ -404,6 +433,56 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 			)
 		);
 
+		$this->add_responsive_control(
+			'section_icon_size',
+			array(
+				'label'      => esc_html__( 'Icon Size', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 10,
+						'max' => 40,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-section-icon i'   => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .magpro-section-icon svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'section_icon_color',
+			array(
+				'label'     => esc_html__( 'Icon Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-section-icon'     => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-section-icon svg' => 'fill: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'section_icon_gap',
+			array(
+				'label'      => esc_html__( 'Icon Spacing', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 30,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-section-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+
 		$this->add_control(
 			'view_all_heading',
 			array(
@@ -464,6 +543,39 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 				'selector' => '{{WRAPPER}} .magpro-view-all',
 			)
 		);
+
+		$this->add_responsive_control(
+			'view_all_border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-view-all' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'view_all_padding',
+			array(
+				'label'      => esc_html__( 'Padding', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-view-all' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}} !important;',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Border::get_type(),
+			array(
+				'name'     => 'view_all_border',
+				'selector' => '{{WRAPPER}} .magpro-view-all',
+			)
+		);
+
 
 		$this->end_controls_section();
 
@@ -668,10 +780,10 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$big_aspect_ratio  = $settings['big_aspect_ratio'] ?? '16:9';
 		$big_custom_height = ! empty( $settings['big_custom_height'] ) ? intval( $settings['big_custom_height'] ) : 230;
 		$big_aspect_style  = \MagPro_Helpers::get_image_aspect_style( $big_aspect_ratio, $big_custom_height );
-		$big_anim_class    = \MagPro_Helpers::get_hover_animation_class( $settings['big_hover_animation'] ?? 'zoom-in' );
+		$big_anim_class    = \MagPro_Helpers::get_hover_animation_class( $settings['big_hover_animation'] ?? 'none' );
 
 		// Small Image settings
-		$small_anim_class  = \MagPro_Helpers::get_hover_animation_class( $settings['small_hover_animation'] ?? 'zoom-in' );
+		$small_anim_class  = \MagPro_Helpers::get_hover_animation_class( $settings['small_hover_animation'] ?? 'none' );
 		?>
 		<div class="magpro-block1-wrap">
 			<?php
@@ -682,7 +794,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 					$show_view_all,
 					$view_all_text,
 					$view_all_url,
-					'far fa-newspaper'
+					! empty( $settings['section_icon']['value'] ) ? $settings['section_icon'] : 'far fa-newspaper', $settings['category'] ?? 0, 'yes' === ( $settings['view_all_auto_link'] ?? 'yes' )
 				);
 			}
 			?>
