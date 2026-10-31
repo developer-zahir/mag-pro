@@ -57,8 +57,9 @@ function astra_header_search_configuration() {
 			'priority'   => 1,
 			'title'      => __( 'Search Style', 'mag-pro' ),
 			'choices'    => array(
-				'full-screen'  => __( 'Full Screen Modal (Center Center)', 'mag-pro' ),
-				'header-cover' => __( 'Replace Header Content', 'mag-pro' ),
+				'full-screen'    => __( 'Full Screen Modal (Center Center)', 'mag-pro' ),
+				'slide-down'     => __( 'Slide Down', 'mag-pro' ),
+				'header-replace' => __( 'Header Replace', 'mag-pro' ),
 			),
 			'context'    => Astra_Builder_Helper::$general_tab,
 		),

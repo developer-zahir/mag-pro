@@ -714,87 +714,6 @@ final class Astra_Builder_Helper {
 			)
 		);
 
-		// Add an additional item conditionally.
-		if ( ! defined( 'ASTRA_EXT_VER' ) ) {
-			$pro_header_desktop_items = array(
-				'divider-1'         => array(
-					'name'    => __( 'Divider 1', 'astra' ),
-					'icon'    => 'minus',
-					'section' => 'section-hb-divider-1',
-					'pro'     => true,
-				),
-				'divider-2'         => array(
-					'name'    => __( 'Divider 2', 'astra' ),
-					'icon'    => 'minus',
-					'section' => 'section-hb-divider-2',
-					'pro'     => true,
-				),
-				'divider-3'         => array(
-					'name'    => __( 'Divider 3', 'astra' ),
-					'icon'    => 'minus',
-					'section' => 'section-hb-divider-3',
-					'pro'     => true,
-				),
-				'language-switcher' => array(
-					'name'    => __( 'Language Switcher', 'astra' ),
-					'icon'    => 'translation',
-					'section' => 'section-hb-language-switcher',
-					'pro'     => true,
-				),
-				'mobile-trigger'    => array(
-					'name'    => __( 'Toggle Button', 'astra' ),
-					'icon'    => 'menu-alt',
-					'section' => 'section-header-mobile-trigger',
-					'pro'     => true,
-				),
-				'mobile-menu'       => array(
-					'name'    => __( 'Off-Canvas Menu', 'astra' ),
-					'icon'    => 'menu-alt',
-					'section' => 'section-header-mobile-menu',
-					'pro'     => true,
-				),
-				'button-2'          => array(
-					'name'    => __( 'Button 2', 'astra' ),
-					'icon'    => 'button',
-					'section' => 'section-hb-button-2',
-					'pro'     => true,
-				),
-				'html-3'            => array(
-					'name'    => __( 'HTML 3', 'astra' ),
-					'icon'    => 'editor-code',
-					'section' => 'section-hb-html-3',
-					'pro'     => true,
-				),
-				'widget-3'          => array(
-					'name'    => __( 'Widget 3', 'astra' ),
-					'icon'    => 'screenoptions',
-					'section' => 'sidebar-widgets-header-widget-3',
-					'pro'     => true,
-				),
-				'widget-4'          => array(
-					'name'    => __( 'Widget 4', 'astra' ),
-					'icon'    => 'screenoptions',
-					'section' => 'sidebar-widgets-header-widget-4',
-					'pro'     => true,
-				),
-				'menu-3'            => array(
-					'name'    => __( 'Menu 3', 'astra' ),
-					'icon'    => 'menu',
-					'section' => 'section-hb-menu-3',
-					'pro'     => true,
-				),
-				'color-switcher'    => array(
-					'name'    => __( 'Color Switcher', 'astra' ),
-					'icon'    => 'art',
-					'section' => 'section-header-color-switcher',
-					'pro'     => true,
-				),
-			);
-
-			// Merge the additional items into the existing header desktop items.
-			self::$header_desktop_items = array_merge( self::$header_desktop_items, $pro_header_desktop_items );
-		}
-
 		self::$footer_desktop_items = apply_filters(
 			'astra_footer_desktop_items',
 			array(
@@ -812,50 +731,6 @@ final class Astra_Builder_Helper {
 				),
 			)
 		);
-
-		// Add an additional item conditionally.
-		if ( ! defined( 'ASTRA_EXT_VER' ) ) {
-			$pro_footer_desktop_items = array(
-				'divider-1' => array(
-					'name' => __( 'Divider 1', 'astra' ),
-					'icon' => 'minus',
-					'pro'  => true,
-				),
-				'divider-2' => array(
-					'name' => __( 'Divider 2', 'astra' ),
-					'icon' => 'minus',
-					'pro'  => true,
-				),
-				'divider-3' => array(
-					'name' => __( 'Divider 3', 'astra' ),
-					'icon' => 'minus',
-					'pro'  => true,
-				),
-				'widget-5'  => array(
-					'name' => __( 'Widget 5', 'astra' ),
-					'icon' => 'screenoptions',
-					'pro'  => true,
-				),
-				'widget-6'  => array(
-					'name' => __( 'Widget 6', 'astra' ),
-					'icon' => 'screenoptions',
-					'pro'  => true,
-				),
-				'button-1'  => array(
-					'name' => __( 'Button 1', 'astra' ),
-					'icon' => 'button',
-					'pro'  => true,
-				),
-				'button-2'  => array(
-					'name' => __( 'Button 2', 'astra' ),
-					'icon' => 'button',
-					'pro'  => true,
-				),
-			);
-
-			// Merge the additional items into the existing header desktop items.
-			self::$footer_desktop_items = array_merge( self::$footer_desktop_items, $pro_footer_desktop_items );
-		}
 
 		self::$header_mobile_items = apply_filters(
 			'astra_header_mobile_items',
@@ -897,66 +772,6 @@ final class Astra_Builder_Helper {
 				),
 			)
 		);
-
-				// Add an additional item conditionally.
-		if ( ! defined( 'ASTRA_EXT_VER' ) ) {
-			$pro_header_mobile_items = array(
-				'divider-1'         => array(
-					'name' => __( 'Divider 1', 'astra' ),
-					'icon' => 'minus',
-					'pro'  => true,
-				),
-				'divider-2'         => array(
-					'name' => __( 'Divider 2', 'astra' ),
-					'icon' => 'minus',
-					'pro'  => true,
-				),
-				'divider-3'         => array(
-					'name' => __( 'Divider 3', 'astra' ),
-					'icon' => 'minus',
-					'pro'  => true,
-				),
-				'language-switcher' => array(
-					'name' => __( 'Language Switcher', 'astra' ),
-					'icon' => 'translation',
-					'pro'  => true,
-				),
-				'button-2'          => array(
-					'name' => __( 'Button 2', 'astra' ),
-					'icon' => 'button',
-					'pro'  => true,
-				),
-				'html-3'            => array(
-					'name' => __( 'HTML 3', 'astra' ),
-					'icon' => 'text',
-					'pro'  => true,
-				),
-				'widget-3'          => array(
-					'name' => __( 'Widget 3', 'astra' ),
-					'icon' => 'wordpress-logo',
-					'pro'  => true,
-				),
-				'widget-4'          => array(
-					'name' => __( 'Widget 4', 'astra' ),
-					'icon' => 'wordpress-logo',
-					'pro'  => true,
-				),
-				'menu-3'            => array(
-					'name' => __( 'Menu 3', 'astra' ),
-					'icon' => 'menu',
-					'pro'  => true,
-				),
-				'color-switcher'    => array(
-					'name'    => __( 'Color Switcher', 'astra' ),
-					'icon'    => 'art',
-					'section' => 'section-header-color-switcher',
-					'pro'     => true,
-				),
-			);
-
-			// Merge the additional items into the existing header desktop items.
-			self::$header_mobile_items = array_merge( self::$header_mobile_items, $pro_header_mobile_items );
-		}
 
 		add_filter( 'astra_addon_list', array( $this, 'deprecate_old_header_and_footer' ) );
 	}

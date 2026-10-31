@@ -86,78 +86,6 @@ function magpro_body_classes( $classes ) {
 add_filter( 'body_class', 'magpro_body_classes' );
 
 /**
- * Render Breaking News Ticker Bar above header
- */
-function magpro_render_header_ticker() {
-	// Allow disabling via filter
-	if ( ! apply_filters( 'magpro_show_header_ticker', true ) ) {
-		return;
-	}
-
-	$recent_posts = new WP_Query(
-		array(
-			'posts_per_page'      => 6,
-			'post_status'         => 'publish',
-			'ignore_sticky_posts' => true,
-		)
-	);
-	?>
-	<div class="magpro-ticker-wrap">
-		<div class="magpro-ticker-container">
-			<div class="magpro-ticker-label">
-				<i class="fas fa-bolt"></i>
-				<span><?php esc_html_e( 'Breaking News', 'mag-pro' ); ?></span>
-			</div>
-
-			<div class="magpro-ticker-content">
-				<?php
-				if ( $recent_posts->have_posts() ) :
-					$count = 0;
-					while ( $recent_posts->have_posts() ) :
-						$recent_posts->the_post();
-						$active = ( 0 === $count ) ? 'active' : '';
-						?>
-						<div class="magpro-ticker-item <?php echo esc_attr( $active ); ?>">
-							<span class="magpro-ticker-bullet">&bull;</span>
-							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-						</div>
-						<?php
-						$count++;
-					endwhile;
-					wp_reset_postdata();
-				else :
-					?>
-					<div class="magpro-ticker-item active">
-						<span><?php esc_html_e( 'Welcome to Mag Pro — Built for modern publishers & bloggers.', 'mag-pro' ); ?></span>
-					</div>
-				<?php endif; ?>
-			</div>
-
-			<div class="magpro-ticker-controls">
-				<button type="button" class="magpro-ticker-btn magpro-ticker-prev" aria-label="<?php esc_attr_e( 'Previous news', 'mag-pro' ); ?>">
-					<i class="fas fa-chevron-left"></i>
-				</button>
-				<button type="button" class="magpro-ticker-btn magpro-ticker-next" aria-label="<?php esc_attr_e( 'Next news', 'mag-pro' ); ?>">
-					<i class="fas fa-chevron-right"></i>
-				</button>
-			</div>
-
-			<div class="magpro-ticker-date">
-				<i class="far fa-calendar-alt"></i> <?php echo esc_html( date_i18n( get_option( 'date_format' ) ) ); ?>
-			</div>
-
-			<!-- Header Dark Mode Switcher -->
-			<button type="button" class="magpro-theme-toggle" style="margin-left: 15px;" aria-label="<?php esc_attr_e( 'Toggle Dark/Light Mode', 'mag-pro' ); ?>" title="<?php esc_attr_e( 'Toggle Theme', 'mag-pro' ); ?>">
-				<i class="fas fa-moon icon-moon"></i>
-				<i class="fas fa-sun icon-sun"></i>
-			</button>
-		</div>
-	</div>
-	<?php
-}
-add_action( 'astra_header_before', 'magpro_render_header_ticker', 5 );
-
-/**
  * Filter Astra Header Search HTML to provide Mag Pro Search Trigger
  */
 function magpro_filter_header_search( $search_html, $option = '', $device = '' ) {
@@ -175,7 +103,7 @@ function magpro_filter_header_search( $search_html, $option = '', $device = '' )
 add_filter( 'astra_get_search', 'magpro_filter_header_search', 20, 3 );
 
 /**
- * Render Search Elements (Full Screen Modal & Header Content Cover)
+ * Render Search Elements (Style 1: Full Screen Modal, Style 2: Slide Down, Style 3: Header Replace)
  */
 function magpro_render_search_elements() {
 	?>
@@ -198,14 +126,28 @@ function magpro_render_search_elements() {
 		</div>
 	</div>
 
-	<!-- Style 2: Replace Header Content Search Bar -->
-	<div class="magpro-search-cover" id="magpro-search-cover" aria-hidden="true">
-		<div class="magpro-search-cover-container">
-			<form role="search" method="get" class="magpro-search-cover-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<i class="fas fa-search magpro-search-cover-icon"></i>
-				<input type="search" class="magpro-search-cover-input" placeholder="<?php esc_attr_e( 'Search news, topics, articles...', 'mag-pro' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
-				<button type="submit" class="magpro-search-cover-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>"><?php esc_html_e( 'Search', 'mag-pro' ); ?></button>
-				<button type="button" class="magpro-search-cover-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
+	<!-- Style 2: Slide Down Search Bar -->
+	<div class="magpro-search-slide-down" id="magpro-search-slide-down" aria-hidden="true">
+		<div class="magpro-search-slide-down-container">
+			<form role="search" method="get" class="magpro-search-slide-down-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<i class="fas fa-search magpro-search-slide-icon"></i>
+				<input type="search" class="magpro-search-slide-down-input" placeholder="<?php esc_attr_e( 'Search news, topics, articles...', 'mag-pro' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+				<button type="submit" class="magpro-search-slide-down-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>"><?php esc_html_e( 'Search', 'mag-pro' ); ?></button>
+				<button type="button" class="magpro-search-slide-down-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Style 3: Header Row Replace Search Bar -->
+	<div class="magpro-search-replace-bar" id="magpro-search-replace-bar" aria-hidden="true">
+		<div class="magpro-search-replace-inner">
+			<form role="search" method="get" class="magpro-search-replace-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<i class="fas fa-search magpro-search-replace-icon"></i>
+				<input type="search" class="magpro-search-replace-input" placeholder="<?php esc_attr_e( 'Type keywords and hit enter to search...', 'mag-pro' ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+				<button type="submit" class="magpro-search-replace-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>">
+					<i class="fas fa-arrow-right"></i>
+				</button>
+				<button type="button" class="magpro-search-replace-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
 			</form>
 		</div>
 	</div>

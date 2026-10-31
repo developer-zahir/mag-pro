@@ -1163,8 +1163,46 @@ html[data-theme="dark"] .magpro-list-excerpt {
   transform: translateX(3px);
 }
 
+
 /* ==========================================================================
-   Header Search Elements (Style 1: Full-screen Modal & Style 2: Header Cover)
+   Zero Background by Default for all post widgets & cards
+   ========================================================================== */
+.magpro-card,
+.magpro-grid-card,
+.magpro-list-card,
+.magpro-compact-item,
+.magpro-video-hero,
+.magpro-video-item,
+.magpro-slider-card,
+.magpro-slide-card,
+.magpro-tabs-wrap,
+.magpro-tabs-item,
+.magpro-block1-wrap,
+.magpro-block1-lead,
+.magpro-block2-col,
+.magpro-block2-lead-card,
+.magpro-social-wrap,
+.magpro-hero-card,
+.magpro-hero-lead,
+.magpro-hero-sub-item {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+html[data-theme="dark"] .magpro-compact-item,
+html[data-theme="dark"] .magpro-grid-card,
+html[data-theme="dark"] .magpro-list-card,
+html[data-theme="dark"] .magpro-block1-wrap,
+html[data-theme="dark"] .magpro-block2-col,
+html[data-theme="dark"] .magpro-tabs-wrap {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* ==========================================================================
+   Header Search Elements (3 Styles: Full-screen, Slide Down, Header Replace)
    ========================================================================== */
 .magpro-header-search-wrap,
 .magpro-widget-search-wrap {
@@ -1302,7 +1340,8 @@ html[data-theme="dark"] .magpro-list-excerpt {
   letter-spacing: 0.5px;
 }
 
-/* Style 2: Replace Header Content (Cover Bar) */
+/* Style 2: Slide Down Search Bar */
+.magpro-search-slide-down,
 .magpro-search-cover {
   position: fixed;
   top: 0;
@@ -1320,18 +1359,21 @@ html[data-theme="dark"] .magpro-list-excerpt {
   visibility: hidden;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
 }
+.magpro-search-slide-down.active,
 .magpro-search-cover.active {
   transform: translateY(0);
   opacity: 1;
   visibility: visible;
 }
 
+.magpro-search-slide-down-container,
 .magpro-search-cover-container {
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
 }
 
+.magpro-search-slide-down-form,
 .magpro-search-cover-form {
   display: flex;
   align-items: center;
@@ -1339,11 +1381,13 @@ html[data-theme="dark"] .magpro-list-excerpt {
   width: 100%;
 }
 
+.magpro-search-slide-icon,
 .magpro-search-cover-icon {
   font-size: 20px;
   color: var(--mp-primary, #ff2232);
 }
 
+.magpro-search-slide-down-input,
 .magpro-search-cover-input {
   flex-grow: 1;
   border: none !important;
@@ -1355,10 +1399,12 @@ html[data-theme="dark"] .magpro-list-excerpt {
   outline: none !important;
   box-shadow: none !important;
 }
+.magpro-search-slide-down-input::placeholder,
 .magpro-search-cover-input::placeholder {
   color: var(--mp-text, #6b7280);
 }
 
+.magpro-search-slide-down-submit,
 .magpro-search-cover-submit {
   background-color: var(--mp-primary, #ff2232);
   color: #ffffff;
@@ -1370,10 +1416,12 @@ html[data-theme="dark"] .magpro-list-excerpt {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+.magpro-search-slide-down-submit:hover,
 .magpro-search-cover-submit:hover {
   background-color: var(--mp-primary-hover, #d91423);
 }
 
+.magpro-search-slide-down-close,
 .magpro-search-cover-close {
   background: transparent;
   border: none;
@@ -1384,80 +1432,124 @@ html[data-theme="dark"] .magpro-list-excerpt {
   padding: 0 8px;
   transition: color 0.2s ease;
 }
+.magpro-search-slide-down-close:hover,
 .magpro-search-cover-close:hover {
   color: var(--mp-heading, #111827);
 }
 
-html[data-theme="dark"] .magpro-search-cover {
-  background-color: #1a202c;
+/* Style 3: Header Row Replace (Direct In-Place Replacement) */
+.magpro-header-search-active {
+  position: relative !important;
+}
+
+.magpro-header-search-active > *:not(.magpro-search-replace-bar) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.magpro-search-replace-bar {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 55px;
+  background-color: var(--mp-surface, #ffffff);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.magpro-header-search-active .magpro-search-replace-bar,
+.magpro-search-replace-bar.active {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+.magpro-search-replace-inner {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.magpro-search-replace-form {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.magpro-search-replace-icon {
+  font-size: 20px;
+  color: var(--mp-primary, #ff2232);
+}
+
+.magpro-search-replace-input {
+  flex-grow: 1;
+  border: none !important;
+  background: transparent !important;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--mp-heading, #111827) !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 8px 0;
+}
+.magpro-search-replace-input::placeholder {
+  color: var(--mp-text, #6b7280);
+}
+
+.magpro-search-replace-submit {
+  background: transparent;
+  border: none;
+  color: var(--mp-primary, #ff2232);
+  font-size: 22px;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: transform 0.2s ease;
+}
+.magpro-search-replace-submit:hover {
+  transform: translateX(4px);
+}
+
+.magpro-search-replace-close {
+  background: transparent;
+  border: none;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--mp-text, #6b7280);
+  cursor: pointer;
+  padding: 0 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.magpro-search-replace-close:hover {
+  color: var(--mp-primary, #ff2232);
+  transform: scale(1.1);
+}
+
+/* Dark theme for search */
+html[data-theme="dark"] .magpro-search-slide-down,
+html[data-theme="dark"] .magpro-search-cover,
+html[data-theme="dark"] .magpro-search-replace-bar {
+  background-color: #1a202c !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
-html[data-theme="dark"] .magpro-search-cover-input {
+html[data-theme="dark"] .magpro-search-slide-down-input,
+html[data-theme="dark"] .magpro-search-cover-input,
+html[data-theme="dark"] .magpro-search-replace-input {
   color: #ffffff !important;
 }
-html[data-theme="dark"] .magpro-search-cover-close {
+html[data-theme="dark"] .magpro-search-slide-down-close,
+html[data-theme="dark"] .magpro-search-cover-close,
+html[data-theme="dark"] .magpro-search-replace-close {
   color: #a0aec0;
 }
-html[data-theme="dark"] .magpro-search-cover-close:hover {
+html[data-theme="dark"] .magpro-search-slide-down-close:hover,
+html[data-theme="dark"] .magpro-search-cover-close:hover,
+html[data-theme="dark"] .magpro-search-replace-close:hover {
   color: #ffffff;
-}
-
-/* ==========================================================================
-   Global Reset: Zero Box-Shadow, Zero Transform & Clean Flat Post Cards
-   ========================================================================== */
-.magpro-card,
-.magpro-grid-card,
-.magpro-compact-item,
-.magpro-list-card,
-.magpro-hero-card,
-.magpro-hero-lead,
-.magpro-hero-sub-item,
-.magpro-video-hero,
-.magpro-video-item,
-.magpro-slider-card,
-.magpro-tabs-item,
-.magpro-block1-lead,
-.magpro-block2-col,
-.magpro-block2-lead-card,
-.magpro-slide-card,
-.magpro-tabs-wrap,
-.magpro-social-wrap,
-.magpro-ticker-wrap {
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.magpro-card:hover,
-.magpro-grid-card:hover,
-.magpro-compact-item:hover,
-.magpro-list-card:hover,
-.magpro-hero-card:hover,
-.magpro-hero-lead:hover,
-.magpro-hero-sub-item:hover,
-.magpro-video-hero:hover,
-.magpro-video-item:hover,
-.magpro-slider-card:hover,
-.magpro-tabs-item:hover,
-.magpro-block1-lead:hover,
-.magpro-block2-col:hover,
-.magpro-block2-lead-card:hover,
-.magpro-slide-card:hover {
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-/* Remove default link underlines */
-.magpro-post-title a,
-.magpro-cat-badge,
-.magpro-meta-item a,
-.magpro-view-all,
-.magpro-read-more {
-  text-decoration: none !important;
-}
-
-/* Default No Zoom on Images */
-.magpro-hover-none img,
-.magpro-hover-none .magpro-hero-thumb {
-  transform: none !important;
-  filter: none !important;
 }

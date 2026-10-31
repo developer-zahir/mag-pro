@@ -205,7 +205,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 		 * @since 1.4.0
 		 */
 		public static function register_notices() {
-			// Return if white labeled.
+			return; // Starter site banners and pro notices disabled for Mag Pro.
 			/** @psalm-suppress RedundantCondition */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 			if ( astra_is_white_labelled() || ! ASTRA_THEME_ORG_VERSION || false === apply_filters( 'astra_showcase_starter_templates_notice', true ) || ! Astra_Menu::is_promoting_starter_templates() ) {
 				/** @psalm-suppress RedundantCondition */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
@@ -303,45 +303,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 		 * @since 3.9.4
 		 */
 		public static function upgrade_to_pro_wc_notice() {
-			/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-			$current_slug = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			/** @psalm-suppress PossiblyInvalidArgument */ // phpcs:ignore Generic.Commenting.DocComment.MissingShort
-
-			if ( '' !== $current_slug && function_exists( 'WC' ) && in_array( $current_slug, array( 'wc-admin', 'wc-reports', 'wc-status', 'wc-addons', 'wc-settings' ), true ) ) {
-
-				$image_path = ASTRA_THEME_URI . 'inc/assets/images/astra-logo.svg';
-
-				$astra_sites_notice_args = array(
-					'id'                         => 'astra-upgrade-pro-wc',
-					'type'                       => 'info',
-					'message'                    => sprintf(
-						'<div class="notice-image">
-							<img src="%1$s" class="custom-logo" alt="Astra" itemprop="logo"></div>
-							<div class="notice-content">
-								<h2 class="notice-heading">
-									%2$s
-								</h2>
-								<p>%3$s</p>
-								<div class="astra-review-notice-container">
-									<a class="%4$s" %5$s> %6$s </a>
-								</div>
-							</div>',
-						$image_path,
-						__( 'Running a WooCommerce store? You need more than just a theme.', 'astra' ),
-						__( 'Design your entire store without limitations - from product pages to checkout. Get conversion-optimized templates, high-converting funnels, cart recovery, upsells, and powerful automation to run your store smoothly - all in one integrated system with the Business Toolkit.', 'astra' ),
-						esc_attr( 'button button-primary' ),
-						'href="' . esc_url( astra_get_pro_url( '/pricing/', 'free-theme', 'dashboard', 'woocommerce' ) ) . '" target="_blank"',
-						__( 'Upgrade to Business Toolkit', 'astra' )
-					),
-					'priority'                   => 5,
-					'show_if'                    => is_admin() ? true : false,
-					'display-with-other-notices' => false,
-				);
-
-				BSF_Admin_Notices::add_notice(
-					$astra_sites_notice_args
-				);
-			}
+			return; // Pro upgrade notice disabled for Mag Pro.
 		}
 
 		/**
@@ -350,43 +312,7 @@ if ( ! class_exists( 'Astra_Admin_Settings' ) ) {
 		 * @since 2.0.0
 		 */
 		public static function minimum_addon_version_notice() {
-
-			if ( ! defined( 'ASTRA_EXT_VER' ) ) {
-				return;
-			}
-
-			if ( version_compare( ASTRA_EXT_VER, ASTRA_EXT_MIN_VER ) < 0 ) {
-
-				$message = sprintf(
-					/* translators: %1$s: Theme Name, %2$s: Minimum Required version of the addon */
-					__( 'Please update the %1$s to version %2$s or higher. Ignore if already updated.', 'astra' ),
-					astra_get_addon_name(),
-					ASTRA_EXT_MIN_VER
-				);
-
-				$min_version = get_user_meta( get_current_user_id(), 'ast-minimum-addon-version-notice-min-ver', true );
-
-				if ( ! $min_version ) {
-					update_user_meta( get_current_user_id(), 'ast-minimum-addon-version-notice-min-ver', ASTRA_EXT_MIN_VER );
-				}
-
-				if ( version_compare( $min_version, ASTRA_EXT_MIN_VER, '!=' ) ) {
-					delete_user_meta( get_current_user_id(), 'ast-minimum-addon-version-notice' );
-					update_user_meta( get_current_user_id(), 'ast-minimum-addon-version-notice-min-ver', ASTRA_EXT_MIN_VER );
-				}
-
-				$notice_args = array(
-					'id'                         => 'ast-minimum-addon-version-notice',
-					'type'                       => 'warning',
-					'message'                    => $message,
-					'show_if'                    => true,
-					'repeat-notice-after'        => false,
-					'priority'                   => 18,
-					'display-with-other-notices' => true,
-				);
-
-				BSF_Admin_Notices::add_notice( $notice_args );
-			}
+			return; // Addon version notice disabled for Mag Pro.
 		}
 
 		/**

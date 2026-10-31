@@ -51,8 +51,9 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'full-screen',
 				'options' => array(
-					'full-screen'  => esc_html__( 'Full Screen Modal (Center Center)', 'mag-pro-elements' ),
-					'header-cover' => esc_html__( 'Replace Header Content', 'mag-pro-elements' ),
+					'full-screen'    => esc_html__( 'Full Screen Modal (Center Center)', 'mag-pro-elements' ),
+					'slide-down'     => esc_html__( 'Slide Down', 'mag-pro-elements' ),
+					'header-replace' => esc_html__( 'Header Replace', 'mag-pro-elements' ),
 				),
 			)
 		);
@@ -355,22 +356,36 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 				<?php endif; ?>
 			</button>
 
-			<?php if ( 'header-cover' === $search_style ) : ?>
-				<!-- Inline / Header Cover Search Container -->
-				<div class="magpro-search-cover" id="magpro-cover-<?php echo esc_attr( $unique_id ); ?>" aria-hidden="true">
-					<div class="magpro-search-cover-container">
-						<form role="search" method="get" class="magpro-search-cover-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<i class="fas fa-search magpro-search-cover-icon" aria-hidden="true"></i>
-							<input type="search" class="magpro-search-cover-input" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
-							<button type="submit" class="magpro-search-cover-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>">
+			<?php if ( 'slide-down' === $search_style ) : ?>
+				<!-- Style 2: Slide Down Search Bar -->
+				<div class="magpro-search-slide-down" id="magpro-slide-<?php echo esc_attr( $unique_id ); ?>" aria-hidden="true">
+					<div class="magpro-search-slide-down-container">
+						<form role="search" method="get" class="magpro-search-slide-down-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<i class="fas fa-search magpro-search-slide-icon" aria-hidden="true"></i>
+							<input type="search" class="magpro-search-slide-down-input" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+							<button type="submit" class="magpro-search-slide-down-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>">
 								<?php esc_html_e( 'Search', 'mag-pro-elements' ); ?>
 							</button>
-							<button type="button" class="magpro-search-cover-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
+							<button type="button" class="magpro-search-slide-down-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
+						</form>
+					</div>
+				</div>
+			<?php elseif ( 'header-replace' === $search_style ) : ?>
+				<!-- Style 3: Header Row Replace Search Bar -->
+				<div class="magpro-search-replace-bar" id="magpro-replace-<?php echo esc_attr( $unique_id ); ?>" aria-hidden="true">
+					<div class="magpro-search-replace-inner">
+						<form role="search" method="get" class="magpro-search-replace-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+							<i class="fas fa-search magpro-search-replace-icon" aria-hidden="true"></i>
+							<input type="search" class="magpro-search-replace-input" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
+							<button type="submit" class="magpro-search-replace-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>">
+								<i class="fas fa-arrow-right" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="magpro-search-replace-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
 						</form>
 					</div>
 				</div>
 			<?php else : ?>
-				<!-- Full-Screen Modal Search (Center Center) -->
+				<!-- Style 1: Full-Screen Modal Search (Center Center) -->
 				<div class="magpro-search-modal" id="magpro-modal-<?php echo esc_attr( $unique_id ); ?>" aria-hidden="true" role="dialog" aria-modal="true">
 					<div class="magpro-search-modal-backdrop"></div>
 					<button type="button" class="magpro-search-modal-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
@@ -395,3 +410,4 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		<?php
 	}
 }
+

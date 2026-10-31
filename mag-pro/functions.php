@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Define Constants
  */
-define( 'ASTRA_THEME_VERSION', '1.0.4' );
+define( 'ASTRA_THEME_VERSION', '1.0.5' );
 define( 'ASTRA_THEME_SETTINGS', 'astra-settings' );
 define( 'ASTRA_THEME_DIR', trailingslashit( get_template_directory() ) );
 define( 'ASTRA_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
@@ -135,10 +135,7 @@ if ( is_admin() ) {
 	require_once ASTRA_THEME_DIR . 'inc/lib/astra-notices/class-bsf-admin-notices.php';
 }
 
-/**
- * BSF Analytics.
- */
-require_once ASTRA_THEME_DIR . 'admin/class-astra-bsf-analytics.php';
+// BSF Analytics removed for Mag Pro.
 
 /**
  * Metabox additions.
