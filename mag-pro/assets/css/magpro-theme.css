@@ -1,0 +1,528 @@
+/**
+ * Mag Pro Theme - Main Styling & Dark/Light System
+ * Author: Developer Zahir
+ * URI: https://developerzahir.com/
+ * Based on MagPro Magazine Template
+ */
+
+/* ==========================================================================
+   CSS Variables / Theming System
+   ========================================================================== */
+:root,
+html[data-theme="light"] {
+  --mp-bg: #f5f6f7;
+  --mp-surface: #ffffff;
+  --mp-card-bg: #ffffff;
+  --mp-primary: #ff2232;
+  --mp-primary-hover: #e51f2d;
+  --mp-title: #171921;
+  --mp-title-hover: #ff2232;
+  --mp-text: #666666;
+  --mp-meta: #8c939d;
+  --mp-border: rgba(0, 0, 0, 0.08);
+  --mp-border-strong: #e1e4e8;
+  --mp-header-bg: #ffffff;
+  --mp-menu-bg: #171921;
+  --mp-menu-text: #ffffff;
+  --mp-footer-bg: #171921;
+  --mp-footer-bar: #12141a;
+  --mp-footer-text: #cccccc;
+  --mp-tag-bg: #ff2232;
+  --mp-tag-color: #ffffff;
+  --mp-card-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  --mp-input-bg: #fdfdfd;
+  --mp-input-border: #e2e5e8;
+  --mp-input-color: #333333;
+  --mp-ticker-bg: #171921;
+  --mp-ticker-text: #ffffff;
+}
+
+html[data-theme="dark"] {
+  --mp-bg: #15181f;
+  --mp-surface: #212530;
+  --mp-card-bg: #212530;
+  --mp-primary: #ff2232;
+  --mp-primary-hover: #ff4754;
+  --mp-title: #f0f2f5;
+  --mp-title-hover: #ff4754;
+  --mp-text: #c0c6d0;
+  --mp-meta: #8a929f;
+  --mp-border: rgba(255, 255, 255, 0.08);
+  --mp-border-strong: #303644;
+  --mp-header-bg: #212530;
+  --mp-menu-bg: #171921;
+  --mp-menu-text: #ffffff;
+  --mp-footer-bg: #171921;
+  --mp-footer-bar: #12141a;
+  --mp-footer-text: #a8b0bd;
+  --mp-tag-bg: #ff2232;
+  --mp-tag-color: #ffffff;
+  --mp-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --mp-input-bg: #1b1e27;
+  --mp-input-border: #323847;
+  --mp-input-color: #e5e9f0;
+  --mp-ticker-bg: #111318;
+  --mp-ticker-text: #f0f2f5;
+}
+
+/* ==========================================================================
+   Typography & Base Reset
+   ========================================================================== */
+body, button, input, select, textarea {
+  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: var(--mp-bg) !important;
+  color: var(--mp-text) !important;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--mp-primary);
+}
+
+/* ==========================================================================
+   Dark Mode Application to Astra Containers & Elements
+   ========================================================================== */
+html[data-theme="dark"] body {
+  background-color: var(--mp-bg) !important;
+}
+
+html[data-theme="dark"] #page,
+html[data-theme="dark"] .site,
+html[data-theme="dark"] #content,
+html[data-theme="dark"] .ast-container,
+html[data-theme="dark"] .site-content {
+  background-color: transparent !important;
+}
+
+/* Header & Navigation in Dark Mode */
+html[data-theme="dark"] .main-header-bar,
+html[data-theme="dark"] .ast-primary-header-bar,
+html[data-theme="dark"] .ast-mobile-header-wrap,
+html[data-theme="dark"] .ast-mobile-header-content,
+html[data-theme="dark"] .ast-theme-transparent-header #masthead {
+  background-color: var(--mp-header-bg) !important;
+  border-bottom-color: var(--mp-border) !important;
+}
+
+html[data-theme="dark"] .main-header-menu .menu-link,
+html[data-theme="dark"] .ast-header-break-point .main-navigation ul .menu-item .menu-link,
+html[data-theme="dark"] .site-title a,
+html[data-theme="dark"] .site-description {
+  color: var(--mp-title) !important;
+}
+
+html[data-theme="dark"] .main-header-menu .sub-menu {
+  background-color: var(--mp-surface) !important;
+  border: 1px solid var(--mp-border) !important;
+  box-shadow: var(--mp-card-shadow) !important;
+}
+
+html[data-theme="dark"] .main-header-menu .sub-menu .menu-link {
+  color: var(--mp-text) !important;
+}
+
+html[data-theme="dark"] .main-header-menu .sub-menu .menu-link:hover {
+  color: var(--mp-primary) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Content, Articles, Cards in Dark Mode */
+html[data-theme="dark"] .ast-article-post,
+html[data-theme="dark"] .ast-article-single,
+html[data-theme="dark"] .ast-separate-container .ast-article-post,
+html[data-theme="dark"] .ast-separate-container .ast-article-single,
+html[data-theme="dark"] .ast-separate-container .site-main > article,
+html[data-theme="dark"] .ast-separate-container .site-main > .comment-respond,
+html[data-theme="dark"] .ast-separate-container .site-main > .ast-single-related-posts-container {
+  background-color: var(--mp-surface) !important;
+  border: 1px solid var(--mp-border) !important;
+  box-shadow: var(--mp-card-shadow) !important;
+}
+
+html[data-theme="dark"] .entry-title,
+html[data-theme="dark"] .entry-title a,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6 {
+  color: var(--mp-title) !important;
+}
+
+html[data-theme="dark"] .entry-meta,
+html[data-theme="dark"] .entry-meta a,
+html[data-theme="dark"] .post-meta,
+html[data-theme="dark"] .ast-blog-single-element {
+  color: var(--mp-meta) !important;
+}
+
+html[data-theme="dark"] .entry-content,
+html[data-theme="dark"] .entry-content p,
+html[data-theme="dark"] .entry-content li {
+  color: var(--mp-text) !important;
+}
+
+html[data-theme="dark"] blockquote {
+  border-left-color: var(--mp-primary) !important;
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: var(--mp-title) !important;
+}
+
+/* Sidebar & Widgets in Dark Mode */
+html[data-theme="dark"] #secondary,
+html[data-theme="dark"] .sidebar-main,
+html[data-theme="dark"] .ast-separate-container #secondary .widget {
+  background-color: var(--mp-surface) !important;
+  border-color: var(--mp-border) !important;
+  color: var(--mp-text) !important;
+}
+
+html[data-theme="dark"] .widget-title,
+html[data-theme="dark"] .widgettitle {
+  color: var(--mp-title) !important;
+  border-bottom: 2px solid var(--mp-primary) !important;
+}
+
+/* Comments Section in Dark Mode */
+html[data-theme="dark"] #comments,
+html[data-theme="dark"] .comments-area,
+html[data-theme="dark"] .comment-list .comment {
+  background-color: var(--mp-surface) !important;
+  border-color: var(--mp-border) !important;
+  color: var(--mp-text) !important;
+}
+
+html[data-theme="dark"] .comment-author .fn,
+html[data-theme="dark"] .comment-author a {
+  color: var(--mp-title) !important;
+}
+
+html[data-theme="dark"] .comment-metadata a {
+  color: var(--mp-meta) !important;
+}
+
+/* Inputs, Textareas, Search in Dark Mode */
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="email"],
+html[data-theme="dark"] input[type="url"],
+html[data-theme="dark"] input[type="password"],
+html[data-theme="dark"] input[type="search"],
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: var(--mp-input-bg) !important;
+  border-color: var(--mp-input-border) !important;
+  color: var(--mp-input-color) !important;
+}
+
+html[data-theme="dark"] input[type="text"]:focus,
+html[data-theme="dark"] input[type="search"]:focus,
+html[data-theme="dark"] textarea:focus {
+  border-color: var(--mp-primary) !important;
+  outline: none !important;
+}
+
+/* Footer in Dark Mode */
+html[data-theme="dark"] .site-footer,
+html[data-theme="dark"] .ast-footer-overlay,
+html[data-theme="dark"] .footer-adv,
+html[data-theme="dark"] .ast-small-footer {
+  background-color: var(--mp-footer-bg) !important;
+  border-top-color: var(--mp-border) !important;
+  color: var(--mp-footer-text) !important;
+}
+
+html[data-theme="dark"] .ast-small-footer {
+  background-color: var(--mp-footer-bar) !important;
+}
+
+/* Pagination in Dark Mode */
+html[data-theme="dark"] .ast-pagination .page-numbers {
+  background-color: var(--mp-surface) !important;
+  color: var(--mp-title) !important;
+  border-color: var(--mp-border) !important;
+}
+
+html[data-theme="dark"] .ast-pagination .page-numbers.current,
+html[data-theme="dark"] .ast-pagination .page-numbers:hover {
+  background-color: var(--mp-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--mp-primary) !important;
+}
+
+/* ==========================================================================
+   MagPro Magazine UI Elements & Effects
+   ========================================================================== */
+
+/* Post Category Badges */
+.magpro-cat-badge,
+.entry-tag-badge {
+  display: inline-block;
+  background-color: var(--mp-tag-bg);
+  color: var(--mp-tag-color);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
+  border-radius: 3px;
+  z-index: 2;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.magpro-cat-badge:hover,
+.entry-tag-badge:hover {
+  background-color: #171921;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Entry Thumb Hover Zoom */
+.magpro-thumb-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.magpro-thumb-wrap img,
+.magpro-thumb-wrap .entry-thumb {
+  transition: transform 0.4s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.magpro-thumb-wrap:hover img,
+.magpro-thumb-wrap:hover .entry-thumb {
+  transform: scale(1.06);
+}
+
+/* Gradient Overlay for Hero & Video Blocks */
+.magpro-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(17, 19, 24, 0.05) 0%, rgba(17, 19, 24, 0.88) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ==========================================================================
+   MagPro Breaking News Ticker
+   ========================================================================== */
+.magpro-ticker-wrap {
+  background-color: var(--mp-ticker-bg);
+  color: var(--mp-ticker-text);
+  border-bottom: 1px solid var(--mp-border);
+  font-size: 13px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.magpro-ticker-container {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  min-height: 42px;
+}
+
+.magpro-ticker-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--mp-primary);
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  padding: 6px 14px;
+  border-radius: 2px;
+  white-space: nowrap;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.magpro-ticker-label i {
+  font-size: 10px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.magpro-ticker-content {
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  height: 42px;
+  line-height: 42px;
+}
+
+.magpro-ticker-item {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+.magpro-ticker-item.active {
+  display: flex;
+  animation: fadeInTicker 0.35s ease;
+}
+
+@keyframes fadeInTicker {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.magpro-ticker-item a {
+  color: var(--mp-ticker-text);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.magpro-ticker-item a:hover {
+  color: var(--mp-primary);
+}
+
+.magpro-ticker-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 15px;
+  flex-shrink: 0;
+}
+
+.magpro-ticker-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--mp-ticker-text);
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: background 0.2s ease;
+}
+.magpro-ticker-btn:hover {
+  background: var(--mp-primary);
+  color: #ffffff;
+}
+
+.magpro-ticker-date {
+  color: var(--mp-meta);
+  font-size: 12px;
+  margin-left: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .magpro-ticker-date {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Dark / Light Mode Toggle Button
+   ========================================================================== */
+
+/* Header / Inline Toggle */
+.magpro-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1;
+  transition: color 0.2s ease, transform 0.2s ease;
+  user-select: none;
+}
+.magpro-theme-toggle:hover {
+  color: var(--mp-primary);
+  transform: rotate(15deg);
+}
+
+.magpro-theme-toggle .icon-sun {
+  display: none;
+}
+.magpro-theme-toggle .icon-moon {
+  display: inline-block;
+}
+
+html[data-theme="dark"] .magpro-theme-toggle .icon-sun {
+  display: inline-block;
+}
+html[data-theme="dark"] .magpro-theme-toggle .icon-moon {
+  display: none;
+}
+
+/* Floating Dark Mode Switch (Bottom Right) */
+.magpro-floating-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--mp-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  border: none;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+.magpro-floating-toggle:hover {
+  transform: scale(1.1) rotate(20deg);
+  background-color: var(--mp-primary-hover);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.magpro-floating-toggle .icon-sun {
+  display: none;
+  font-size: 18px;
+}
+.magpro-floating-toggle .icon-moon {
+  display: inline-block;
+  font-size: 18px;
+}
+
+html[data-theme="dark"] .magpro-floating-toggle .icon-sun {
+  display: inline-block;
+}
+html[data-theme="dark"] .magpro-floating-toggle .icon-moon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .magpro-floating-toggle {
+    bottom: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
