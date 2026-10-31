@@ -173,3 +173,39 @@ function magpro_render_floating_toggle() {
 }
 add_action( 'wp_footer', 'magpro_render_floating_toggle', 99 );
 
+/**
+ * Post Views Counter & Formatter
+ */
+function magpro_get_post_views( $post_id ) {
+	$views = get_post_meta( $post_id, '_magpro_post_views', true );
+	if ( empty( $views ) ) {
+		$views = 0;
+	}
+	$views = intval( $views );
+
+	if ( $views >= 1000000 ) {
+		return round( $views / 1000000, 1 ) . 'M';
+	} elseif ( $views >= 1000 ) {
+		return round( $views / 1000, 1 ) . 'K';
+	}
+	return number_format_i18n( $views );
+}
+
+function magpro_increment_post_views() {
+	if ( ! is_single() ) {
+		return;
+	}
+	$post_id = get_the_ID();
+	if ( ! $post_id ) {
+		return;
+	}
+	if ( current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	$views = get_post_meta( $post_id, '_magpro_post_views', true );
+	$views = ! empty( $views ) ? intval( $views ) + 1 : 1;
+	update_post_meta( $post_id, '_magpro_post_views', $views );
+}
+add_action( 'wp_head', 'magpro_increment_post_views' );
+
+

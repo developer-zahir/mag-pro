@@ -113,24 +113,20 @@ switch ( $astra_header_component_slug ) {
 		<?php
 		break;
 
-	case 'woo-cart':
-		if ( class_exists( 'Astra_Woocommerce' ) ) {
-			?>
-			<div class="ast-builder-layout-element site-header-focus-item ast-header-woo-cart" data-section="section-header-woo-cart">
-				<?php do_action( 'astra_header_woo_cart', $astra_active_device ); ?>
-			</div>
-			<?php
-		}
+	case 'dark-mode':
+		?>
+		<div class="ast-builder-layout-element ast-flex site-header-focus-item ast-header-dark-mode" data-section="section-header-dark-mode">
+			<?php do_action( 'astra_header_dark_mode' ); ?>
+		</div>
+		<?php
 		break;
 
-	case 'edd-cart':
-		if ( class_exists( 'Easy_Digital_Downloads' ) ) {
-			?>
-			<div class="ast-builder-layout-element site-header-focus-item ast-header-edd-cart" data-section="section-header-edd-cart">
-				<?php do_action( 'astra_header_edd_cart' ); ?>
-			</div>
-			<?php
-		}
+	case 'news-ticker':
+		?>
+		<div class="ast-builder-layout-element ast-flex site-header-focus-item ast-header-news-ticker" data-section="section-header-news-ticker" style="width: 100%;">
+			<?php do_action( 'astra_header_news_ticker' ); ?>
+		</div>
+		<?php
 		break;
 	case 'widget-1':
 		?>

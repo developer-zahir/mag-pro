@@ -99,9 +99,27 @@ class MagPro_Helpers {
 	}
 
 	/**
-	 * Get post meta markup
+	 * Get formatted post view count
 	 */
-	public static function get_post_meta( $post_id, $show_author = true, $show_date = true, $show_comments = false ) {
+	public static function get_post_views( $post_id ) {
+		$views = get_post_meta( $post_id, '_magpro_post_views', true );
+		if ( empty( $views ) ) {
+			$views = 0;
+		}
+		$views = intval( $views );
+
+		if ( $views >= 1000000 ) {
+			return round( $views / 1000000, 1 ) . 'M';
+		} elseif ( $views >= 1000 ) {
+			return round( $views / 1000, 1 ) . 'K';
+		}
+		return number_format_i18n( $views );
+	}
+
+	/**
+	 * Get post meta markup with author, date, views, and comments switches
+	 */
+	public static function get_post_meta( $post_id, $show_author = true, $show_date = true, $show_views = true, $show_comments = false ) {
 		$output = '<div class="magpro-post-meta">';
 
 		if ( $show_author ) {
@@ -120,6 +138,13 @@ class MagPro_Helpers {
 			);
 		}
 
+		if ( $show_views ) {
+			$output .= sprintf(
+				'<span class="magpro-meta-item magpro-meta-views"><i class="far fa-eye"></i> %1$s</span>',
+				esc_html( self::get_post_views( $post_id ) )
+			);
+		}
+
 		if ( $show_comments ) {
 			$comment_count = get_comments_number( $post_id );
 			$output       .= sprintf(
@@ -131,6 +156,39 @@ class MagPro_Helpers {
 		$output .= '</div>';
 
 		return $output;
+	}
+
+	/**
+	 * Generate aspect ratio and manual height style attribute
+	 */
+	public static function get_image_aspect_style( $aspect_ratio = '16:9', $custom_height = '' ) {
+		if ( 'custom' === $aspect_ratio && ! empty( $custom_height ) ) {
+			return 'height: ' . intval( $custom_height ) . 'px;';
+		}
+
+		switch ( $aspect_ratio ) {
+			case '4:3':
+				return 'aspect-ratio: 4 / 3; height: auto;';
+			case '1:1':
+				return 'aspect-ratio: 1 / 1; height: auto;';
+			case '3:2':
+				return 'aspect-ratio: 3 / 2; height: auto;';
+			case '21:9':
+				return 'aspect-ratio: 21 / 9; height: auto;';
+			case '16:9':
+			default:
+				return 'aspect-ratio: 16 / 9; height: auto;';
+		}
+	}
+
+	/**
+	 * Get hover animation class for images
+	 */
+	public static function get_hover_animation_class( $animation = 'zoom-in' ) {
+		if ( empty( $animation ) || 'none' === $animation ) {
+			return 'magpro-hover-none';
+		}
+		return 'magpro-hover-' . sanitize_html_class( $animation );
 	}
 
 	/**

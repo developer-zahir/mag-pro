@@ -701,6 +701,16 @@ final class Astra_Builder_Helper {
 					'section' => 'section-header-account',
 					'delete'  => false,
 				),
+				'dark-mode'   => array(
+					'name'    => __( 'Dark Mode Switcher', 'mag-pro' ),
+					'icon'    => 'art',
+					'section' => 'section-header-dark-mode',
+				),
+				'news-ticker' => array(
+					'name'    => __( 'News Ticker', 'mag-pro' ),
+					'icon'    => 'megaphone',
+					'section' => 'section-header-news-ticker',
+				),
 			)
 		);
 
@@ -874,6 +884,16 @@ final class Astra_Builder_Helper {
 					'name'    => __( 'Account', 'astra' ),
 					'icon'    => 'admin-users',
 					'section' => 'section-header-account',
+				),
+				'dark-mode'      => array(
+					'name'    => __( 'Dark Mode Switcher', 'mag-pro' ),
+					'icon'    => 'art',
+					'section' => 'section-header-dark-mode',
+				),
+				'news-ticker'    => array(
+					'name'    => __( 'News Ticker', 'mag-pro' ),
+					'icon'    => 'megaphone',
+					'section' => 'section-header-news-ticker',
 				),
 			)
 		);

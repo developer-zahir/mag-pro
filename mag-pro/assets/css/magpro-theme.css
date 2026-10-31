@@ -439,6 +439,72 @@ html[data-theme="dark"] .ast-pagination .page-numbers:hover {
 }
 
 /* ==========================================================================
+   Continuous Marquee Ticker Style
+   ========================================================================== */
+.magpro-ticker-marquee {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 42px;
+  align-items: center;
+  user-select: none;
+}
+
+.magpro-ticker-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+  animation: magproMarquee 30s linear infinite;
+  gap: 30px;
+  align-items: center;
+}
+
+.magpro-ticker-marquee:hover .magpro-ticker-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes magproMarquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.magpro-marquee-item,
+.magpro-ticker-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.magpro-marquee-item a,
+.magpro-ticker-marquee-item a {
+  color: var(--mp-ticker-text);
+  font-weight: 500;
+  text-decoration: none;
+}
+.magpro-marquee-item a:hover,
+.magpro-ticker-marquee-item a:hover {
+  color: var(--mp-primary);
+}
+
+.magpro-ticker-views {
+  color: var(--mp-primary);
+  font-size: 11px;
+  background: rgba(255, 34, 50, 0.12);
+  padding: 2px 7px;
+  border-radius: 2px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.magpro-header-dark-mode-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ==========================================================================
    Dark / Light Mode Toggle Button
    ========================================================================== */
 

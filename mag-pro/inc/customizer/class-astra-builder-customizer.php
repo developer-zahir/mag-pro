@@ -292,13 +292,9 @@ final class Astra_Builder_Customizer {
 		require_once $header_components_path . '/above-header/class-astra-above-header.php';
 		require_once $header_components_path . '/below-header/class-astra-below-header.php';
 
-		if ( class_exists( 'Astra_Woocommerce' ) ) {
-			require_once $header_components_path . '/woo-cart/class-astra-header-woo-cart-component.php';
-		}
-
-		if ( class_exists( 'Easy_Digital_Downloads' ) ) {
-			require_once $header_components_path . '/edd-cart/class-astra-header-edd-cart-component.php';
-		}
+		// Mag Pro Header Builder Elements
+		require_once $header_components_path . '/dark-mode/class-astra-header-dark-mode-component.php';
+		require_once $header_components_path . '/news-ticker/class-astra-header-news-ticker-component.php';
 
 		// @codingStandardsIgnoreEnd WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 	}

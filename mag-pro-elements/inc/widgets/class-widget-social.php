@@ -32,6 +32,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 	}
 
 	protected function register_controls() {
+		// Content Controls
 		$this->start_controls_section(
 			'section_content',
 			array(
@@ -103,6 +104,118 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		);
 
 		$this->end_controls_section();
+
+		// Style Tab: Section Title
+		$this->start_controls_section(
+			'section_style_header',
+			array(
+				'label' => esc_html__( 'Widget Title', 'mag-pro-elements' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'header_title_color',
+			array(
+				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-widget-title' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'header_title_typography',
+				'selector' => '{{WRAPPER}} .magpro-widget-title',
+			)
+		);
+
+		$this->end_controls_section();
+
+		// Style Tab: Buttons Style
+		$this->start_controls_section(
+			'section_style_buttons',
+			array(
+				'label' => esc_html__( 'Buttons & Layout', 'mag-pro-elements' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_responsive_control(
+			'columns',
+			array(
+				'label'     => esc_html__( 'Columns', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'default'   => '2',
+				'options'   => array(
+					'1' => esc_html__( '1 Column', 'mag-pro-elements' ),
+					'2' => esc_html__( '2 Columns', 'mag-pro-elements' ),
+					'3' => esc_html__( '3 Columns', 'mag-pro-elements' ),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-social-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'button_gap',
+			array(
+				'label'      => esc_html__( 'Grid Gap', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 4,
+						'max' => 24,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => 10,
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-social-grid' => 'gap: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'button_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-social-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'button_padding',
+			array(
+				'label'      => esc_html__( 'Button Padding', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-social-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'selector' => '{{WRAPPER}} .magpro-social-btn',
+			)
+		);
+
+		$this->end_controls_section();
 	}
 
 	protected function render() {
@@ -160,4 +273,3 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		<?php
 	}
 }
-
