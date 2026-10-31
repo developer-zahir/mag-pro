@@ -4,7 +4,7 @@ Tags: blog, news, entertainment, grid-layout, custom-menu, custom-logo, featured
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,11 +15,16 @@ Mag Pro is an ultra-fast, modern, lightweight, and fully responsive magazine and
 Mag Pro is built by Developer Zahir (https://developerzahir.com/). It provides an ultra-lightweight codebase, blazing fast load times, and complete design freedom with Elementor Header & Footer Builder while featuring the iconic MagPro layout by default.
 
 Features:
-- Default Header matching MagPro XML (Topbar, Logo + 728x90 Ad, Red Menu Bar with Home Icon, Dark Switcher, Nav Search)
+- Default Header matching MagPro XML (Topbar, Logo + 728x90 Ad, Sleek Black Menu Bar with Red Home Icon, Dark Switcher, Nav Search)
+- Sticky Main Navigation option in WordPress Customizer
+- Container Width control option in Customizer (960px - 1400px)
+- Single Post FAQ / Accordion styling (<details> and <summary>) with Customizer color controls
+- 100% Flat seamless design (no boxy cards/padding around widgets, archive posts, or single posts)
+- Archive and Search breadcrumb & query message (.queryMessage) matching MagPro XML
+- Beautiful modern, responsive WordPress comment form
 - Customizer controls for Topbar, Middle Header, Logo width, Light/Dark Logos, and Header Ads
 - Customizer Color Palette controls for Primary color, Menu bg, Topbar bg, Header bg, and Dark mode colors
 - Customizer Social Links configuration (Facebook, Twitter, YouTube, Instagram, Pinterest, LinkedIn, Telegram, WhatsApp)
-- MagPro Breadcrumbs on Archive and Single Post pages
 - Elementor Header & Footer Builder with target display conditions (when custom templates are needed)
 - Instant Dark & Light Mode with zero flash
 - 12 Elementor magazine and blog widgets via Mag Pro Elements
@@ -28,6 +33,15 @@ Features:
 - Fully responsive across mobile, tablet, and desktop
 
 == Changelog ==
+
+= 2.3.0 =
+* Added Sticky Main Navigation toggle option in Customizer with smooth scroll handling.
+* Changed default Main Navigation background to sleek black (#171921) matching MagPro XML.
+* Added Container Max-Width control option in Customizer (960px - 1400px).
+* Added modern FAQ / Accordion styling for <details> and <summary> tags in post content with Customizer color controls.
+* Replaced boxy card styling on archive and single post pages with clean flat borderless layout matching MagPro XML.
+* Replaced archive header with exact MagPro XML breadcrumb and query message (.queryMessage).
+* Redesigned and polished WordPress comment form with responsive 3-column author fields and primary submit button.
 
 = 2.2.0 =
 * Added WordPress Customizer panel with dynamic Color Palette controls (Primary color, Menu bg, Topbar bg, Header bg, Dark mode colors).

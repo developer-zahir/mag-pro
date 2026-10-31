@@ -1,7 +1,7 @@
 /**
  * Mag Pro Theme Stylesheet
  * Faithfully re-engineered from the original MagPro XML template
- * Version: 2.1.0
+ * Version: 2.3.0
  * Author: Developer Zahir (https://developerzahir.com/)
  */
 
@@ -27,7 +27,7 @@
   --topbar-color: #555555;
   --header-bg: #ffffff;
   --header-ads-bg: #f5f5f5;
-  --menu-bg: #ff2232;
+  --menu-bg: #171921; /* Default Black Menu Bar as in MagPro */
   --menu-color: #ffffff;
   --submenu-bg: #ffffff;
   --submenu-color: #222222;
@@ -35,6 +35,12 @@
   --radius: 4px;
   --container-width: 1140px;
   --transition: 0.25s ease;
+
+  /* Post FAQ variables */
+  --faq-bg: #fbfbfb;
+  --faq-border: #e5e7eb;
+  --faq-title-color: #111827;
+  --faq-active-bg: #f3f4f6;
 }
 
 html[data-theme="dark"] {
@@ -55,6 +61,12 @@ html[data-theme="dark"] {
   --submenu-bg: #1e2028;
   --submenu-color: #ffffff;
   --border-color: #282c36;
+
+  /* Dark FAQ */
+  --faq-bg: #1e222b;
+  --faq-border: #282d37;
+  --faq-title-color: #ffffff;
+  --faq-active-bg: #282d37;
 }
 
 /* ==========================================================================
@@ -73,7 +85,7 @@ html[data-theme="dark"] {
 .content-wrapper {
   display: flex;
   gap: 30px;
-  padding-top: 30px;
+  padding-top: 25px;
   padding-bottom: 50px;
 }
 
@@ -98,7 +110,7 @@ html[data-theme="dark"] {
 }
 
 /* ==========================================================================
-   3. MagPro Header (Topbar, Logo + Ads, Red Menu Bar)
+   3. MagPro Header (Topbar, Logo + Ads, Menu Bar)
    ========================================================================== */
 #magpro-pro-header-wrapper {
   position: relative;
@@ -213,7 +225,7 @@ html[data-theme="dark"] {
   border-radius: var(--radius);
 }
 
-/* 3.3 Main Navigation Menu Bar (50px, MagPro Red) */
+/* 3.3 Main Navigation Menu Bar (50px, Black Default) */
 .main-menu-wrap {
   position: relative;
   width: 100%;
@@ -221,6 +233,26 @@ html[data-theme="dark"] {
   background-color: var(--menu-bg);
   z-index: 100;
   transition: background-color var(--transition);
+}
+
+/* Sticky Navigation Mode */
+.main-menu-wrap.is-sticky {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  animation: magproSlideDown 0.25s ease;
+}
+
+@keyframes magproSlideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .main-menu-frame .container {
@@ -235,6 +267,7 @@ html[data-theme="dark"] {
   position: relative;
 }
 
+/* Home Icon Link (Primary Color) */
 .home-icon-link {
   width: 50px;
   height: 50px;
@@ -256,7 +289,7 @@ html[data-theme="dark"] {
 .magpro-pro-main-menu {
   flex: 1;
   height: 50px;
-  margin-right: 100px; /* Leave room for dark toggle & search toggle */
+  margin-right: 100px;
 }
 
 .main-nav-list {
@@ -286,7 +319,7 @@ html[data-theme="dark"] {
 
 .main-nav-list > li:hover > a,
 .main-nav-list > li.current-menu-item > a {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 
@@ -298,7 +331,7 @@ html[data-theme="dark"] {
   min-width: 200px;
   background-color: var(--submenu-bg);
   border: 1px solid var(--border-color);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   list-style: none;
   margin: 0;
   padding: 8px 0;
@@ -339,14 +372,14 @@ html[data-theme="dark"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #ffffff;
   cursor: pointer;
   transition: background-color var(--transition);
 }
 
 .darkmode-toggle:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.18);
 }
 
 .darkmode-toggle::after {
@@ -613,8 +646,110 @@ html[data-theme="dark"] .darkmode-toggle::after {
 }
 
 /* ==========================================================================
-   4. Archive & Blog Posts Loop (.index-post)
+   4. Breadcrumbs & Archive Title (MagPro XML Style)
    ========================================================================== */
+#breadcrumb,
+.breadcrumb {
+  font-family: var(--body-font);
+  font-size: 13px;
+  color: var(--meta-color);
+  font-weight: 400;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#breadcrumb a,
+.breadcrumb a {
+  color: var(--meta-color);
+  transition: color var(--transition);
+}
+
+#breadcrumb a.home,
+.breadcrumb a.home {
+  color: var(--main-color);
+}
+
+#breadcrumb a:hover,
+.breadcrumb a:hover {
+  color: var(--main-color);
+}
+
+#breadcrumb a,
+#breadcrumb em,
+#breadcrumb span,
+.breadcrumb a,
+.breadcrumb em,
+.breadcrumb span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#breadcrumb .delimiter,
+.breadcrumb .delimiter {
+  display: inline-block;
+  font-style: normal;
+}
+
+#breadcrumb .delimiter::after,
+.breadcrumb .delimiter::after {
+  content: '\f054';
+  font-family: 'Font Awesome 5 Free';
+  font-size: 9px;
+  font-weight: 900;
+  font-style: normal;
+  margin: 0 6px;
+  color: var(--meta-color);
+}
+
+/* MagPro .queryMessage */
+.queryMessage {
+  overflow: hidden;
+  color: var(--meta-color);
+  font-size: 13px;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding: 0 0 10px;
+  margin: 0 0 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.queryMessage .query-info {
+  margin: 0;
+}
+
+.queryMessage .search-query,
+.queryMessage .search-label {
+  color: var(--title-color);
+  font-weight: 700;
+}
+
+.queryMessage .search-query::before,
+.queryMessage .search-label::before {
+  content: '\201c';
+}
+
+.queryMessage .search-query::after,
+.queryMessage .search-label::after {
+  content: '\201d';
+}
+
+.queryEmpty {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 30px 0;
+  text-align: center;
+  color: var(--meta-color);
+}
+
+/* ==========================================================================
+   5. Archive & Blog Posts Loop (.index-post - FLAT, NO BOXY CARDS)
+   ========================================================================== */
+.index-post-wrap {
+  width: 100%;
+}
+
 .index-post {
   position: relative;
   display: flex;
@@ -622,10 +757,16 @@ html[data-theme="dark"] .darkmode-toggle::after {
   padding: 0 0 20px;
   margin: 0 0 20px;
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--card-bg);
-  padding: 16px;
-  border-radius: var(--radius);
-  transition: background-color var(--transition);
+  background: transparent; /* No boxy background */
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  transition: border-color var(--transition);
+}
+
+.index-post:last-child {
+  border-bottom: none;
 }
 
 .index-post .entry-image {
@@ -759,70 +900,14 @@ html[data-theme="dark"] .darkmode-toggle::after {
 }
 
 /* ==========================================================================
-   5. Single Blog Post Template (.item-post)
+   6. Single Blog Post Template (.item-post - FLAT, NO BOXY CARDS)
    ========================================================================== */
 .item-post {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 30px;
+  background: transparent; /* No boxy background */
+  border: none;
+  border-radius: 0;
+  padding: 0;
   margin-bottom: 30px;
-}
-
-/* MagPro Breadcrumbs (#breadcrumb) */
-#breadcrumb,
-.breadcrumb {
-  font-family: var(--body-font);
-  font-size: 13px;
-  color: var(--meta-color);
-  font-weight: 400;
-  margin: 0 0 16px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-#breadcrumb a,
-.breadcrumb a {
-  color: var(--meta-color);
-  transition: color var(--transition);
-}
-
-#breadcrumb a.home,
-.breadcrumb a.home {
-  color: var(--main-color);
-}
-
-#breadcrumb a:hover,
-.breadcrumb a:hover {
-  color: var(--main-color);
-}
-
-#breadcrumb a,
-#breadcrumb em,
-#breadcrumb span,
-.breadcrumb a,
-.breadcrumb em,
-.breadcrumb span {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-#breadcrumb .delimiter,
-.breadcrumb .delimiter {
-  display: inline-block;
-  font-style: normal;
-}
-
-#breadcrumb .delimiter::after,
-.breadcrumb .delimiter::after {
-  content: '\f054';
-  font-family: 'Font Awesome 5 Free';
-  font-size: 9px;
-  font-weight: 900;
-  font-style: normal;
-  margin: 0 6px;
-  color: var(--meta-color);
 }
 
 .item-post .blog-entry-header {
@@ -876,6 +961,65 @@ html[data-theme="dark"] .darkmode-toggle::after {
   font-style: italic;
 }
 
+/* ==========================================================================
+   FAQ / Accordion (<details> & <summary>) in Post Content
+   ========================================================================== */
+.entry-content details {
+  background-color: var(--faq-bg, #fbfbfb);
+  border: 1px solid var(--faq-border, #e5e7eb);
+  border-radius: var(--radius);
+  margin: 16px 0;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.entry-content details summary {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--faq-title-color, var(--title-color));
+  padding: 14px 18px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+}
+
+.entry-content details summary::-webkit-details-marker {
+  display: none;
+}
+
+.entry-content details summary::after {
+  content: '\f078'; /* Font Awesome chevron-down */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 13px;
+  color: var(--main-color);
+  transition: transform 0.25s ease;
+}
+
+.entry-content details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.entry-content details[open] summary {
+  border-bottom: 1px solid var(--faq-border, #e5e7eb);
+  background-color: var(--faq-active-bg, #f3f4f6);
+}
+
+.entry-content details > *:not(summary) {
+  padding: 16px 18px;
+  margin: 0;
+  color: var(--text-color);
+  line-height: 1.7;
+}
+
+/* Post Tags */
 .post-tags {
   margin-top: 25px;
   padding-top: 15px;
@@ -947,7 +1091,7 @@ html[data-theme="dark"] .darkmode-toggle::after {
   gap: 18px;
   margin-top: 30px;
   padding: 20px;
-  background-color: var(--card-bg);
+  background-color: rgba(155, 155, 155, 0.04);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
 }
@@ -998,8 +1142,8 @@ html[data-theme="dark"] .darkmode-toggle::after {
 }
 
 .related-title {
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 700;
   text-transform: uppercase;
   margin: 0 0 16px;
   color: var(--title-color);
@@ -1061,15 +1205,39 @@ html[data-theme="dark"] .darkmode-toggle::after {
   }
 }
 
-/* Comments */
+/* ==========================================================================
+   7. Modern Comment Form & Comments List
+   ========================================================================== */
 #comments {
-  margin-top: 35px;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border-color);
+}
+
+.comments-title,
+#reply-title {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--title-color);
+  margin: 0 0 20px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--main-color);
+  display: inline-block;
+}
+
+#reply-title small a {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-left: 12px;
+  text-transform: none;
 }
 
 .comment-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 30px;
+  margin: 0 0 35px;
 }
 
 .comment-body {
@@ -1077,22 +1245,152 @@ html[data-theme="dark"] .darkmode-toggle::after {
   background-color: rgba(155, 155, 155, 0.05);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
-/* ==========================================================================
-   6. Sidebar Widgets
-   ========================================================================== */
-.magpro-widget {
+.comment-author .avatar {
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.comment-author .fn {
+  font-weight: 700;
+  color: var(--title-color);
+}
+
+.comment-metadata {
+  font-size: 12px;
+  color: var(--meta-color);
+  margin: 4px 0 10px;
+}
+
+.comment-content p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.reply a {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--main-color);
+  text-transform: uppercase;
+}
+
+/* Comment Form */
+.comment-respond {
+  margin-top: 30px;
+}
+
+.comment-form p {
+  margin-bottom: 18px;
+}
+
+.comment-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--title-color);
+  margin-bottom: 6px;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+  width: 100%;
+  padding: 12px 14px;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 25px;
+  color: var(--title-color);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form input[type="url"]:focus,
+.comment-form textarea:focus {
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 3px rgba(255, 34, 50, 0.1);
+}
+
+.comment-form-author,
+.comment-form-email,
+.comment-form-url {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .comment-form-author,
+  .comment-form-email,
+  .comment-form-url {
+    display: inline-block;
+    width: calc(33.333% - 10px);
+    margin-right: 15px;
+    vertical-align: top;
+  }
+  .comment-form-url {
+    margin-right: 0;
+  }
+}
+
+.comment-form-cookies-consent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--meta-color);
+}
+
+.comment-form-cookies-consent input[type="checkbox"] {
+  accent-color: var(--main-color);
+  margin: 0;
+}
+
+.form-submit {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.form-submit #submit {
+  background-color: var(--main-color);
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.form-submit #submit:hover {
+  background-color: var(--main-color-hover);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   8. Sidebar Widgets (FLAT, NO BOXY CARDS)
+   ========================================================================== */
+.magpro-widget {
+  background: transparent; /* No boxy background */
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 35px;
 }
 
 .magpro-widget-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1127,12 +1425,12 @@ html[data-theme="dark"] .darkmode-toggle::after {
 }
 
 /* ==========================================================================
-   7. MagPro Footer
+   9. MagPro Footer
    ========================================================================== */
 #footer-wrapper {
   background-color: var(--card-bg);
   border-top: 1px solid var(--border-color);
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .footer-widgets-wrap {

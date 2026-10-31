@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define Constants
-define( 'MAGPRO_THEME_VERSION', '2.2.0' );
+define( 'MAGPRO_THEME_VERSION', '2.3.0' );
 define( 'MAGPRO_THEME_DIR', get_template_directory() );
 define( 'MAGPRO_THEME_URI', get_template_directory_uri() );
 

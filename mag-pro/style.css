@@ -4,7 +4,7 @@ Theme URI: https://developerzahir.com/
 Author: Developer Zahir
 Author URI: https://developerzahir.com/
 Description: Mag Pro is an ultra-fast, modern, lightweight, and fully responsive magazine and blog WordPress theme with built-in Elementor Header & Footer Builder, Dark & Light Mode, and advanced post widgets modeled after the classic MagPro design.
-Version: 2.2.0
+Version: 2.3.0
 Requires at least: 5.8
 Tested up to: 6.7
 Requires PHP: 7.4
@@ -34,7 +34,7 @@ Tags: blog, news, entertainment, grid-layout, custom-menu, custom-logo, featured
   --topbar-color: #555555;
   --header-bg: #ffffff;
   --header-ads-bg: #f5f5f5;
-  --menu-bg: #ff2232;
+  --menu-bg: #171921; /* Default Black Menu Bar */
   --menu-color: #ffffff;
   --submenu-bg: #ffffff;
   --submenu-color: #222222;

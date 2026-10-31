@@ -133,16 +133,39 @@
     });
   }
 
+  // ==========================================================================
+  // 4. Sticky Main Navigation
+  // ==========================================================================
+  function initStickyMenu() {
+    var menuWrap = document.querySelector('.main-menu-wrap');
+    if (!menuWrap || !document.body.classList.contains('has-sticky-menu')) return;
+
+    var menuOffset = menuWrap.getBoundingClientRect().top + window.pageYOffset;
+
+    function handleScroll() {
+      if (window.pageYOffset > menuOffset) {
+        menuWrap.classList.add('is-sticky');
+      } else {
+        menuWrap.classList.remove('is-sticky');
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  }
+
   // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initThemeToggle();
       initSearchToggle();
       initMobileMenu();
+      initStickyMenu();
     });
   } else {
     initThemeToggle();
     initSearchToggle();
     initMobileMenu();
+    initStickyMenu();
   }
 })();

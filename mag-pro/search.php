@@ -1,6 +1,7 @@
 <?php
 /**
  * The template for displaying search results pages.
+ * Replicated same to same as MagPro XML.
  *
  * @package MagPro
  */
@@ -16,16 +17,22 @@ get_header();
 	<div class="content-wrapper">
 		<main id="main-wrapper" class="blog-posts">
 
-			<?php if ( have_posts() ) : ?>
+			<!-- MagPro Search Breadcrumbs -->
+			<nav id="breadcrumb">
+				<a class="home" href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="fas fa-home"></i> <?php esc_html_e( 'Home', 'mag-pro' ); ?></a>
+				<em class="delimiter"></em>
+				<span class="current"><?php esc_html_e( 'Search', 'mag-pro' ); ?></span>
+			</nav>
 
-				<header class="page-header" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 25px; border-left: 4px solid var(--main-color);">
-					<h1 class="page-title" style="margin: 0; font-size: 22px; font-weight: 800; color: var(--title-color);">
-						<?php
-						/* translators: %s: search query. */
-						printf( esc_html__( 'Search Results for: "%s"', 'mag-pro' ), '<span style="color:var(--main-color);">' . esc_html( get_search_query() ) . '</span>' );
-						?>
-					</h1>
-				</header>
+			<!-- MagPro .queryMessage for Search -->
+			<div class="queryMessage">
+				<span class="query-info">
+					<?php esc_html_e( 'Showing posts matching the search for:', 'mag-pro' ); ?>
+					<span class="search-query"><?php echo get_search_query(); ?></span>
+				</span>
+			</div>
+
+			<?php if ( have_posts() ) : ?>
 
 				<div class="index-post-wrap">
 					<?php
@@ -90,9 +97,9 @@ get_header();
 
 			<?php else : ?>
 
-				<div class="magpro-no-results" style="padding: 50px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); text-align: center;">
-					<h2 style="font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--title-color);"><?php esc_html_e( 'Nothing Found', 'mag-pro' ); ?></h2>
-					<p style="color: var(--meta-color); font-size: 15px; margin-bottom: 24px;"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'mag-pro' ); ?></p>
+				<div class="queryEmpty" style="padding: 40px 0; text-align: center;">
+					<h3 style="font-size: 20px; font-weight: 700; color: var(--title-color); margin-bottom: 12px;"><?php esc_html_e( 'No matching posts found', 'mag-pro' ); ?></h3>
+					<p style="color: var(--meta-color); font-size: 14px; margin-bottom: 24px;"><?php esc_html_e( 'Try different keywords or browse our categories.', 'mag-pro' ); ?></p>
 					<div style="max-width: 440px; margin: 0 auto;">
 						<?php get_search_form(); ?>
 					</div>

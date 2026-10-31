@@ -1,6 +1,7 @@
 <?php
 /**
  * The template for displaying archive pages.
+ * Replicated same to same as MagPro XML.
  *
  * @package MagPro
  */
@@ -31,14 +32,27 @@ get_header();
 				<?php endif; ?>
 			</nav>
 
-			<?php if ( have_posts() ) : ?>
+			<!-- MagPro .queryMessage (same to same as MagPro XML) -->
+			<div class="queryMessage">
+				<span class="query-info">
+					<?php esc_html_e( 'Showing posts for:', 'mag-pro' ); ?>
+					<span class="search-label">
+						<?php
+						if ( is_category() ) {
+							single_cat_title();
+						} elseif ( is_tag() ) {
+							single_tag_title( '#' );
+						} elseif ( is_author() ) {
+							the_author();
+						} else {
+							echo wp_strip_all_tags( get_the_archive_title() );
+						}
+						?>
+					</span>
+				</span>
+			</div>
 
-				<header class="page-header magpro-archive-header" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 25px; border-left: 4px solid var(--main-color);">
-					<?php
-					the_archive_title( '<h1 class="page-title" style="margin: 0 0 6px; font-size: 24px; font-weight: 800; color: var(--title-color);">', '</h1>' );
-					the_archive_description( '<div class="archive-description" style="color: var(--meta-color); font-size: 14px; margin: 0;">', '</div>' );
-					?>
-				</header>
+			<?php if ( have_posts() ) : ?>
 
 				<div class="index-post-wrap">
 					<?php
@@ -115,9 +129,8 @@ get_header();
 
 			<?php else : ?>
 
-				<div class="magpro-no-results" style="padding: 40px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); text-align: center;">
-					<h2><?php esc_html_e( 'Nothing Found', 'mag-pro' ); ?></h2>
-					<p><?php esc_html_e( 'It seems there are no posts in this archive.', 'mag-pro' ); ?></p>
+				<div class="queryEmpty">
+					<p><?php esc_html_e( 'No posts found in this archive.', 'mag-pro' ); ?></p>
 				</div>
 
 			<?php endif; ?>
