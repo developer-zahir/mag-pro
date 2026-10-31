@@ -45,3 +45,4 @@ class Astra_Header_Dark_Mode_Component {
 }
 
 new Astra_Header_Dark_Mode_Component();
+

@@ -1,6 +1,6 @@
 <?php
 /**
- * MagPro Post List Widget (Horizontal Cards)
+ * MagPro Post List Widget
  *
  * @package MagProElements
  */
@@ -46,6 +46,59 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 				'label'   => esc_html__( 'Section Title', 'mag-pro-elements' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => esc_html__( 'Recent Posts', 'mag-pro-elements' ),
+			)
+		);
+
+		$this->add_control(
+			'title_style',
+			array(
+				'label'   => esc_html__( 'Section Title Style', 'mag-pro-elements' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'style-1',
+				'options' => array(
+					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
+					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
+					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'show_view_all',
+			array(
+				'label'        => esc_html__( 'Show "View All" Button', 'mag-pro-elements' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
+
+		$this->add_control(
+			'view_all_text',
+			array(
+				'label'     => esc_html__( '"View All" Text', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::TEXT,
+				'default'   => esc_html__( 'View All', 'mag-pro-elements' ),
+				'condition' => array(
+					'show_view_all' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_url',
+			array(
+				'label'         => esc_html__( '"View All" Link', 'mag-pro-elements' ),
+				'type'          => \Elementor\Controls_Manager::URL,
+				'placeholder'   => 'https://your-link.com',
+				'show_external' => true,
+				'default'       => array(
+					'url'         => '#',
+					'is_external' => false,
+				),
+				'condition'     => array(
+					'show_view_all' => 'yes',
+				),
 			)
 		);
 
@@ -139,7 +192,7 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 			array(
 				'label'        => esc_html__( 'Show Comments Count', 'mag-pro-elements' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'default'      => 'yes',
+				'default'      => 'no',
 				'return_value' => 'yes',
 			)
 		);
@@ -164,24 +217,34 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'thumb_width',
+		$this->add_responsive_control(
+			'image_width',
 			array(
-				'label'      => esc_html__( 'Thumbnail Width (px)', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Image Width (px)', 'mag-pro-elements' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
-					'px' => array(
-						'min' => 100,
-						'max' => 300,
-					),
+					'px' => array( 'min' => 80, 'max' => 350 ),
 				),
-				'default'    => array(
-					'unit' => 'px',
-					'size' => 180,
-				),
+				'default'    => array( 'unit' => 'px', 'size' => 180 ),
 				'selectors'  => array(
-					'{{WRAPPER}} .magpro-list-thumb' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .magpro-list-thumb' => 'flex: 0 0 {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'image_height',
+			array(
+				'label'      => esc_html__( 'Image Height (px)', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array( 'min' => 70, 'max' => 250 ),
+				),
+				'default'    => array( 'unit' => 'px', 'size' => 120 ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-list-thumb img' => 'height: {{SIZE}}{{UNIT}}; object-fit: cover;',
 				),
 			)
 		);
@@ -203,13 +266,91 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'image_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-list-thumb, {{WRAPPER}} .magpro-list-thumb img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 
-		// Style Tab
+		// Style Tab: Section Header
 		$this->start_controls_section(
-			'section_style_tab',
+			'section_style_header',
 			array(
-				'label' => esc_html__( 'Style Options', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Section Header', 'mag-pro-elements' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'header_title_color',
+			array(
+				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-widget-title' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'header_title_typography',
+				'selector' => '{{WRAPPER}} .magpro-widget-title',
+			)
+		);
+
+		$this->add_control(
+			'header_accent_color',
+			array(
+				'label'     => esc_html__( 'Accent / Bar Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-header-style-1 .magpro-widget-title' => 'border-left-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-2 .magpro-widget-title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-2'                      => 'border-bottom-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-3 .magpro-widget-title' => 'border-bottom-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_color',
+			array(
+				'label'     => esc_html__( 'View All Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-view-all' => 'color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_hover_color',
+			array(
+				'label'     => esc_html__( 'View All Hover Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-view-all:hover' => 'color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		// Style Tab: Card
+		$this->start_controls_section(
+			'section_style_card',
+			array(
+				'label' => esc_html__( 'List Card Container', 'mag-pro-elements' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -226,12 +367,58 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
+			'card_border_color',
+			array(
+				'label'     => esc_html__( 'Card Border Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-list-card' => 'border-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'card_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-list-card' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'card_padding',
+			array(
+				'label'      => esc_html__( 'Card Padding', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-list-card' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		// Style Tab: Titles & Meta
+		$this->start_controls_section(
+			'section_style_content',
+			array(
+				'label' => esc_html__( 'Titles, Meta & Excerpt', 'mag-pro-elements' ),
+				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
 			'title_color',
 			array(
 				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-title, {{WRAPPER}} .magpro-post-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-title a' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -242,19 +429,57 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Title Hover Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-title a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-title a:hover' => 'color: {{VALUE}} !important;',
 				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'title_typography',
+				'selector' => '{{WRAPPER}} .magpro-post-title',
 			)
 		);
 
 		$this->add_control(
 			'meta_color',
 			array(
-				'label'     => esc_html__( 'Meta & Views Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Meta Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-meta-item' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-post-meta a' => 'color: {{VALUE}} !important;',
 				),
+			)
+		);
+
+		$this->add_control(
+			'meta_icon_color',
+			array(
+				'label'     => esc_html__( 'Meta Icon Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-post-meta i' => 'color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'excerpt_color',
+			array(
+				'label'     => esc_html__( 'Excerpt Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-list-excerpt' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'excerpt_typography',
+				'selector' => '{{WRAPPER}} .magpro-list-excerpt',
 			)
 		);
 
@@ -262,8 +487,7 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 	}
 
 	protected function render() {
-		$settings    = $this->get_settings_for_display();
-		$hover_class = \MagPro_Helpers::get_hover_animation_class( $settings['hover_animation'] );
+		$settings = $this->get_settings_for_display();
 
 		$query = \MagPro_Helpers::get_posts(
 			array(
@@ -278,27 +502,42 @@ class MagPro_Widget_List extends \Elementor\Widget_Base {
 			return;
 		}
 
-		$show_badge    = 'yes' === $settings['show_badge'];
-		$show_author   = 'yes' === $settings['show_author'];
-		$show_date     = 'yes' === $settings['show_date'];
-		$show_views    = 'yes' === $settings['show_views'];
-		$show_comments = 'yes' === $settings['show_comments'];
-		$show_excerpt  = 'yes' === $settings['show_excerpt'];
+		$title_style   = $settings['title_style'] ?? 'style-1';
+		$show_view_all = ( 'yes' === ( $settings['show_view_all'] ?? 'yes' ) );
+		$view_all_text = $settings['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_url  = ! empty( $settings['view_all_url']['url'] ) ? $settings['view_all_url']['url'] : '';
+
+		$show_badge    = ( 'yes' === ( $settings['show_badge'] ?? 'yes' ) );
+		$show_author   = ( 'yes' === ( $settings['show_author'] ?? 'yes' ) );
+		$show_date     = ( 'yes' === ( $settings['show_date'] ?? 'yes' ) );
+		$show_views    = ( 'yes' === ( $settings['show_views'] ?? 'yes' ) );
+		$show_comments = ( 'yes' === ( $settings['show_comments'] ?? 'no' ) );
+		$show_excerpt  = ( 'yes' === ( $settings['show_excerpt'] ?? 'yes' ) );
+		$anim_class    = \MagPro_Helpers::get_hover_animation_class( $settings['hover_animation'] ?? 'zoom-in' );
 		?>
 		<div class="magpro-list-wrap">
-			<?php if ( ! empty( $settings['widget_title'] ) ) : ?>
-				<h3 class="magpro-widget-title"><?php echo esc_html( $settings['widget_title'] ); ?></h3>
-			<?php endif; ?>
+			<?php
+			if ( ! empty( $settings['widget_title'] ) ) {
+				\MagPro_Helpers::render_section_title(
+					$settings['widget_title'],
+					$title_style,
+					$show_view_all,
+					$view_all_text,
+					$view_all_url,
+					'fas fa-list'
+				);
+			}
+			?>
 
 			<div class="magpro-list-items">
 				<?php
 				while ( $query->have_posts() ) :
 					$query->the_post();
 					$p_id  = get_the_ID();
-					$thumb = \MagPro_Helpers::get_thumbnail_url( $p_id, 'medium' );
+					$thumb = \MagPro_Helpers::get_thumbnail_url( $p_id, 'medium_large' );
 					?>
-					<article class="magpro-list-card <?php echo esc_attr( $hover_class ); ?>">
-						<div class="magpro-list-thumb">
+					<article class="magpro-list-card" style="box-shadow: none;">
+						<div class="magpro-list-thumb <?php echo esc_attr( $anim_class ); ?>">
 							<a href="<?php the_permalink(); ?>">
 								<img src="<?php echo esc_url( $thumb ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" />
 							</a>

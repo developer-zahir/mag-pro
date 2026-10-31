@@ -122,3 +122,4 @@ class Astra_Header_News_Ticker_Component {
 }
 
 new Astra_Header_News_Ticker_Component();
+

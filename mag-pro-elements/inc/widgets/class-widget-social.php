@@ -50,6 +50,23 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
+			'title_style',
+			array(
+				'label'   => esc_html__( 'Section Title Style', 'mag-pro-elements' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'style-1',
+				'options' => array(
+					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
+					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
+					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
+				),
+				'condition' => array(
+					'widget_title!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
 			'facebook_url',
 			array(
 				'label'   => esc_html__( 'Facebook URL', 'mag-pro-elements' ),
@@ -219,12 +236,22 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 	}
 
 	protected function render() {
-		$settings = $this->get_settings_for_display();
+		$settings    = $this->get_settings_for_display();
+		$title_style = $settings['title_style'] ?? 'style-1';
 		?>
-		<div class="magpro-social-wrap">
-			<?php if ( ! empty( $settings['widget_title'] ) ) : ?>
-				<h3 class="magpro-widget-title"><?php echo esc_html( $settings['widget_title'] ); ?></h3>
-			<?php endif; ?>
+		<div class="magpro-social-wrap" style="box-shadow: none;">
+			<?php
+			if ( ! empty( $settings['widget_title'] ) ) {
+				\MagPro_Helpers::render_section_title(
+					$settings['widget_title'],
+					$title_style,
+					false,
+					'',
+					'',
+					'fas fa-share-alt'
+				);
+			}
+			?>
 
 			<div class="magpro-social-grid">
 				<?php if ( ! empty( $settings['facebook_url'] ) ) : ?>

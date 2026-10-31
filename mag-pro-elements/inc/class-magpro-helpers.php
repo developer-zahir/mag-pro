@@ -206,5 +206,43 @@ class MagPro_Helpers {
 
 		return $text;
 	}
+
+	/**
+	 * Render Section Header with 3 distinct styles and View All button
+	 *
+	 * @param string $title
+	 * @param string $style 'style-1' (Left Accent Bar), 'style-2' (Solid Badge), 'style-3' (Underline Dual Bar)
+	 * @param bool   $show_view_all
+	 * @param string $view_all_text
+	 * @param string $view_all_url
+	 * @param string $icon FontAwesome icon class
+	 */
+	public static function render_section_title( $title, $style = 'style-1', $show_view_all = false, $view_all_text = 'View All', $view_all_url = '', $icon = '' ) {
+		if ( empty( $title ) ) {
+			return;
+		}
+
+		$style = in_array( $style, array( 'style-1', 'style-2', 'style-3' ), true ) ? $style : 'style-1';
+		?>
+		<div class="magpro-section-header magpro-header-<?php echo esc_attr( $style ); ?>">
+			<div class="magpro-section-title-wrap">
+				<h3 class="magpro-widget-title">
+					<?php if ( ! empty( $icon ) ) : ?>
+						<i class="<?php echo esc_attr( $icon ); ?>"></i>
+					<?php endif; ?>
+					<span><?php echo esc_html( $title ); ?></span>
+				</h3>
+			</div>
+			<?php if ( $show_view_all && ! empty( $view_all_url ) ) : ?>
+				<div class="magpro-view-all-wrap">
+					<a href="<?php echo esc_url( $view_all_url ); ?>" class="magpro-view-all">
+						<span><?php echo esc_html( ! empty( $view_all_text ) ? $view_all_text : esc_html__( 'View All', 'mag-pro-elements' ) ); ?></span>
+						<i class="fas fa-angle-right"></i>
+					</a>
+				</div>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
 }
 

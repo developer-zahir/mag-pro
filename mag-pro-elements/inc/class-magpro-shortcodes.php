@@ -21,6 +21,7 @@ class MagPro_Shortcodes {
 		add_shortcode( 'magpro_ticker', array( __CLASS__, 'render_ticker' ) );
 		add_shortcode( 'magpro_tabs', array( __CLASS__, 'render_tabs' ) );
 		add_shortcode( 'magpro_social', array( __CLASS__, 'render_social' ) );
+		add_shortcode( 'magpro_slider', array( __CLASS__, 'render_slider' ) );
 	}
 
 	public static function render_hero( $atts ) {
@@ -826,6 +827,106 @@ class MagPro_Shortcodes {
 			<?php
 		endwhile;
 		wp_reset_postdata();
+	}
+	public static function render_slider( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'title'       => '',
+				'title_style' => 'style-1',
+				'view_all'    => 'yes',
+				'view_url'    => '',
+				'category'    => '',
+				'count'       => 6,
+				'desktop'     => 3,
+				'tablet'      => 2,
+				'mobile'      => 1,
+				'autoplay'    => 'true',
+				'speed'       => 4000,
+				'height'      => 240,
+				'aspect'      => '16:9',
+				'views'       => 'yes',
+				'author'      => 'yes',
+				'date'        => 'yes',
+				'badge'       => 'yes',
+				'comments'    => 'no',
+				'hover'       => 'zoom-in',
+			),
+			$atts
+		);
+
+		ob_start();
+		$query = \MagPro_Helpers::get_posts(
+			array(
+				'posts_per_page' => intval( $atts['count'] ),
+				'category'       => $atts['category'],
+			)
+		);
+
+		if ( $query->have_posts() ) {
+			$posts         = $query->posts;
+			$show_badge    = ( 'yes' === $atts['badge'] );
+			$show_author   = ( 'yes' === $atts['author'] );
+			$show_date     = ( 'yes' === $atts['date'] );
+			$show_views    = ( 'yes' === $atts['views'] );
+			$show_comments = ( 'yes' === $atts['comments'] );
+			$aspect_style  = \MagPro_Helpers::get_image_aspect_style( $atts['aspect'], intval( $atts['height'] ) );
+			$anim_class    = \MagPro_Helpers::get_hover_animation_class( $atts['hover'] );
+			?>
+			<div class="magpro-slider-widget-wrap">
+				<?php
+				if ( ! empty( $atts['title'] ) ) {
+					\MagPro_Helpers::render_section_title(
+						$atts['title'],
+						$atts['title_style'],
+						( 'yes' === $atts['view_all'] ),
+						esc_html__( 'View All', 'mag-pro-elements' ),
+						$atts['view_url'],
+						'fas fa-sliders-h'
+					);
+				}
+				?>
+				<div class="magpro-slider-wrap"
+					data-autoplay="<?php echo esc_attr( $atts['autoplay'] ); ?>"
+					data-speed="<?php echo esc_attr( $atts['speed'] ); ?>"
+					data-desktop="<?php echo esc_attr( $atts['desktop'] ); ?>"
+					data-tablet="<?php echo esc_attr( $atts['tablet'] ); ?>"
+					data-mobile="<?php echo esc_attr( $atts['mobile'] ); ?>"
+					style="box-shadow: none;">
+					<div class="magpro-slider-viewport">
+						<div class="magpro-slider-track">
+							<?php foreach ( $posts as $p ) : 
+								$p_id  = $p->ID;
+								$thumb = \MagPro_Helpers::get_thumbnail_url( $p_id, 'medium_large' );
+							?>
+								<div class="magpro-slide-item">
+									<div class="magpro-slide-card <?php echo esc_attr( $anim_class ); ?>" style="<?php echo esc_attr( $aspect_style ); ?> box-shadow: none;">
+										<a href="<?php echo esc_url( get_permalink( $p_id ) ); ?>" class="magpro-slide-img-link">
+											<div class="magpro-slide-thumb" style="background-image: url('<?php echo esc_url( $thumb ); ?>');"></div>
+										</a>
+										<div class="magpro-slide-overlay"></div>
+										<div class="magpro-slide-content">
+											<?php if ( $show_badge ) : ?>
+												<?php echo \MagPro_Helpers::get_category_badge( $p_id ); ?>
+											<?php endif; ?>
+											<h4 class="magpro-post-title" style="color: #ffffff; font-size: 15px; margin: 6px 0;">
+												<a href="<?php echo esc_url( get_permalink( $p_id ) ); ?>"><?php echo esc_html( get_the_title( $p_id ) ); ?></a>
+											</h4>
+											<?php echo \MagPro_Helpers::get_post_meta( $p_id, $show_author, $show_date, $show_views, $show_comments ); ?>
+										</div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
+					<button type="button" class="magpro-slider-btn magpro-slider-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+					<button type="button" class="magpro-slider-btn magpro-slider-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+					<div class="magpro-slider-dots"></div>
+				</div>
+			</div>
+			<?php
+			wp_reset_postdata();
+		}
+		return ob_get_clean();
 	}
 }
 

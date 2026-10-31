@@ -41,6 +41,77 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
+			'widget_title',
+			array(
+				'label'       => esc_html__( 'Section Title (Optional)', 'mag-pro-elements' ),
+				'type'        => \Elementor\Controls_Manager::TEXT,
+				'default'     => esc_html__( 'Trending Posts', 'mag-pro-elements' ),
+				'placeholder' => esc_html__( 'Enter block title', 'mag-pro-elements' ),
+			)
+		);
+
+		$this->add_control(
+			'title_style',
+			array(
+				'label'     => esc_html__( 'Section Title Style', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::SELECT,
+				'default'   => 'style-1',
+				'options'   => array(
+					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
+					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
+					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
+				),
+				'condition' => array(
+					'widget_title!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'show_view_all',
+			array(
+				'label'        => esc_html__( 'Show "View All" Button', 'mag-pro-elements' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+				'condition'    => array(
+					'widget_title!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_text',
+			array(
+				'label'     => esc_html__( '"View All" Text', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::TEXT,
+				'default'   => esc_html__( 'View All', 'mag-pro-elements' ),
+				'condition' => array(
+					'show_view_all' => 'yes',
+					'widget_title!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_url',
+			array(
+				'label'         => esc_html__( '"View All" Link', 'mag-pro-elements' ),
+				'type'          => \Elementor\Controls_Manager::URL,
+				'placeholder'   => 'https://your-link.com',
+				'show_external' => true,
+				'default'       => array(
+					'url'         => '#',
+					'is_external' => false,
+				),
+				'condition'     => array(
+					'show_view_all' => 'yes',
+					'widget_title!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
 			'posts_count',
 			array(
 				'label'   => esc_html__( 'Posts Per Tab', 'mag-pro-elements' ),
@@ -174,6 +245,75 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
+		// Style Tab: Section Header
+		$this->start_controls_section(
+			'section_style_header',
+			array(
+				'label'     => esc_html__( 'Section Header', 'mag-pro-elements' ),
+				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
+				'condition' => array(
+					'widget_title!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'header_title_color',
+			array(
+				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-widget-title' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'header_title_typography',
+				'selector' => '{{WRAPPER}} .magpro-widget-title',
+			)
+		);
+
+		$this->add_control(
+			'header_accent_color',
+			array(
+				'label'     => esc_html__( 'Accent / Bar Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-header-style-1 .magpro-widget-title' => 'border-left-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-2 .magpro-widget-title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-2'                      => 'border-bottom-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-3 .magpro-widget-title' => 'border-bottom-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_color',
+			array(
+				'label'     => esc_html__( 'View All Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-view-all' => 'color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_hover_color',
+			array(
+				'label'     => esc_html__( 'View All Hover Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-view-all:hover' => 'color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
 		// Style Tab: Tab Navigation Buttons
 		$this->start_controls_section(
 			'section_style_nav',
@@ -227,17 +367,6 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'tab_active_indicator_color',
-			array(
-				'label'     => esc_html__( 'Active Indicator Bar Color', 'mag-pro-elements' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .magpro-tab-button.active::after' => 'background-color: {{VALUE}};',
-				),
-			)
-		);
-
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
@@ -263,7 +392,7 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Post Title Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-title a' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -274,7 +403,7 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Post Title Hover Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-title a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-title a:hover' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -293,7 +422,7 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Meta Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-post-meta a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-post-meta a' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -304,19 +433,7 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Meta Icon Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-meta i' => 'color: {{VALUE}};',
-				),
-			)
-		);
-
-		$this->add_control(
-			'thumb_radius',
-			array(
-				'label'      => esc_html__( 'Thumbnail Border Radius', 'mag-pro-elements' ),
-				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%' ),
-				'selectors'  => array(
-					'{{WRAPPER}} .magpro-compact-thumb img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .magpro-post-meta i' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -341,7 +458,7 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 			$p_id  = get_the_ID();
 			$thumb = \MagPro_Helpers::get_thumbnail_url( $p_id, 'thumbnail' );
 			?>
-			<div class="magpro-compact-item">
+			<div class="magpro-compact-item" style="box-shadow: none;">
 				<div class="magpro-compact-thumb <?php echo esc_attr( $anim_class ); ?>">
 					<a href="<?php the_permalink(); ?>">
 						<img src="<?php echo esc_url( $thumb ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" />
@@ -362,6 +479,11 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$count    = ! empty( $settings['posts_count'] ) ? intval( $settings['posts_count'] ) : 4;
+
+		$title_style   = $settings['title_style'] ?? 'style-1';
+		$show_view_all = ( 'yes' === ( $settings['show_view_all'] ?? 'yes' ) );
+		$view_all_text = $settings['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_url  = ! empty( $settings['view_all_url']['url'] ) ? $settings['view_all_url']['url'] : '';
 
 		// 1. Recent Posts Query
 		$recent_query = \MagPro_Helpers::get_posts(
@@ -387,28 +509,43 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 			)
 		);
 		?>
-		<div class="magpro-tabs-wrap">
-			<div class="magpro-tabs-nav">
-				<button type="button" class="magpro-tab-button active" data-tab="recent">
-					<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro-elements' ); ?>
-				</button>
-				<button type="button" class="magpro-tab-button" data-tab="popular">
-					<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro-elements' ); ?>
-				</button>
-				<button type="button" class="magpro-tab-button" data-tab="comments">
-					<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro-elements' ); ?>
-				</button>
-			</div>
+		<div class="magpro-tabs-widget-wrap">
+			<?php
+			if ( ! empty( $settings['widget_title'] ) ) {
+				\MagPro_Helpers::render_section_title(
+					$settings['widget_title'],
+					$title_style,
+					$show_view_all,
+					$view_all_text,
+					$view_all_url,
+					'far fa-clock'
+				);
+			}
+			?>
 
-			<div class="magpro-tabs-content">
-				<div class="magpro-tab-panel magpro-tab-recent active">
-					<?php $this->render_post_list( $recent_query, $settings ); ?>
+			<div class="magpro-tabs-wrap" style="box-shadow: none;">
+				<div class="magpro-tabs-nav">
+					<button type="button" class="magpro-tab-button active" data-tab="recent">
+						<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro-elements' ); ?>
+					</button>
+					<button type="button" class="magpro-tab-button" data-tab="popular">
+						<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro-elements' ); ?>
+					</button>
+					<button type="button" class="magpro-tab-button" data-tab="comments">
+						<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro-elements' ); ?>
+					</button>
 				</div>
-				<div class="magpro-tab-panel magpro-tab-popular">
-					<?php $this->render_post_list( $popular_query, $settings ); ?>
-				</div>
-				<div class="magpro-tab-panel magpro-tab-comments">
-					<?php $this->render_post_list( $random_query, $settings ); ?>
+
+				<div class="magpro-tabs-content">
+					<div class="magpro-tab-panel magpro-tab-recent active">
+						<?php $this->render_post_list( $recent_query, $settings ); ?>
+					</div>
+					<div class="magpro-tab-panel magpro-tab-popular">
+						<?php $this->render_post_list( $popular_query, $settings ); ?>
+					</div>
+					<div class="magpro-tab-panel magpro-tab-comments">
+						<?php $this->render_post_list( $random_query, $settings ); ?>
+					</div>
 				</div>
 			</div>
 		</div>

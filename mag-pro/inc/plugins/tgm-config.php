@@ -28,7 +28,7 @@ function magpro_register_required_plugins() {
 			'slug'               => 'mag-pro-elements',
 			'source'             => get_template_directory() . '/inc/plugins/mag-pro-elements.zip',
 			'required'           => true,
-			'version'            => '1.0.2',
+			'version'            => '1.0.3',
 			'force_activation'   => false,
 			'force_deactivation' => false,
 		),

@@ -50,6 +50,59 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
+			'title_style',
+			array(
+				'label'   => esc_html__( 'Section Title Style', 'mag-pro-elements' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'style-1',
+				'options' => array(
+					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
+					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
+					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
+				),
+			)
+		);
+
+		$this->add_control(
+			'show_view_all',
+			array(
+				'label'        => esc_html__( 'Show "View All" Button', 'mag-pro-elements' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
+
+		$this->add_control(
+			'view_all_text',
+			array(
+				'label'     => esc_html__( '"View All" Text', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::TEXT,
+				'default'   => esc_html__( 'View All', 'mag-pro-elements' ),
+				'condition' => array(
+					'show_view_all' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_url',
+			array(
+				'label'         => esc_html__( '"View All" Link', 'mag-pro-elements' ),
+				'type'          => \Elementor\Controls_Manager::URL,
+				'placeholder'   => 'https://your-link.com',
+				'show_external' => true,
+				'default'       => array(
+					'url'         => '#',
+					'is_external' => false,
+				),
+				'condition'     => array(
+					'show_view_all' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
 			'category',
 			array(
 				'label'   => esc_html__( 'Category', 'mag-pro-elements' ),
@@ -132,11 +185,11 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
-		// Image Size & Hover Animation
+		// Big Image (Hero Video) Settings
 		$this->start_controls_section(
-			'section_image_settings',
+			'section_big_image_settings',
 			array(
-				'label' => esc_html__( 'Hero Image Size & Animation', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Big Image Controls (Hero Video)', 'mag-pro-elements' ),
 			)
 		);
 
@@ -172,7 +225,7 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 		$this->add_control(
 			'hover_animation',
 			array(
-				'label'   => esc_html__( 'Image Hover Animation', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Hero Hover Animation', 'mag-pro-elements' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'zoom-in',
 				'options' => array(
@@ -188,7 +241,66 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
-		// Style Tab: Section Title
+		// Small Image (Playlist Items) Settings
+		$this->start_controls_section(
+			'section_small_image_settings',
+			array(
+				'label' => esc_html__( 'Small Image Controls (Playlist)', 'mag-pro-elements' ),
+			)
+		);
+
+		$this->add_responsive_control(
+			'small_image_width',
+			array(
+				'label'      => esc_html__( 'Thumbnail Width (px)', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array( 'min' => 60, 'max' => 160 ),
+				),
+				'default'    => array( 'unit' => 'px', 'size' => 90 ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-video-item-thumb' => 'flex: 0 0 {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'small_image_height',
+			array(
+				'label'      => esc_html__( 'Thumbnail Height (px)', 'mag-pro-elements' ),
+				'type'       => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range'      => array(
+					'px' => array( 'min' => 50, 'max' => 140 ),
+				),
+				'default'    => array( 'unit' => 'px', 'size' => 70 ),
+				'selectors'  => array(
+					'{{WRAPPER}} .magpro-video-item-thumb img' => 'height: {{SIZE}}{{UNIT}}; object-fit: cover;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'small_hover_animation',
+			array(
+				'label'   => esc_html__( 'Hover Animation', 'mag-pro-elements' ),
+				'type'    => \Elementor\Controls_Manager::SELECT,
+				'default' => 'zoom-in',
+				'options' => array(
+					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro-elements' ),
+					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro-elements' ),
+					'slide-up'  => esc_html__( 'Slide Up', 'mag-pro-elements' ),
+					'grayscale' => esc_html__( 'Grayscale to Color', 'mag-pro-elements' ),
+					'blur'      => esc_html__( 'Blur to Sharp', 'mag-pro-elements' ),
+					'none'      => esc_html__( 'None', 'mag-pro-elements' ),
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		// Style Tab: Section Header
 		$this->start_controls_section(
 			'section_style_header',
 			array(
@@ -217,12 +329,37 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'header_icon_color',
+			'header_accent_color',
 			array(
-				'label'     => esc_html__( 'Icon / Accent Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Accent / Bar Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-widget-title i' => 'color: {{VALUE}} !important;',
+					'{{WRAPPER}} .magpro-header-style-1 .magpro-widget-title' => 'border-left-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-2 .magpro-widget-title' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-2'                      => 'border-bottom-color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-header-style-3 .magpro-widget-title' => 'border-bottom-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_color',
+			array(
+				'label'     => esc_html__( 'View All Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-view-all' => 'color: {{VALUE}} !important;',
+				),
+			)
+		);
+
+		$this->add_control(
+			'view_all_hover_color',
+			array(
+				'label'     => esc_html__( 'View All Hover Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-view-all:hover' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -233,8 +370,19 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_card',
 			array(
-				'label' => esc_html__( 'Card & Container', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Container & Background', 'mag-pro-elements' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'block_bg',
+			array(
+				'label'     => esc_html__( 'Block Background Color', 'mag-pro-elements' ),
+				'type'      => \Elementor\Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .magpro-videos-wrap' => 'background-color: {{VALUE}};',
+				),
 			)
 		);
 
@@ -246,17 +394,6 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .magpro-video-hero, {{WRAPPER}} .magpro-video-item-thumb img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				),
-			)
-		);
-
-		$this->add_control(
-			'hero_overlay_color',
-			array(
-				'label'     => esc_html__( 'Hero Overlay Color', 'mag-pro-elements' ),
-				'type'      => \Elementor\Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .magpro-hero-overlay' => 'background: linear-gradient(180deg, transparent 40%, {{VALUE}} 100%);',
 				),
 			)
 		);
@@ -278,7 +415,7 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Hero Title Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-video-hero .magpro-post-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-video-hero .magpro-post-title a' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -297,7 +434,7 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'List Title Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-video-item .magpro-post-title a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-video-item .magpro-post-title a' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -308,8 +445,16 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'List Title Hover Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-video-item .magpro-post-title a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-video-item .magpro-post-title a:hover' => 'color: {{VALUE}} !important;',
 				),
+			)
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'list_title_typography',
+				'selector' => '{{WRAPPER}} .magpro-video-item .magpro-post-title',
 			)
 		);
 
@@ -319,7 +464,7 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Meta Text Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-post-meta a' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-post-meta a' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -330,7 +475,7 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 				'label'     => esc_html__( 'Meta Icon Color', 'mag-pro-elements' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .magpro-post-meta i' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .magpro-post-meta i' => 'color: {{VALUE}} !important;',
 				),
 			)
 		);
@@ -398,6 +543,11 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 		}
 
 		$posts         = $query->posts;
+		$title_style   = $settings['title_style'] ?? 'style-1';
+		$show_view_all = ( 'yes' === ( $settings['show_view_all'] ?? 'yes' ) );
+		$view_all_text = $settings['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_url  = ! empty( $settings['view_all_url']['url'] ) ? $settings['view_all_url']['url'] : '';
+
 		$show_badge    = ( 'yes' === ( $settings['show_badge'] ?? 'yes' ) );
 		$show_author   = ( 'yes' === ( $settings['show_author'] ?? 'no' ) );
 		$show_date     = ( 'yes' === ( $settings['show_date'] ?? 'yes' ) );
@@ -408,18 +558,28 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 		$custom_height = ! empty( $settings['custom_height'] ) ? intval( $settings['custom_height'] ) : 360;
 		$aspect_style  = \MagPro_Helpers::get_image_aspect_style( $aspect_ratio, $custom_height );
 		$anim_class    = \MagPro_Helpers::get_hover_animation_class( $settings['hover_animation'] ?? 'zoom-in' );
+		$small_anim    = \MagPro_Helpers::get_hover_animation_class( $settings['small_hover_animation'] ?? 'zoom-in' );
 		?>
-		<div class="magpro-videos-wrap">
-			<?php if ( ! empty( $settings['widget_title'] ) ) : ?>
-				<h3 class="magpro-widget-title"><i class="fas fa-play-circle" style="color: var(--mp-primary, #ff2232); margin-right: 6px;"></i> <?php echo esc_html( $settings['widget_title'] ); ?></h3>
-			<?php endif; ?>
+		<div class="magpro-videos-wrap" style="box-shadow: none;">
+			<?php
+			if ( ! empty( $settings['widget_title'] ) ) {
+				\MagPro_Helpers::render_section_title(
+					$settings['widget_title'],
+					$title_style,
+					$show_view_all,
+					$view_all_text,
+					$view_all_url,
+					'fas fa-play-circle'
+				);
+			}
+			?>
 
 			<div class="magpro-videos-grid">
 				<?php if ( isset( $posts[0] ) ) : 
 					$lead_id = $posts[0]->ID;
 					$thumb   = \MagPro_Helpers::get_thumbnail_url( $lead_id, 'large' );
 				?>
-					<div class="magpro-video-hero magpro-hero-card <?php echo esc_attr( $anim_class ); ?>" style="<?php echo esc_attr( $aspect_style ); ?>">
+					<div class="magpro-video-hero magpro-hero-card <?php echo esc_attr( $anim_class ); ?>" style="<?php echo esc_attr( $aspect_style ); ?> box-shadow: none;">
 						<a href="<?php echo esc_url( get_permalink( $lead_id ) ); ?>" class="magpro-hero-img-link">
 							<div class="magpro-video-hero-thumb" style="background-image: url('<?php echo esc_url( $thumb ); ?>');"></div>
 						</a>
@@ -444,8 +604,8 @@ class MagPro_Widget_Videos extends \Elementor\Widget_Base {
 						$p_id  = $posts[ $i ]->ID;
 						$thumb = \MagPro_Helpers::get_thumbnail_url( $p_id, 'thumbnail' );
 					?>
-						<div class="magpro-video-item">
-							<div class="magpro-video-item-thumb <?php echo esc_attr( $anim_class ); ?>">
+						<div class="magpro-video-item" style="box-shadow: none;">
+							<div class="magpro-video-item-thumb <?php echo esc_attr( $small_anim ); ?>">
 								<a href="<?php echo esc_url( get_permalink( $p_id ) ); ?>">
 									<img src="<?php echo esc_url( $thumb ); ?>" alt="<?php echo esc_attr( get_the_title( $p_id ) ); ?>" loading="lazy" />
 									<span class="magpro-video-mini-play"><i class="fas fa-play"></i></span>

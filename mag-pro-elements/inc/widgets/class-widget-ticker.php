@@ -383,7 +383,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$marquee_speed = ! empty( $settings['marquee_speed'] ) ? intval( $settings['marquee_speed'] ) : 25;
 		$posts         = $query->posts;
 		?>
-		<div class="magpro-ticker-wrap magpro-ticker-<?php echo esc_attr( $style ); ?>-wrap" style="border-radius: 4px; margin-bottom: 25px;">
+		<div class="magpro-ticker-wrap magpro-ticker-<?php echo esc_attr( $style ); ?>-wrap" data-style="<?php echo esc_attr( $style ); ?>" data-speed="4500" style="border-radius: 4px; margin-bottom: 25px; box-shadow: none;">
 			<div class="magpro-ticker-container" style="max-width: 100%; padding: 0 12px;">
 				<div class="magpro-ticker-label">
 					<i class="fas fa-fire"></i>

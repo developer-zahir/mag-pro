@@ -34,8 +34,12 @@
   // News Ticker Slider Handler for Widget
   // =========================================================================
   function initMagProTickers() {
-    $('.magpro-ticker-slide-wrap').each(function () {
+    $('.magpro-ticker-wrap').each(function () {
       var $wrap = $(this);
+      // Skip continuous marquee ticker
+      if ($wrap.hasClass('magpro-ticker-marquee-wrap') || $wrap.find('.magpro-ticker-marquee').length) {
+        return;
+      }
       if ($wrap.data('tickerInit')) return;
       $wrap.data('tickerInit', true);
 
@@ -44,7 +48,7 @@
 
       var currentIndex = 0;
       var timer = null;
-      var interval = 4500;
+      var interval = parseInt($wrap.data('speed'), 10) || 4500;
 
       function showItem(idx) {
         $items.removeClass('active');
@@ -73,18 +77,172 @@
         }
       }
 
-      $wrap.find('.magpro-ticker-next').on('click', function () {
+      $wrap.find('.magpro-ticker-next').off('click').on('click', function (e) {
+        e.preventDefault();
         next();
         start();
       });
 
-      $wrap.find('.magpro-ticker-prev').on('click', function () {
+      $wrap.find('.magpro-ticker-prev').off('click').on('click', function (e) {
+        e.preventDefault();
         prev();
         start();
       });
 
-      $wrap.on('mouseenter', stop).on('mouseleave', start);
+      $wrap.off('mouseenter mouseleave').on('mouseenter', stop).on('mouseleave', start);
+      showItem(0);
       start();
+    });
+  }
+
+  // =========================================================================
+  // Post Slider / Carousel Handler
+  // =========================================================================
+  function initMagProSliders() {
+    $('.magpro-slider-wrap').each(function () {
+      var $slider = $(this);
+      if ($slider.data('sliderInit')) return;
+      $slider.data('sliderInit', true);
+
+      var $track = $slider.find('.magpro-slider-track');
+      var $slides = $slider.find('.magpro-slide-item');
+      var totalSlides = $slides.length;
+      if (totalSlides === 0) return;
+
+      var autoplay = $slider.data('autoplay') === true || $slider.data('autoplay') === 'true';
+      var speed = parseInt($slider.data('speed'), 10) || 4000;
+      var desktop = parseInt($slider.data('desktop'), 10) || 3;
+      var tablet = parseInt($slider.data('tablet'), 10) || 2;
+      var mobile = parseInt($slider.data('mobile'), 10) || 1;
+
+      var currentIndex = 0;
+      var timer = null;
+      var startX = 0;
+      var currentX = 0;
+      var isSwiping = false;
+
+      function getVisibleCount() {
+        var width = $(window).width();
+        if (width <= 600) return mobile;
+        if (width <= 1024) return tablet;
+        return desktop;
+      }
+
+      function updateLayout() {
+        var visible = getVisibleCount();
+        var gap = 16;
+
+        $slides.css({
+          'flex': '0 0 calc(' + (100 / visible) + '% - ' + ((visible - 1) * gap / visible) + 'px)',
+          'min-width': '0'
+        });
+
+        // Generate Dots
+        var maxIndex = Math.max(0, totalSlides - visible);
+        var $dotsWrap = $slider.find('.magpro-slider-dots');
+        if ($dotsWrap.length) {
+          $dotsWrap.empty();
+          for (var d = 0; d <= maxIndex; d++) {
+            var activeClass = (d === currentIndex) ? ' active' : '';
+            $dotsWrap.append('<span class="magpro-slider-dot' + activeClass + '" data-index="' + d + '"></span>');
+          }
+        }
+
+        goToSlide(currentIndex);
+      }
+
+      function goToSlide(idx) {
+        var visible = getVisibleCount();
+        var maxIndex = Math.max(0, totalSlides - visible);
+        if (idx < 0) idx = maxIndex;
+        if (idx > maxIndex) idx = 0;
+        currentIndex = idx;
+
+        var slideItemWidth = $slides.first().outerWidth(true) || 0;
+        var translateX = -(currentIndex * slideItemWidth);
+        $track.css('transform', 'translateX(' + translateX + 'px)');
+
+        $slider.find('.magpro-slider-dot').removeClass('active');
+        $slider.find('.magpro-slider-dot[data-index="' + currentIndex + '"]').addClass('active');
+      }
+
+      function next() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function prev() {
+        goToSlide(currentIndex - 1);
+      }
+
+      function startTimer() {
+        stopTimer();
+        if (autoplay) {
+          timer = setInterval(next, speed);
+        }
+      }
+
+      function stopTimer() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      $slider.find('.magpro-slider-next').off('click').on('click', function (e) {
+        e.preventDefault();
+        next();
+        startTimer();
+      });
+
+      $slider.find('.magpro-slider-prev').off('click').on('click', function (e) {
+        e.preventDefault();
+        prev();
+        startTimer();
+      });
+
+      $slider.off('click', '.magpro-slider-dot').on('click', '.magpro-slider-dot', function () {
+        var targetIdx = parseInt($(this).data('index'), 10);
+        goToSlide(targetIdx);
+        startTimer();
+      });
+
+      // Pause on hover
+      $slider.off('mouseenter mouseleave').on('mouseenter', stopTimer).on('mouseleave', startTimer);
+
+      // Touch Swipe Support
+      $slider.off('touchstart touchmove touchend');
+      $slider.on('touchstart', function (e) {
+        stopTimer();
+        startX = e.originalEvent.touches[0].clientX;
+        isSwiping = true;
+      });
+
+      $slider.on('touchmove', function (e) {
+        if (!isSwiping) return;
+        currentX = e.originalEvent.touches[0].clientX;
+      });
+
+      $slider.on('touchend', function () {
+        if (!isSwiping) return;
+        isSwiping = false;
+        var diffX = startX - currentX;
+        if (Math.abs(diffX) > 40) {
+          if (diffX > 0) {
+            next();
+          } else {
+            prev();
+          }
+        }
+        startTimer();
+      });
+
+      // Window Resize Listener
+      $(window).off('resize.magproSlider').on('resize.magproSlider', function () {
+        updateLayout();
+      });
+
+      updateLayout();
+      startTimer();
     });
   }
 
@@ -99,6 +257,9 @@
       window.elementorFrontend.hooks.addAction('frontend/element_ready/magpro-news-ticker.default', function () {
         initMagProTickers();
       });
+      window.elementorFrontend.hooks.addAction('frontend/element_ready/magpro-slider.default', function () {
+        initMagProSliders();
+      });
     }
   });
 
@@ -106,5 +267,6 @@
   $(document).ready(function () {
     initMagProTabs();
     initMagProTickers();
+    initMagProSliders();
   });
 })(jQuery);
