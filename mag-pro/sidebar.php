@@ -2,42 +2,18 @@
 /**
  * The sidebar containing the main widget area.
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package Astra
- * @since 1.0.0
+ * @package MagPro
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-$astra_sidebar = apply_filters( 'astra_get_sidebar', 'sidebar-1' );
+if ( ! is_active_sidebar( 'magpro-main-sidebar' ) ) {
+	return;
+}
+?>
 
-echo '<div ';
-	echo wp_kses_post(
-		astra_attr(
-			'sidebar',
-			array(
-				'id'    => 'secondary',
-				'class' => join( ' ', astra_get_secondary_class() ),
-			)
-		)
-	);
-	echo '>';
-	?>
-
-	<div class="sidebar-main" <?php echo apply_filters( 'astra_sidebar_data_attrs', '', $astra_sidebar ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, Generic.Commenting.DocComment.MissingShort ?>>
-		<?php astra_sidebars_before(); ?>
-
-		<?php
-
-		if ( is_active_sidebar( $astra_sidebar ) ) {
-				dynamic_sidebar( $astra_sidebar );
-		}
-
-		astra_sidebars_after();
-		?>
-
-	</div><!-- .sidebar-main -->
-</div><!-- #secondary -->
+<aside id="secondary" class="widget-area magpro-sidebar-area">
+	<?php dynamic_sidebar( 'magpro-main-sidebar' ); ?>
+</aside>

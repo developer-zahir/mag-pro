@@ -1,198 +1,144 @@
 <?php
 /**
- * Astra functions and definitions
+ * Mag Pro functions and definitions
  *
- * @link https://developer.wordpress.org/themes/basics/theme-functions/
- *
- * @package Astra
- * @since 1.0.0
+ * @package MagPro
+ * @version 2.0.0
+ * @author Developer Zahir (https://developerzahir.com/)
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-/**
- * Define Constants
- */
-define( 'ASTRA_THEME_VERSION', '1.0.5' );
-define( 'ASTRA_THEME_SETTINGS', 'astra-settings' );
-define( 'ASTRA_THEME_DIR', trailingslashit( get_template_directory() ) );
-define( 'ASTRA_THEME_URI', trailingslashit( esc_url( get_template_directory_uri() ) ) );
-define( 'ASTRA_THEME_ORG_VERSION', file_exists( ASTRA_THEME_DIR . 'inc/w-org-version.php' ) );
+// Define Constants
+define( 'MAGPRO_THEME_VERSION', '2.0.0' );
+define( 'MAGPRO_THEME_DIR', get_template_directory() );
+define( 'MAGPRO_THEME_URI', get_template_directory_uri() );
 
 /**
- * Minimum Version requirement of the Astra Pro addon.
- * This constant will be used to display the notice asking user to update the Astra addon to the version defined below.
+ * Sets up theme defaults and registers support for various WordPress features.
  */
-define( 'ASTRA_EXT_MIN_VER', '4.12.0' );
+function magpro_setup() {
+	// Make theme available for translation
+	load_theme_textdomain( 'mag-pro', MAGPRO_THEME_DIR . '/languages' );
 
-/**
- * Load in-house compatibility.
- */
-if ( ASTRA_THEME_ORG_VERSION ) {
-	require_once ASTRA_THEME_DIR . 'inc/w-org-version.php';
+	// Add default posts and comments RSS feed links to head
+	add_theme_support( 'automatic-feed-links' );
+
+	// Let WordPress manage the document title
+	add_theme_support( 'title-tag' );
+
+	// Enable support for Post Thumbnails on posts and pages
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 1200, 675, true );
+
+	// Register Navigation Menus
+	register_nav_menus(
+		array(
+			'primary' => esc_html__( 'Primary Navigation', 'mag-pro' ),
+			'top'     => esc_html__( 'Top Bar Navigation', 'mag-pro' ),
+			'footer'  => esc_html__( 'Footer Navigation', 'mag-pro' ),
+		)
+	);
+
+	// Switch default core markup for search form, comment form, etc. to output valid HTML5
+	add_theme_support(
+		'html5',
+		array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		)
+	);
+
+	// Custom Logo Support
+	add_theme_support(
+		'custom-logo',
+		array(
+			'height'      => 80,
+			'width'       => 240,
+			'flex-width'  => true,
+			'flex-height' => true,
+		)
+	);
+
+	// Gutenberg / Block Editor Support
+	add_theme_support( 'align-wide' );
+	add_theme_support( 'responsive-embeds' );
 }
+add_action( 'after_setup_theme', 'magpro_setup' );
 
 /**
- * Setup helper functions of Astra.
+ * Set the content width in pixels, based on the theme's design and stylesheet.
  */
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-theme-options.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-theme-strings.php';
-require_once ASTRA_THEME_DIR . 'inc/core/common-functions.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-icons.php';
-
-define( 'ASTRA_WEBSITE_BASE_URL', 'https://wpastra.com' );
-
-/**
- * Update theme
- */
-require_once ASTRA_THEME_DIR . 'inc/theme-update/astra-update-functions.php';
-require_once ASTRA_THEME_DIR . 'inc/theme-update/class-astra-theme-background-updater.php';
-
-/**
- * Fonts Files
- */
-require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-font-families.php';
-if ( is_admin() ) {
-	require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts-data.php';
+function magpro_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'magpro_content_width', 1200 );
 }
+add_action( 'after_setup_theme', 'magpro_content_width', 0 );
 
-require_once ASTRA_THEME_DIR . 'inc/lib/webfont/class-astra-webfont-loader.php';
-require_once ASTRA_THEME_DIR . 'inc/lib/docs/class-astra-docs-loader.php';
-require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts.php';
+/**
+ * Register widget area.
+ */
+function magpro_widgets_init() {
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Main Sidebar', 'mag-pro' ),
+			'id'            => 'magpro-main-sidebar',
+			'description'   => esc_html__( 'Add widgets here to appear in your sidebar.', 'mag-pro' ),
+			'before_widget' => '<section id="%1$s" class="widget magpro-widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h3 class="widget-title magpro-widget-title">',
+			'after_title'   => '</h3>',
+		)
+	);
 
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/custom-menu-old-header.php';
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/container-layouts.php';
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/astra-icons.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-walker-page.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-enqueue-scripts.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-gutenberg-editor-css.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-wp-editor-css.php';
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-command-palette.php';
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/block-editor-compatibility.php';
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/inline-on-mobile.php';
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/content-background.php';
-require_once ASTRA_THEME_DIR . 'inc/dynamic-css/dark-mode.php';
-require_once ASTRA_THEME_DIR . 'inc/class-astra-dynamic-css.php';
-require_once ASTRA_THEME_DIR . 'inc/class-astra-global-palette.php';
-
-// Enable NPS Survey only if the starter templates version is < 4.3.7 or > 4.4.4 to prevent fatal error.
-if ( ! defined( 'ASTRA_SITES_VER' ) || version_compare( ASTRA_SITES_VER, '4.3.7', '<' ) || version_compare( ASTRA_SITES_VER, '4.4.4', '>' ) ) {
-	// NPS Survey Integration
-	require_once ASTRA_THEME_DIR . 'inc/lib/class-astra-nps-notice.php';
-	require_once ASTRA_THEME_DIR . 'inc/lib/class-astra-nps-survey.php';
+	for ( $i = 1; $i <= 4; $i++ ) {
+		register_sidebar(
+			array(
+				'name'          => sprintf( esc_html__( 'Footer Column %d', 'mag-pro' ), $i ),
+				'id'            => 'magpro-footer-' . $i,
+				'description'   => sprintf( esc_html__( 'Widgets in this area will be shown in footer column %d.', 'mag-pro' ), $i ),
+				'before_widget' => '<section id="%1$s" class="widget magpro-widget %2$s">',
+				'after_widget'  => '</section>',
+				'before_title'  => '<h4 class="widget-title magpro-widget-title">',
+				'after_title'   => '</h4>',
+			)
+		);
+	}
 }
+add_action( 'widgets_init', 'magpro_widgets_init' );
 
 /**
- * Custom template tags for this theme.
+ * Enqueue scripts and styles.
  */
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-attr.php';
-require_once ASTRA_THEME_DIR . 'inc/template-tags.php';
+function magpro_scripts() {
+	// Theme Main Stylesheet
+	wp_enqueue_style( 'magpro-style', get_stylesheet_uri(), array(), MAGPRO_THEME_VERSION );
 
-require_once ASTRA_THEME_DIR . 'inc/widgets.php';
-require_once ASTRA_THEME_DIR . 'inc/core/theme-hooks.php';
-require_once ASTRA_THEME_DIR . 'inc/admin-functions.php';
-require_once ASTRA_THEME_DIR . 'inc/class-astra-memory-limit-notice.php';
-require_once ASTRA_THEME_DIR . 'inc/core/sidebar-manager.php';
+	// Mag Pro Component & Layout Styles
+	wp_enqueue_style( 'magpro-theme', MAGPRO_THEME_URI . '/assets/css/magpro-theme.css', array(), MAGPRO_THEME_VERSION );
 
-/**
- * Markup Functions
- */
-require_once ASTRA_THEME_DIR . 'inc/markup-extras.php';
-require_once ASTRA_THEME_DIR . 'inc/extras.php';
-require_once ASTRA_THEME_DIR . 'inc/blog/blog-config.php';
-require_once ASTRA_THEME_DIR . 'inc/blog/blog.php';
-require_once ASTRA_THEME_DIR . 'inc/blog/single-blog.php';
+	// Mag Pro Theme JavaScript (Dark mode toggle, mobile nav, search modals)
+	wp_enqueue_script( 'magpro-theme-js', MAGPRO_THEME_URI . '/assets/js/magpro-theme.js', array(), MAGPRO_THEME_VERSION, true );
 
-/**
- * Markup Files
- */
-require_once ASTRA_THEME_DIR . 'inc/template-parts.php';
-require_once ASTRA_THEME_DIR . 'inc/class-astra-loop.php';
-require_once ASTRA_THEME_DIR . 'inc/class-astra-mobile-header.php';
-
-/**
- * Functions and definitions.
- */
-require_once ASTRA_THEME_DIR . 'inc/class-astra-after-setup-theme.php';
-
-// Required files.
-require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-helper.php';
-
-require_once ASTRA_THEME_DIR . 'inc/schema/class-astra-schema.php';
-
-/* Setup API */
-require_once ASTRA_THEME_DIR . 'admin/includes/class-astra-learn.php';
-require_once ASTRA_THEME_DIR . 'admin/includes/class-astra-api-init.php';
-
-if ( is_admin() ) {
-	/**
-	 * Admin Menu Settings
-	 */
-	require_once ASTRA_THEME_DIR . 'inc/core/class-astra-admin-settings.php';
-	require_once ASTRA_THEME_DIR . 'admin/class-astra-admin-loader.php';
-	require_once ASTRA_THEME_DIR . 'inc/lib/astra-notices/class-bsf-admin-notices.php';
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 }
+add_action( 'wp_enqueue_scripts', 'magpro_scripts' );
 
-// BSF Analytics removed for Mag Pro.
+// Include Core Functionality
+require_once MAGPRO_THEME_DIR . '/inc/class-magpro-core.php';
 
-/**
- * Metabox additions.
- */
-require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-meta-boxes.php';
-require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-meta-box-operations.php';
-require_once ASTRA_THEME_DIR . 'inc/metabox/class-astra-elementor-editor-settings.php';
+// Include Header & Footer Builder
+require_once MAGPRO_THEME_DIR . '/inc/class-magpro-header-footer.php';
 
-/**
- * Customizer additions.
- */
-require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-customizer.php';
-
-/**
- * Astra Modules.
- */
-require_once ASTRA_THEME_DIR . 'inc/modules/posts-structures/class-astra-post-structures.php';
-require_once ASTRA_THEME_DIR . 'inc/modules/related-posts/class-astra-related-posts.php';
-
-/**
- * Compatibility (Gutenberg, Elementor, AMP, Yoast)
- */
-require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-gutenberg.php';
-require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-amp.php';
-require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-yoast-seo.php';
-require_once ASTRA_THEME_DIR . 'inc/addons/transparent-header/class-astra-ext-transparent-header.php';
-require_once ASTRA_THEME_DIR . 'inc/addons/breadcrumbs/class-astra-breadcrumbs.php';
-require_once ASTRA_THEME_DIR . 'inc/addons/scroll-to-top/class-astra-scroll-to-top.php';
-require_once ASTRA_THEME_DIR . 'inc/addons/heading-colors/class-astra-heading-colors.php';
-require_once ASTRA_THEME_DIR . 'inc/builder/class-astra-builder-loader.php';
-
-// Elementor Compatibility.
-require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-elementor.php';
-require_once ASTRA_THEME_DIR . 'inc/compatibility/class-astra-elementor-pro.php';
-
-require_once ASTRA_THEME_DIR . 'inc/core/markup/class-astra-markup.php';
-
-/**
- * Abilities API integration.
- */
-require_once ASTRA_THEME_DIR . 'inc/abilities/bootstrap.php';
-
-/**
- * Load deprecated functions
- */
-require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
-require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
-require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
-
-/**
- * Mag Pro Core Features (Dark/Light mode, fonts, ticker, styling)
- */
-require_once ASTRA_THEME_DIR . 'inc/magpro-core.php';
-
-/**
- * Required Plugins Activation (TGMPA) & Admin Notices
- */
-require_once ASTRA_THEME_DIR . 'inc/plugins/tgm-config.php';
-require_once ASTRA_THEME_DIR . 'inc/plugins/admin-notice.php';
-
+// Include TGM Plugin Activation
+if ( file_exists( MAGPRO_THEME_DIR . '/inc/plugins/tgm-config.php' ) ) {
+	require_once MAGPRO_THEME_DIR . '/inc/plugins/tgm-config.php';
+}

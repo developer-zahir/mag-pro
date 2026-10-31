@@ -2,43 +2,57 @@
 /**
  * The template for displaying all pages.
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package Astra
- * @since 1.0.0
+ * @package MagPro
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
-get_header(); ?>
+get_header();
+?>
 
-<?php if ( astra_page_layout() === 'left-sidebar' ) { ?>
+<div class="magpro-page-wrapper">
+	<?php
+	while ( have_posts() ) :
+		the_post();
 
-	<?php get_sidebar(); ?>
+		// If built with Elementor, render clean content directly
+		if ( did_action( 'elementor/loaded' ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() ) && \Elementor\Plugin::$instance->documents->get( get_the_ID() )->is_built_with_elementor() ) :
+			the_content();
+		else :
+			?>
+			<div class="magpro-container" style="padding-top: 40px; padding-bottom: 60px;">
+				<article id="post-<?php the_ID(); ?>" <?php post_class( 'magpro-standard-page' ); ?> style="background: var(--magpro-card-bg); border: 1px solid var(--magpro-border); border-radius: var(--magpro-radius); padding: 40px;">
+					<header class="entry-header" style="margin-bottom: 24px;">
+						<h1 class="entry-title" style="font-size: 32px; font-weight: 800; margin: 0; color: var(--magpro-text);"><?php the_title(); ?></h1>
+					</header>
 
-<?php } ?>
+					<div class="entry-content magpro-single-content">
+						<?php
+						the_content();
 
-	<div id="primary" <?php astra_primary_class(); ?>>
+						wp_link_pages(
+							array(
+								'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'mag-pro' ),
+								'after'  => '</div>',
+							)
+						);
+						?>
+					</div>
 
-		<?php astra_primary_content_top(); ?>
+					<?php
+					if ( comments_open() || get_comments_number() ) :
+						comments_template();
+					endif;
+					?>
+				</article>
+			</div>
+			<?php
+		endif;
+	endwhile;
+	?>
+</div>
 
-		<?php astra_content_page_loop(); ?>
-
-		<?php astra_primary_content_bottom(); ?>
-
-	</div><!-- #primary -->
-
-<?php if ( astra_page_layout() === 'right-sidebar' ) { ?>
-
-	<?php get_sidebar(); ?>
-
-<?php } ?>
-
-<?php get_footer(); ?>
+<?php
+get_footer();

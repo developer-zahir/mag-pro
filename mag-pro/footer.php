@@ -2,35 +2,29 @@
 /**
  * The template for displaying the footer.
  *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package Astra
- * @since 1.0.0
+ * @package MagPro
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
-
 ?>
-<?php astra_content_bottom(); ?>
-	</div> <!-- ast-container -->
 	</div><!-- #content -->
-<?php
-	astra_content_after();
 
-	astra_footer_before();
+	<?php
+	/**
+	 * Renders Before Footer template if configured.
+	 */
+	magpro_render_before_footer();
 
-	astra_footer();
+	/**
+	 * Renders Elementor Footer if active, or Fallback Footer.
+	 */
+	magpro_render_footer();
+	?>
+</div><!-- #page -->
 
-	astra_footer_after();
-?>
-	</div><!-- #page -->
-<?php
-	astra_body_bottom();
-	wp_footer();
-?>
-	</body>
+<?php wp_footer(); ?>
+
+</body>
 </html>

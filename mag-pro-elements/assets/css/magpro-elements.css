@@ -1553,3 +1553,52 @@ html[data-theme="dark"] .magpro-search-cover-close:hover,
 html[data-theme="dark"] .magpro-search-replace-close:hover {
   color: #ffffff;
 }
+
+/* ==========================================================================
+   11. Dark Mode Switcher Widget
+   ========================================================================== */
+.magpro-dm-wrapper {
+  display: block;
+}
+
+.magpro-dm-pill {
+  position: relative;
+  background-color: var(--magpro-surface, #e2e8f0);
+  border: 1px solid var(--magpro-border, #cbd5e1);
+  transition: all 0.25s ease;
+}
+
+.magpro-dm-pill::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .magpro-dm-pill {
+  background-color: #334155;
+  border-color: #475569;
+}
+
+[data-theme="dark"] .magpro-dm-pill::after {
+  transform: translateX(32px);
+  background-color: #38bdf8;
+}
+
+.magpro-dm-btn {
+  background: var(--magpro-surface, #f1f5f9);
+  border: 1px solid var(--magpro-border, #e2e8f0);
+  color: var(--magpro-text, #1e293b);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.magpro-dm-btn:hover {
+  background: var(--magpro-border, #e2e8f0);
+}

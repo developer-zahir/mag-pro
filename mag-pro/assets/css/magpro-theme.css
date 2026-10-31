@@ -1,1129 +1,814 @@
 /**
- * Mag Pro Theme - Main Styling & Dark/Light System
- * Author: Developer Zahir
- * URI: https://developerzahir.com/
- * Based on MagPro Magazine Template
+ * Mag Pro Theme Stylesheet
+ * Ultra-fast, lightweight, responsive magazine & blog styling
+ * Version: 2.0.0
+ * Author: Developer Zahir (https://developerzahir.com/)
  */
 
 /* ==========================================================================
-   CSS Variables / Theming System
+   1. Theme Variables & Base
    ========================================================================== */
-:root,
-html[data-theme="light"] {
-  --mp-bg: #f5f6f7;
-  --mp-surface: #ffffff;
-  --mp-card-bg: #ffffff;
-  --mp-primary: #ff2232;
-  --mp-primary-hover: #e51f2d;
-  --mp-title: #171921;
-  --mp-title-hover: #ff2232;
-  --mp-text: #666666;
-  --mp-meta: #8c939d;
-  --mp-border: rgba(0, 0, 0, 0.08);
-  --mp-border-strong: #e1e4e8;
-  --mp-header-bg: #ffffff;
-  --mp-menu-bg: #171921;
-  --mp-menu-text: #ffffff;
-  --mp-footer-bg: #171921;
-  --mp-footer-bar: #12141a;
-  --mp-footer-text: #cccccc;
-  --mp-tag-bg: #ff2232;
-  --mp-tag-color: #ffffff;
-  --mp-card-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  --mp-input-bg: #fdfdfd;
-  --mp-input-border: #e2e5e8;
-  --mp-input-color: #333333;
-  --mp-ticker-bg: #171921;
-  --mp-ticker-text: #ffffff;
+:root {
+  --magpro-primary: #0066cc;
+  --magpro-primary-hover: #0052a3;
+  --magpro-bg: #f8fafc;
+  --magpro-card-bg: #ffffff;
+  --magpro-surface: #f1f5f9;
+  --magpro-text: #1e293b;
+  --magpro-text-muted: #64748b;
+  --magpro-border: #e2e8f0;
+  --magpro-radius: 8px;
+  --magpro-radius-lg: 12px;
+  --magpro-shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --magpro-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --magpro-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -4px rgba(0,0,0,0.07);
+  --magpro-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --magpro-font-heading: inherit;
+  --magpro-container: 1200px;
+  --magpro-transition: 0.25s ease;
 }
 
-html[data-theme="dark"] {
-  --mp-bg: #15181f;
-  --mp-surface: #212530;
-  --mp-card-bg: #212530;
-  --mp-primary: #ff2232;
-  --mp-primary-hover: #ff4754;
-  --mp-title: #f0f2f5;
-  --mp-title-hover: #ff4754;
-  --mp-text: #c0c6d0;
-  --mp-meta: #8a929f;
-  --mp-border: rgba(255, 255, 255, 0.08);
-  --mp-border-strong: #303644;
-  --mp-header-bg: #212530;
-  --mp-menu-bg: #171921;
-  --mp-menu-text: #ffffff;
-  --mp-footer-bg: #171921;
-  --mp-footer-bar: #12141a;
-  --mp-footer-text: #a8b0bd;
-  --mp-tag-bg: #ff2232;
-  --mp-tag-color: #ffffff;
-  --mp-card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --mp-input-bg: #1b1e27;
-  --mp-input-border: #323847;
-  --mp-input-color: #e5e9f0;
-  --mp-ticker-bg: #111318;
-  --mp-ticker-text: #f0f2f5;
+[data-theme="dark"] {
+  --magpro-bg: #0b1120;
+  --magpro-card-bg: #1e293b;
+  --magpro-surface: #334155;
+  --magpro-text: #f1f5f9;
+  --magpro-text-muted: #94a3b8;
+  --magpro-border: #283548;
+  --magpro-primary: #38bdf8;
+  --magpro-primary-hover: #0ea5e9;
+  --magpro-shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --magpro-shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --magpro-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.4), 0 4px 6px -4px rgba(0,0,0,0.4);
 }
 
 /* ==========================================================================
-   Typography & Base Reset
+   2. Layout Container & Grid
    ========================================================================== */
-body, button, input, select, textarea {
-  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}
-
-body {
-  background-color: var(--mp-bg) !important;
-  color: var(--mp-text) !important;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-a {
-  color: inherit;
-  transition: color 0.2s ease;
-}
-a:hover {
-  color: var(--mp-primary);
-}
-
-/* ==========================================================================
-   Dark Mode Application to Astra Containers & Elements
-   ========================================================================== */
-html[data-theme="dark"] body {
-  background-color: var(--mp-bg) !important;
-}
-
-html[data-theme="dark"] #page,
-html[data-theme="dark"] .site,
-html[data-theme="dark"] #content,
-html[data-theme="dark"] .ast-container,
-html[data-theme="dark"] .site-content {
-  background-color: transparent !important;
-}
-
-/* Header & Navigation in Dark Mode */
-html[data-theme="dark"] .main-header-bar,
-html[data-theme="dark"] .ast-primary-header-bar,
-html[data-theme="dark"] .ast-mobile-header-wrap,
-html[data-theme="dark"] .ast-mobile-header-content,
-html[data-theme="dark"] .ast-theme-transparent-header #masthead {
-  background-color: var(--mp-header-bg) !important;
-  border-bottom-color: var(--mp-border) !important;
-}
-
-html[data-theme="dark"] .main-header-menu .menu-link,
-html[data-theme="dark"] .ast-header-break-point .main-navigation ul .menu-item .menu-link,
-html[data-theme="dark"] .site-title a,
-html[data-theme="dark"] .site-description {
-  color: var(--mp-title) !important;
-}
-
-html[data-theme="dark"] .main-header-menu .sub-menu {
-  background-color: var(--mp-surface) !important;
-  border: 1px solid var(--mp-border) !important;
-  box-shadow: var(--mp-card-shadow) !important;
-}
-
-html[data-theme="dark"] .main-header-menu .sub-menu .menu-link {
-  color: var(--mp-text) !important;
-}
-
-html[data-theme="dark"] .main-header-menu .sub-menu .menu-link:hover {
-  color: var(--mp-primary) !important;
-  background-color: rgba(255, 255, 255, 0.03) !important;
-}
-
-/* Content, Articles, Cards in Dark Mode */
-html[data-theme="dark"] .ast-article-post,
-html[data-theme="dark"] .ast-article-single,
-html[data-theme="dark"] .ast-separate-container .ast-article-post,
-html[data-theme="dark"] .ast-separate-container .ast-article-single,
-html[data-theme="dark"] .ast-separate-container .site-main > article,
-html[data-theme="dark"] .ast-separate-container .site-main > .comment-respond,
-html[data-theme="dark"] .ast-separate-container .site-main > .ast-single-related-posts-container {
-  background-color: var(--mp-surface) !important;
-  border: 1px solid var(--mp-border) !important;
-  box-shadow: var(--mp-card-shadow) !important;
-}
-
-html[data-theme="dark"] .entry-title,
-html[data-theme="dark"] .entry-title a,
-html[data-theme="dark"] h1,
-html[data-theme="dark"] h2,
-html[data-theme="dark"] h3,
-html[data-theme="dark"] h4,
-html[data-theme="dark"] h5,
-html[data-theme="dark"] h6 {
-  color: var(--mp-title) !important;
-}
-
-html[data-theme="dark"] .entry-meta,
-html[data-theme="dark"] .entry-meta a,
-html[data-theme="dark"] .post-meta,
-html[data-theme="dark"] .ast-blog-single-element {
-  color: var(--mp-meta) !important;
-}
-
-html[data-theme="dark"] .entry-content,
-html[data-theme="dark"] .entry-content p,
-html[data-theme="dark"] .entry-content li {
-  color: var(--mp-text) !important;
-}
-
-html[data-theme="dark"] blockquote {
-  border-left-color: var(--mp-primary) !important;
-  background-color: rgba(255, 255, 255, 0.03) !important;
-  color: var(--mp-title) !important;
-}
-
-/* Sidebar & Widgets in Dark Mode */
-html[data-theme="dark"] #secondary,
-html[data-theme="dark"] .sidebar-main,
-html[data-theme="dark"] .ast-separate-container #secondary .widget {
-  background-color: var(--mp-surface) !important;
-  border-color: var(--mp-border) !important;
-  color: var(--mp-text) !important;
-}
-
-html[data-theme="dark"] .widget-title,
-html[data-theme="dark"] .widgettitle {
-  color: var(--mp-title) !important;
-  border-bottom: 2px solid var(--mp-primary) !important;
-}
-
-/* Comments Section in Dark Mode */
-html[data-theme="dark"] #comments,
-html[data-theme="dark"] .comments-area,
-html[data-theme="dark"] .comment-list .comment {
-  background-color: var(--mp-surface) !important;
-  border-color: var(--mp-border) !important;
-  color: var(--mp-text) !important;
-}
-
-html[data-theme="dark"] .comment-author .fn,
-html[data-theme="dark"] .comment-author a {
-  color: var(--mp-title) !important;
-}
-
-html[data-theme="dark"] .comment-metadata a {
-  color: var(--mp-meta) !important;
-}
-
-/* Inputs, Textareas, Search in Dark Mode */
-html[data-theme="dark"] input[type="text"],
-html[data-theme="dark"] input[type="email"],
-html[data-theme="dark"] input[type="url"],
-html[data-theme="dark"] input[type="password"],
-html[data-theme="dark"] input[type="search"],
-html[data-theme="dark"] textarea,
-html[data-theme="dark"] select {
-  background-color: var(--mp-input-bg) !important;
-  border-color: var(--mp-input-border) !important;
-  color: var(--mp-input-color) !important;
-}
-
-html[data-theme="dark"] input[type="text"]:focus,
-html[data-theme="dark"] input[type="search"]:focus,
-html[data-theme="dark"] textarea:focus {
-  border-color: var(--mp-primary) !important;
-  outline: none !important;
-}
-
-/* Footer in Dark Mode */
-html[data-theme="dark"] .site-footer,
-html[data-theme="dark"] .ast-footer-overlay,
-html[data-theme="dark"] .footer-adv,
-html[data-theme="dark"] .ast-small-footer {
-  background-color: var(--mp-footer-bg) !important;
-  border-top-color: var(--mp-border) !important;
-  color: var(--mp-footer-text) !important;
-}
-
-html[data-theme="dark"] .ast-small-footer {
-  background-color: var(--mp-footer-bar) !important;
-}
-
-/* Pagination in Dark Mode */
-html[data-theme="dark"] .ast-pagination .page-numbers {
-  background-color: var(--mp-surface) !important;
-  color: var(--mp-title) !important;
-  border-color: var(--mp-border) !important;
-}
-
-html[data-theme="dark"] .ast-pagination .page-numbers.current,
-html[data-theme="dark"] .ast-pagination .page-numbers:hover {
-  background-color: var(--mp-primary) !important;
-  color: #ffffff !important;
-  border-color: var(--mp-primary) !important;
-}
-
-/* ==========================================================================
-   MagPro Magazine UI Elements & Effects
-   ========================================================================== */
-
-/* Post Category Badges */
-.magpro-cat-badge,
-.entry-tag-badge {
-  display: inline-block;
-  background-color: var(--mp-tag-bg);
-  color: var(--mp-tag-color);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 3px 9px;
-  border-radius: 3px;
-  z-index: 2;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-.magpro-cat-badge:hover,
-.entry-tag-badge:hover {
-  background-color: #171921;
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-
-/* Entry Thumb Hover Zoom */
-.magpro-thumb-wrap {
-  position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-}
-.magpro-thumb-wrap img,
-.magpro-thumb-wrap .entry-thumb {
-  transition: transform 0.4s ease;
+.magpro-container {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.magpro-thumb-wrap:hover img,
-.magpro-thumb-wrap:hover .entry-thumb {
-  transform: scale(1.06);
+  max-width: var(--magpro-container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* Gradient Overlay for Hero & Video Blocks */
-.magpro-overlay-gradient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, rgba(17, 19, 24, 0.05) 0%, rgba(17, 19, 24, 0.88) 100%);
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-/* ==========================================================================
-   MagPro Breaking News Ticker
-   ========================================================================== */
-.magpro-ticker-wrap {
-  background-color: var(--mp-ticker-bg);
-  color: var(--mp-ticker-text);
-  border-bottom: 1px solid var(--mp-border);
-  font-size: 13px;
-  padding: 0;
-  overflow: hidden;
-}
-
-.magpro-ticker-container {
+.magpro-main-layout {
   display: flex;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-  min-height: 42px;
+  gap: 36px;
+  padding-top: 40px;
+  padding-bottom: 60px;
 }
 
-.magpro-ticker-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background-color: var(--mp-primary);
-  color: #ffffff;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 0.8px;
-  padding: 6px 14px;
-  border-radius: 2px;
-  white-space: nowrap;
-  margin-right: 15px;
+.magpro-content-area {
+  flex: 1;
+  min-width: 0;
+}
+
+.magpro-sidebar-area {
+  width: 340px;
   flex-shrink: 0;
 }
 
-.magpro-ticker-label i {
-  font-size: 10px;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  50% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.8; }
-}
-
-.magpro-ticker-content {
-  flex-grow: 1;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  height: 42px;
-  line-height: 42px;
-}
-
-.magpro-ticker-item {
-  display: none;
-  align-items: center;
-  gap: 10px;
-}
-.magpro-ticker-item.active {
-  display: flex;
-  animation: fadeInTicker 0.35s ease;
-}
-
-@keyframes fadeInTicker {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.magpro-ticker-item a {
-  color: var(--mp-ticker-text);
-  font-weight: 500;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.magpro-ticker-item a:hover {
-  color: var(--mp-primary);
-}
-
-.magpro-ticker-controls {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 15px;
-  flex-shrink: 0;
-}
-
-.magpro-ticker-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--mp-ticker-text);
-  border: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 2px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  transition: background 0.2s ease;
-}
-.magpro-ticker-btn:hover {
-  background: var(--mp-primary);
-  color: #ffffff;
-}
-
-.magpro-ticker-date {
-  color: var(--mp-meta);
-  font-size: 12px;
-  margin-left: 20px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-  .magpro-ticker-date {
-    display: none;
+@media (max-width: 991px) {
+  .magpro-main-layout {
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+  .magpro-sidebar-area {
+    width: 100%;
   }
 }
 
 /* ==========================================================================
-   Continuous Marquee Ticker Style
+   3. Fallback Header & Navigation
    ========================================================================== */
-.magpro-ticker-marquee {
+.magpro-topbar {
+  background-color: var(--magpro-card-bg);
+  border-bottom: 1px solid var(--magpro-border);
+  font-size: 13px;
+  padding: 8px 0;
+  transition: background-color var(--magpro-transition), border-color var(--magpro-transition);
+}
+
+.magpro-topbar-inner {
   display: flex;
-  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.magpro-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--magpro-text-muted);
+}
+
+.magpro-top-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 16px;
+}
+
+.magpro-top-menu a {
+  color: var(--magpro-text-muted);
+}
+
+.magpro-top-menu a:hover {
+  color: var(--magpro-primary);
+}
+
+.magpro-main-header {
+  background-color: var(--magpro-card-bg);
+  border-bottom: 1px solid var(--magpro-border);
+  transition: background-color var(--magpro-transition), border-color var(--magpro-transition);
   position: relative;
-  width: 100%;
-  height: 42px;
-  align-items: center;
-  user-select: none;
+  z-index: 100;
 }
 
-.magpro-ticker-marquee-track {
-  display: flex;
-  flex-shrink: 0;
-  white-space: nowrap;
-  animation: magproMarquee 30s linear infinite;
-  gap: 30px;
-  align-items: center;
-}
-
-.magpro-ticker-marquee:hover .magpro-ticker-marquee-track {
-  animation-play-state: paused;
-}
-
-@keyframes magproMarquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-
-.magpro-marquee-item,
-.magpro-ticker-marquee-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.magpro-marquee-item a,
-.magpro-ticker-marquee-item a {
-  color: var(--mp-ticker-text);
-  font-weight: 500;
-  text-decoration: none;
-}
-.magpro-marquee-item a:hover,
-.magpro-ticker-marquee-item a:hover {
-  color: var(--mp-primary);
-}
-
-.magpro-ticker-views {
-  color: var(--mp-primary);
-  font-size: 11px;
-  background: rgba(255, 34, 50, 0.12);
-  padding: 2px 7px;
-  border-radius: 2px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.magpro-header-dark-mode-wrap {
-  display: inline-flex;
-  align-items: center;
-}
-
-/* ==========================================================================
-   Dark / Light Mode Toggle Button
-   ========================================================================== */
-
-/* Header / Inline Toggle */
-.magpro-theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 6px;
-  color: inherit;
-  font-size: 16px;
-  line-height: 1;
-  transition: color 0.2s ease, transform 0.2s ease;
-  user-select: none;
-}
-.magpro-theme-toggle:hover {
-  color: var(--mp-primary);
-  transform: rotate(15deg);
-}
-
-.magpro-theme-toggle .icon-sun {
-  display: none;
-}
-.magpro-theme-toggle .icon-moon {
-  display: inline-block;
-}
-
-html[data-theme="dark"] .magpro-theme-toggle .icon-sun {
-  display: inline-block;
-}
-html[data-theme="dark"] .magpro-theme-toggle .icon-moon {
-  display: none;
-}
-
-
-
-
-
-/* ==========================================================================
-   Section Header Styles (6 Distinct Magazine Styles) & View All Button
-   ========================================================================== */
-.magpro-section-header {
+.magpro-main-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px;
-  position: relative;
-  gap: 15px;
+  min-height: 76px;
 }
 
-.magpro-section-title-wrap {
+.magpro-site-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.magpro-site-title a {
+  color: var(--magpro-text);
+}
+
+.magpro-site-description {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--magpro-text-muted);
+}
+
+.magpro-primary-nav {
   display: flex;
   align-items: center;
-  flex-shrink: 0;
 }
 
-.magpro-section-icon {
+.magpro-main-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+}
+
+.magpro-main-menu > li {
+  position: relative;
+}
+
+.magpro-main-menu a {
+  display: block;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--magpro-text);
+  border-radius: var(--magpro-radius);
+  transition: all var(--magpro-transition);
+}
+
+.magpro-main-menu a:hover,
+.magpro-main-menu .current-menu-item > a {
+  color: var(--magpro-primary);
+  background-color: var(--magpro-surface);
+}
+
+/* Dropdowns */
+.magpro-main-menu .sub-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background-color: var(--magpro-card-bg);
+  border: 1px solid var(--magpro-border);
+  border-radius: var(--magpro-radius);
+  box-shadow: var(--magpro-shadow-lg);
+  padding: 8px 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.2s ease;
+  z-index: 999;
+}
+
+.magpro-main-menu li:hover > .sub-menu,
+.magpro-main-menu li:focus-within > .sub-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.magpro-main-menu .sub-menu a {
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 0;
+}
+
+.magpro-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.magpro-header-btn {
+  background: none;
+  border: none;
+  color: var(--magpro-text);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--magpro-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--magpro-transition), color var(--magpro-transition);
+}
+
+.magpro-header-btn:hover {
+  background-color: var(--magpro-surface);
+  color: var(--magpro-primary);
+}
+
+.magpro-mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .magpro-primary-nav {
+    display: none;
+  }
+  .magpro-mobile-toggle {
+    display: flex;
+  }
+}
+
+/* ==========================================================================
+   4. Dark Mode Switcher Elements
+   ========================================================================== */
+.magpro-theme-toggle {
+  background: var(--magpro-surface);
+  border: 1px solid var(--magpro-border);
+  color: var(--magpro-text);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-right: 8px;
-  font-size: inherit;
-  color: var(--mp-primary, #ff2232);
+  transition: all var(--magpro-transition);
 }
 
-.magpro-section-icon svg {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
+.magpro-theme-toggle:hover {
+  background: var(--magpro-border);
 }
 
-/* Style 1: Modern Left Accent Bar */
-.magpro-header-style-1 {
-  border-bottom: 2px solid var(--mp-border, rgba(0, 0, 0, 0.08));
-  padding-bottom: 8px;
+.magpro-icon-sun {
+  display: none;
 }
-.magpro-header-style-1 .magpro-widget-title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-left: 4px solid var(--mp-primary, #ff2232);
-  padding-left: 12px;
+.magpro-icon-moon {
   display: inline-flex;
-  align-items: center;
-  line-height: 1.2;
 }
 
-/* Style 2: Solid Badge Header */
-.magpro-header-style-2 {
-  border-bottom: 2px solid var(--mp-primary, #ff2232);
-  padding-bottom: 0;
-}
-.magpro-header-style-2 .magpro-widget-title {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  background-color: var(--mp-primary, #ff2232);
-  color: #ffffff !important;
-  padding: 8px 18px;
-  border-radius: 4px 4px 0 0;
+[data-theme="dark"] .magpro-icon-sun {
   display: inline-flex;
-  align-items: center;
-  line-height: 1;
 }
-.magpro-header-style-2 .magpro-section-icon {
-  color: #ffffff;
-}
-
-/* Style 3: Underline Dual-Color Bar */
-.magpro-header-style-3 {
-  border-bottom: 2px solid var(--mp-border, rgba(0, 0, 0, 0.08));
-  padding-bottom: 8px;
-}
-.magpro-header-style-3 .magpro-widget-title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding-bottom: 8px;
-  margin-bottom: -10px;
-  border-bottom: 3px solid var(--mp-primary, #ff2232);
-}
-
-/* Style 4: Refined Bordered Box */
-.magpro-header-style-4 {
-  border-bottom: 1px solid var(--mp-border, rgba(0, 0, 0, 0.08));
-  padding-bottom: 10px;
-}
-.magpro-header-style-4 .magpro-widget-title {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 1px solid var(--mp-primary, #ff2232);
-  padding: 6px 14px;
-  border-radius: 3px;
-  display: inline-flex;
-  align-items: center;
-  background-color: rgba(255, 34, 50, 0.05);
-}
-
-/* Style 5: Sleek Line Divider */
-.magpro-header-style-5 {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-.magpro-header-style-5 .magpro-widget-title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-}
-.magpro-header-line-fill {
-  flex-grow: 1;
-  height: 2px;
-  background-color: var(--mp-border, rgba(0, 0, 0, 0.08));
-  margin: 0 15px;
-}
-
-/* Style 6: Gradient Accent Bar */
-.magpro-header-style-6 {
-  border-bottom: 2px solid var(--mp-border, rgba(0, 0, 0, 0.08));
-  padding-bottom: 8px;
-}
-.magpro-header-style-6 .magpro-widget-title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-left: 5px solid;
-  border-image: linear-gradient(to bottom, var(--mp-primary, #ff2232), #ff7e40) 1 100%;
-  padding-left: 12px;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1.2;
-}
-
-/* View All Button: Default Plain Text */
-.magpro-view-all-wrap {
-  margin-left: auto;
-  flex-shrink: 0;
-}
-.magpro-view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  color: var(--mp-primary, #ff2232) !important;
-  text-decoration: none !important;
-  border: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-.magpro-view-all:hover {
-  background-color: transparent !important;
-  border: none !important;
-  color: var(--mp-primary-hover, #d91423) !important;
-  text-decoration: none !important;
-  opacity: 0.85;
-  transform: none !important;
-  box-shadow: none !important;
-}
-.magpro-view-all i {
-  font-size: 11px;
-  transition: transform 0.2s ease;
-}
-.magpro-view-all:hover i {
-  transform: translateX(3px);
-}
-
-
-/* ==========================================================================
-   Zero Background by Default for all post widgets & cards
-   ========================================================================== */
-.magpro-card,
-.magpro-grid-card,
-.magpro-list-card,
-.magpro-compact-item,
-.magpro-video-hero,
-.magpro-video-item,
-.magpro-slider-card,
-.magpro-slide-card,
-.magpro-tabs-wrap,
-.magpro-tabs-item,
-.magpro-block1-wrap,
-.magpro-block1-lead,
-.magpro-block2-col,
-.magpro-block2-lead-card,
-.magpro-social-wrap,
-.magpro-hero-card,
-.magpro-hero-lead,
-.magpro-hero-sub-item {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-}
-
-html[data-theme="dark"] .magpro-compact-item,
-html[data-theme="dark"] .magpro-grid-card,
-html[data-theme="dark"] .magpro-list-card,
-html[data-theme="dark"] .magpro-block1-wrap,
-html[data-theme="dark"] .magpro-block2-col,
-html[data-theme="dark"] .magpro-tabs-wrap {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
+[data-theme="dark"] .magpro-icon-moon {
+  display: none;
 }
 
 /* ==========================================================================
-   Header Search Elements (3 Styles: Full-screen, Slide Down, Header Replace)
+   5. Mobile Drawer Navigation
    ========================================================================== */
-.magpro-header-search-wrap,
-.magpro-widget-search-wrap {
-  display: inline-flex;
-  align-items: center;
-}
-
-.magpro-search-trigger {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-  font-size: 18px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-.magpro-search-trigger:hover {
-  color: var(--mp-primary, #ff2232);
-}
-
-/* Style 1: Full-Screen Modal (Center Center) */
-.magpro-search-modal {
+.magpro-mobile-drawer {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 300px;
+  max-width: 85vw;
+  height: 100vh;
+  background-color: var(--magpro-card-bg);
+  z-index: 10000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 2px 0 15px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.magpro-mobile-drawer.is-active {
+  transform: translateX(0);
+}
+
+.magpro-mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--magpro-border);
+}
+
+.magpro-mobile-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--magpro-text);
+}
+
+.magpro-mobile-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--magpro-text-muted);
+  cursor: pointer;
+}
+
+.magpro-mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.magpro-mobile-menu-list li a {
+  display: block;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--magpro-text);
+  border-bottom: 1px solid var(--magpro-border);
+}
+
+.magpro-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 999999;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.magpro-mobile-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   6. Search Functionality & Modal
+   ========================================================================== */
+.magpro-search-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  transition: all 0.3s ease;
 }
-.magpro-search-modal.active {
+
+.magpro-search-fullscreen.is-open {
   opacity: 1;
   visibility: visible;
 }
 
 .magpro-search-modal-backdrop {
   position: absolute;
-  inset: 0;
-  background-color: rgba(10, 15, 29, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.magpro-search-modal-close {
-  position: absolute;
-  top: 30px;
-  right: 35px;
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 40px;
-  line-height: 1;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0.75;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.magpro-search-modal-close:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-.magpro-search-modal-inner {
-  position: relative;
-  z-index: 5;
-  width: 90%;
-  max-width: 720px;
-  text-align: center;
-  transform: translateY(20px) scale(0.97);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.magpro-search-modal.active .magpro-search-modal-inner {
-  transform: translateY(0) scale(1);
-}
-
-.magpro-search-modal-form .magpro-search-input-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 10px 0;
-  transition: border-color 0.2s ease;
-}
-.magpro-search-modal-form .magpro-search-input-wrap:focus-within {
-  border-bottom-color: var(--mp-primary, #ff2232);
-}
-
-.magpro-search-modal-icon {
-  font-size: 26px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-right: 16px;
-}
-
-.magpro-search-modal-input {
-  flex-grow: 1;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  color: #ffffff !important;
-  font-size: 26px;
-  font-weight: 500;
-  padding: 8px 0;
-  box-shadow: none !important;
-}
-.magpro-search-modal-input::placeholder {
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.magpro-search-modal-submit {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 24px;
-  cursor: pointer;
-  padding: 8px 12px;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-.magpro-search-modal-submit:hover {
-  color: var(--mp-primary, #ff2232);
-  transform: translateX(4px);
-}
-
-.magpro-search-modal-hint {
-  margin-top: 15px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.5px;
-}
-
-/* Style 2: Slide Down Search Bar */
-.magpro-search-slide-down,
-.magpro-search-cover {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 75px;
-  background-color: var(--mp-surface, #ffffff);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  padding: 0 30px;
-  transform: translateY(-100%);
-  opacity: 0;
-  visibility: hidden;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease;
-}
-.magpro-search-slide-down.active,
-.magpro-search-cover.active {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-}
-
-.magpro-search-slide-down-container,
-.magpro-search-cover-container {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-}
-
-.magpro-search-slide-down-form,
-.magpro-search-cover-form {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-}
-
-.magpro-search-slide-icon,
-.magpro-search-cover-icon {
-  font-size: 20px;
-  color: var(--mp-primary, #ff2232);
-}
-
-.magpro-search-slide-down-input,
-.magpro-search-cover-input {
-  flex-grow: 1;
-  border: none !important;
-  background: transparent !important;
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--mp-heading, #111827) !important;
-  padding: 8px 0;
-  outline: none !important;
-  box-shadow: none !important;
-}
-.magpro-search-slide-down-input::placeholder,
-.magpro-search-cover-input::placeholder {
-  color: var(--mp-text, #6b7280);
-}
-
-.magpro-search-slide-down-submit,
-.magpro-search-cover-submit {
-  background-color: var(--mp-primary, #ff2232);
-  color: #ffffff;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-.magpro-search-slide-down-submit:hover,
-.magpro-search-cover-submit:hover {
-  background-color: var(--mp-primary-hover, #d91423);
-}
-
-.magpro-search-slide-down-close,
-.magpro-search-cover-close {
-  background: transparent;
-  border: none;
-  font-size: 28px;
-  line-height: 1;
-  color: var(--mp-text, #6b7280);
-  cursor: pointer;
-  padding: 0 8px;
-  transition: color 0.2s ease;
-}
-.magpro-search-slide-down-close:hover,
-.magpro-search-cover-close:hover {
-  color: var(--mp-heading, #111827);
-}
-
-/* Style 3: Header Row Replace (Direct In-Place Replacement) */
-.magpro-header-search-active {
-  position: relative !important;
-}
-
-.magpro-header-search-active > *:not(.magpro-search-replace-bar) {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  visibility: hidden !important;
-}
-
-.magpro-search-replace-bar {
-  position: absolute;
-  inset: 0;
-  width: 100%;
   height: 100%;
-  min-height: 55px;
-  background-color: var(--mp-surface, #ffffff);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 25px;
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(6px);
 }
 
-.magpro-header-search-active .magpro-search-replace-bar,
-.magpro-search-replace-bar.active {
-  display: flex !important;
-  opacity: 1 !important;
+.magpro-search-modal-container {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 650px;
 }
 
-.magpro-search-replace-inner {
-  width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-}
-
-.magpro-search-replace-form {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-}
-
-.magpro-search-replace-icon {
-  font-size: 20px;
-  color: var(--mp-primary, #ff2232);
-}
-
-.magpro-search-replace-input {
-  flex-grow: 1;
-  border: none !important;
-  background: transparent !important;
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--mp-heading, #111827) !important;
-  outline: none !important;
-  box-shadow: none !important;
-  padding: 8px 0;
-}
-.magpro-search-replace-input::placeholder {
-  color: var(--mp-text, #6b7280);
-}
-
-.magpro-search-replace-submit {
-  background: transparent;
+.magpro-search-close {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  background: none;
   border: none;
-  color: var(--mp-primary, #ff2232);
-  font-size: 22px;
+  color: #ffffff;
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 8px;
   transition: transform 0.2s ease;
 }
-.magpro-search-replace-submit:hover {
-  transform: translateX(4px);
-}
 
-.magpro-search-replace-close {
-  background: transparent;
-  border: none;
-  font-size: 30px;
-  line-height: 1;
-  color: var(--mp-text, #6b7280);
-  cursor: pointer;
-  padding: 0 8px;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-.magpro-search-replace-close:hover {
-  color: var(--mp-primary, #ff2232);
+.magpro-search-close:hover {
   transform: scale(1.1);
 }
 
-/* Dark theme for search */
-html[data-theme="dark"] .magpro-search-slide-down,
-html[data-theme="dark"] .magpro-search-cover,
-html[data-theme="dark"] .magpro-search-replace-bar {
-  background-color: #1a202c !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+.magpro-search-modal-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
-html[data-theme="dark"] .magpro-search-slide-down-input,
-html[data-theme="dark"] .magpro-search-cover-input,
-html[data-theme="dark"] .magpro-search-replace-input {
+
+.magpro-modal-search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.magpro-modal-search-field {
+  width: 100%;
+  background: #ffffff;
+  border: 2px solid transparent;
+  color: #0f172a;
+  font-size: 20px;
+  padding: 18px 60px 18px 24px;
+  border-radius: var(--magpro-radius-lg);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  outline: none;
+  transition: border-color var(--magpro-transition);
+}
+
+.magpro-modal-search-field:focus {
+  border-color: #38bdf8;
+}
+
+.magpro-modal-search-submit {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #0066cc;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.magpro-search-modal-hint {
+  color: #94a3b8;
+  font-size: 13px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   7. Blog Posts, Cards & Elements
+   ========================================================================== */
+.magpro-post-card {
+  background: var(--magpro-card-bg);
+  border: 1px solid var(--magpro-border);
+  border-radius: var(--magpro-radius);
+  overflow: hidden;
+  margin-bottom: 30px;
+  transition: transform var(--magpro-transition), box-shadow var(--magpro-transition);
+}
+
+.magpro-post-thumbnail-wrap {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--magpro-surface);
+}
+
+.magpro-post-thumb-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.magpro-post-card:hover .magpro-post-thumb-img {
+  transform: scale(1.03);
+}
+
+.magpro-post-content {
+  padding: 24px;
+}
+
+.magpro-cat-badge {
+  display: inline-block;
+  background-color: var(--magpro-primary);
   color: #ffffff !important;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
 }
-html[data-theme="dark"] .magpro-search-slide-down-close,
-html[data-theme="dark"] .magpro-search-cover-close,
-html[data-theme="dark"] .magpro-search-replace-close {
-  color: #a0aec0;
+
+.magpro-post-title {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
 }
-html[data-theme="dark"] .magpro-search-slide-down-close:hover,
-html[data-theme="dark"] .magpro-search-cover-close:hover,
-html[data-theme="dark"] .magpro-search-replace-close:hover {
+
+.magpro-post-title a {
+  color: var(--magpro-text);
+}
+
+.magpro-post-title a:hover {
+  color: var(--magpro-primary);
+}
+
+.magpro-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--magpro-text-muted);
+  margin-bottom: 14px;
+}
+
+.magpro-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.magpro-post-excerpt {
+  color: var(--magpro-text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.magpro-read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--magpro-primary);
+}
+
+/* ==========================================================================
+   8. Single Post Layout
+   ========================================================================== */
+.magpro-single-post {
+  background: var(--magpro-card-bg);
+  border: 1px solid var(--magpro-border);
+  border-radius: var(--magpro-radius);
+  padding: 36px;
+}
+
+.magpro-single-title {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 12px 0 16px;
+  color: var(--magpro-text);
+}
+
+.magpro-single-thumb {
+  margin: 24px 0 28px;
+  border-radius: var(--magpro-radius);
+  overflow: hidden;
+}
+
+.magpro-single-content {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--magpro-text);
+}
+
+.magpro-single-content p {
+  margin-bottom: 24px;
+}
+
+.magpro-single-content h2,
+.magpro-single-content h3,
+.magpro-single-content h4 {
+  color: var(--magpro-text);
+  margin-top: 36px;
+  margin-bottom: 16px;
+}
+
+.magpro-single-content blockquote {
+  border-left: 4px solid var(--magpro-primary);
+  margin: 28px 0;
+  padding: 12px 24px;
+  background: var(--magpro-surface);
+  border-radius: 0 var(--magpro-radius) var(--magpro-radius) 0;
+  font-style: italic;
+}
+
+.magpro-post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--magpro-border);
+}
+
+.magpro-tag-link {
+  background: var(--magpro-surface);
+  color: var(--magpro-text);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.magpro-tag-link:hover {
+  background: var(--magpro-primary);
+  color: #fff;
+}
+
+/* Author Box */
+.magpro-author-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 36px;
+  padding: 24px;
+  background: var(--magpro-surface);
+  border-radius: var(--magpro-radius);
+}
+
+.magpro-author-avatar img {
+  border-radius: 50%;
+}
+
+.magpro-author-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.magpro-author-bio {
+  font-size: 14px;
+  color: var(--magpro-text-muted);
+  margin: 0;
+}
+
+/* Comments */
+.magpro-comments-area {
+  margin-top: 40px;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+}
+
+.comment-body {
+  padding: 20px;
+  background: var(--magpro-surface);
+  border-radius: var(--magpro-radius);
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   9. Sidebar & Widgets
+   ========================================================================== */
+.magpro-widget {
+  background: var(--magpro-card-bg);
+  border: 1px solid var(--magpro-border);
+  border-radius: var(--magpro-radius);
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+.magpro-widget-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--magpro-primary);
+  color: var(--magpro-text);
+  position: relative;
+}
+
+.magpro-widget ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.magpro-widget li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--magpro-border);
+}
+
+.magpro-widget li:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   10. Fallback Footer
+   ========================================================================== */
+.magpro-default-footer {
+  background-color: var(--magpro-card-bg);
+  border-top: 1px solid var(--magpro-border);
+  transition: background-color var(--magpro-transition), border-color var(--magpro-transition);
+}
+
+.magpro-footer-widgets-area {
+  padding: 50px 0;
+  border-bottom: 1px solid var(--magpro-border);
+}
+
+.magpro-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.magpro-bottom-bar {
+  padding: 20px 0;
+  font-size: 14px;
+  color: var(--magpro-text-muted);
+}
+
+.magpro-bottom-bar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.magpro-bottom-bar p {
+  margin: 0;
+}
+
+.magpro-bottom-bar a {
+  color: var(--magpro-text);
+}
+
+.magpro-bottom-bar a:hover {
+  color: var(--magpro-primary);
+}
+
+/* ==========================================================================
+   11. Pagination
+   ========================================================================== */
+.pagination {
+  margin: 30px 0;
+}
+
+.pagination .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--magpro-card-bg);
+  border: 1px solid var(--magpro-border);
+  color: var(--magpro-text);
+  border-radius: var(--magpro-radius);
+  transition: all var(--magpro-transition);
+}
+
+.pagination .page-numbers.current,
+.pagination .page-numbers:hover {
+  background: var(--magpro-primary);
+  border-color: var(--magpro-primary);
   color: #ffffff;
 }

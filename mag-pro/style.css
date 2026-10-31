@@ -1,62 +1,75 @@
-/**
+/*
 Theme Name: Mag Pro
 Theme URI: https://developerzahir.com/
 Author: Developer Zahir
 Author URI: https://developerzahir.com/
-Description: Mag Pro is a modern, high-performance magazine and blog WordPress theme converted from the popular MagPro template. Packed with dark/light mode toggle, breaking news ticker, magazine hero layouts, and Elementor post widgets.
-Version: 1.0.5
-Requires at least: 5.3
-Tested up to: 7.1
+Description: Mag Pro is an ultra-fast, modern, lightweight, and fully responsive magazine and blog WordPress theme with built-in Elementor Header & Footer Builder, Dark & Light Mode, and advanced post widgets.
+Version: 2.0.0
+Requires at least: 5.8
+Tested up to: 6.7
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: mag-pro
-Domain Path: /languages
-Tags: custom-menu, custom-logo, entertainment, one-column, two-columns, left-sidebar, right-sidebar, custom-colors, editor-style, featured-images, full-width-template, microformats, post-formats, rtl-language-support, theme-options, threaded-comments, translation-ready, blog
-AMP: true
+Tags: blog, news, entertainment, grid-layout, custom-menu, custom-logo, featured-images, translation-ready
+*/
 
-Mag Pro WordPress Theme, Copyright 2026 Developer Zahir.
-Mag Pro is distributed under the terms of the GNU GPL.
+/* Baseline Reset & Variables */
+:root {
+  --magpro-primary: #0066cc;
+  --magpro-primary-hover: #0052a3;
+  --magpro-bg: #f8fafc;
+  --magpro-card-bg: #ffffff;
+  --magpro-surface: #f1f5f9;
+  --magpro-text: #1e293b;
+  --magpro-text-muted: #64748b;
+  --magpro-border: #e2e8f0;
+  --magpro-radius: 8px;
+  --magpro-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  --magpro-font-heading: inherit;
+  --magpro-container: 1200px;
+  --magpro-transition: 0.25s ease;
+}
 
-Astra is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
-Underscores is distributed under the terms of the GNU GPL v2 or later.
+[data-theme="dark"] {
+  --magpro-bg: #0f172a;
+  --magpro-card-bg: #1e293b;
+  --magpro-surface: #334155;
+  --magpro-text: #f1f5f9;
+  --magpro-text-muted: #94a3b8;
+  --magpro-border: #334155;
+  --magpro-primary: #38bdf8;
+  --magpro-primary-hover: #0ea5e9;
+}
 
-Normalizing styles have been helped along thanks to the fine work of.
-Nicolas Gallagher and Jonathan Neal https://necolas.github.com/normalize.css/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-Astra icon font is based on IcoMoon-Free vector icon by Keyamoon.
-IcoMoon-Free vector icon distributed under terms of CC BY 4.0 or GPL. (https://creativecommons.org/licenses/by/4.0/ or https://www.gnu.org/licenses/gpl.html)
-Source: http://keyamoon.com/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--magpro-font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--magpro-text);
+  background-color: var(--magpro-bg);
+  transition: background-color var(--magpro-transition), color var(--magpro-transition);
+  -webkit-font-smoothing: antialiased;
+}
 
-Flexibility is a JavaScript polyfill for Flexbox By Jonathan Neal, 10up. (https://github.com/jonathantneal/flexibility)
-Licensed under MIT ( https://github.com/jonathantneal/flexibility/blob/master/LICENSE.md )
+a {
+  color: var(--magpro-primary);
+  text-decoration: none;
+  transition: color var(--magpro-transition);
+}
 
-Screenshot image is a collage of actual sites created using the Astra WordPress Theme.
+a:hover, a:focus {
+  color: var(--magpro-primary-hover);
+}
 
-Icons used in the Screenshot image are all licensed under Creative Commons ( CC BY 4.0 ) License ( https://fontawesome.com/license/free )
-https://fontawesome.com/v5.15/icons/store?style=solid
-https://fontawesome.com/v5.15/icons/shopping-cart?style=solid
-https://fontawesome.com/v5.15/icons/pen-square?style=solid
-https://fontawesome.com/v5.15/icons/user-tie?style=solid
-https://fontawesome.com/v5.15/icons/user-tie?style=solid
-
-Illustrations used in the Screenshot images are all licensed under Creative Commons ( CC0 ) License ( https://gumroad.com/l/humaaans )
-https://websitedemos.net/web-design-agency-08/wp-content/uploads/sites/796/2021/05/standing-24.png
-https://websitedemos.net/web-design-agency-08/wp-content/uploads/sites/796/2021/05/sitting-2.png
-
-Hand-drawn illustrations used are created by Brainstorm Force and released under Creative Commons ( CC0 ) License.
-https://websitedemos.net/web-design-agency-08/wp-content/uploads/sites/796/2021/05/girl-with-image-container.png
-https://websitedemos.net/web-design-agency-08/wp-content/uploads/sites/796/2021/05/boy-with-code-container.png
-https://websitedemos.net/web-design-agency-08/wp-content/uploads/sites/796/2021/05/web-browser.png
-
-The same site as screenshot can be imported from here https://websitedemos.net/web-design-agency-08/.
-
-For more information, refer to this document on how to create a page like in the screenshot - https://wpastra.com/docs/replicating-the-screenshot/.
-
-Astra default breadcrumb is based on Breadcrumb Trail by Justin Tadlock. (https://github.com/justintadlock/breadcrumb-trail)
-Breadcrumb Trail is distributed under the terms of the GNU GPL v2 or later.
-
-Astra local fonts feature is based on Webfonts Loader by WordPress Themes Team (WPTT). (https://github.com/WPTT/webfont-loader)
-Licensed under MIT ( https://github.com/WPTT/webfont-loader/blob/master/LICENSE )
-
-/* Note: The CSS files are loaded from assets/css/ folder. */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

@@ -1,9 +1,8 @@
 <?php
 /**
- * Plugin installation and activation for Mag Pro theme.
+ * TGM Plugin Activation configuration for Mag Pro.
  *
- * @package Mag Pro
- * @author  Developer Zahir
+ * @package MagPro
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,33 +14,26 @@ require_once get_template_directory() . '/inc/plugins/class-tgm-plugin-activatio
 add_action( 'tgmpa_register', 'magpro_register_required_plugins' );
 
 /**
- * Register the required plugins for Mag Pro theme.
+ * Register required and recommended plugins.
  */
 function magpro_register_required_plugins() {
-	/*
-	 * Array of plugin arrays. Required keys are name and slug.
-	 * If the source is NOT from the .org repo, then source is also required.
-	 */
 	$plugins = array(
 		array(
-			'name'               => esc_html__( 'Mag Pro Elements', 'mag-pro' ),
+			'name'               => 'Mag Pro Elements',
 			'slug'               => 'mag-pro-elements',
 			'source'             => get_template_directory() . '/inc/plugins/mag-pro-elements.zip',
 			'required'           => true,
-			'version'            => '1.0.5',
+			'version'            => '2.0.0',
 			'force_activation'   => false,
 			'force_deactivation' => false,
 		),
 		array(
-			'name'     => esc_html__( 'Elementor Website Builder', 'mag-pro' ),
+			'name'     => 'Elementor Website Builder',
 			'slug'     => 'elementor',
-			'required' => true,
+			'required' => false,
 		),
 	);
 
-	/*
-	 * Array of configuration settings.
-	 */
 	$config = array(
 		'id'           => 'mag-pro',
 		'default_path' => '',
@@ -49,12 +41,11 @@ function magpro_register_required_plugins() {
 		'parent_slug'  => 'themes.php',
 		'capability'   => 'edit_theme_options',
 		'has_notices'  => true,
-		'dismissable'  => false,
+		'dismissable'  => true,
 		'dismiss_msg'  => '',
-		'is_automatic' => true,
+		'is_automatic' => false,
 		'message'      => '',
 	);
 
 	tgmpa( $plugins, $config );
 }
-
