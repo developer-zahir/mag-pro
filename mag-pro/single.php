@@ -27,16 +27,16 @@ get_header();
 
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'item-post' ); ?>>
 
-					<!-- 1. Breadcrumb -->
-					<div class="breadcrumb">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="fas fa-home"></i> <?php esc_html_e( 'Home', 'mag-pro' ); ?></a>
-						<span class="delimiter">&raquo;</span>
+					<!-- 1. MagPro Post Breadcrumbs -->
+					<nav id="breadcrumb">
+						<a class="home" href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="fas fa-home"></i> <?php esc_html_e( 'Home', 'mag-pro' ); ?></a>
+						<em class="delimiter"></em>
 						<?php if ( ! empty( $categories ) ) : ?>
 							<a href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>"><?php echo esc_html( $categories[0]->name ); ?></a>
-							<span class="delimiter">&raquo;</span>
+							<em class="delimiter"></em>
 						<?php endif; ?>
 						<span class="current"><?php the_title(); ?></span>
-					</div>
+					</nav>
 
 					<!-- 2. Post Header -->
 					<header class="blog-entry-header">

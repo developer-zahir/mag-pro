@@ -110,7 +110,7 @@ class MagPro_Core {
 			<div style="background: linear-gradient(135deg, #171921 0%, #212530 100%); color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); margin-bottom: 30px; border-bottom: 4px solid #ff2232;">
 				<div style="display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
 					<div>
-						<span style="background: #ff2232; color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Version 2.1.0</span>
+						<span style="background: #ff2232; color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Version 2.2.0</span>
 						<h1 style="color: #ffffff; font-size: 32px; font-weight: 800; margin: 12px 0 8px;">Mag Pro — Classic Magazine & Blog Theme</h1>
 						<p style="color: #a9b4ba; font-size: 15px; margin: 0; max-width: 600px;">Re-engineered with love by <strong style="color: #ff2232;">Developer Zahir</strong>. Modeled faithfully after the original MagPro design with modern Elementor Header & Footer capabilities.</p>
 					</div>
@@ -183,80 +183,126 @@ function magpro_get_post_views( $post_id = 0 ) {
  * Render Fallback Header matching MagPro .xml template.
  */
 function magpro_render_fallback_header() {
+	$show_topbar        = get_theme_mod( 'magpro_enable_topbar', 1 );
+	$show_middle_header = get_theme_mod( 'magpro_enable_middle_header', 1 );
+
+	// Social links from customizer
+	$social_networks = array(
+		'facebook'  => array( 'icon' => 'fab fa-facebook-f', 'name' => 'Facebook', 'url' => get_theme_mod( 'magpro_social_facebook', '#' ) ),
+		'twitter'   => array( 'icon' => 'fab fa-twitter', 'name' => 'Twitter', 'url' => get_theme_mod( 'magpro_social_twitter', '#' ) ),
+		'youtube'   => array( 'icon' => 'fab fa-youtube', 'name' => 'YouTube', 'url' => get_theme_mod( 'magpro_social_youtube', '#' ) ),
+		'instagram' => array( 'icon' => 'fab fa-instagram', 'name' => 'Instagram', 'url' => get_theme_mod( 'magpro_social_instagram', '#' ) ),
+		'pinterest' => array( 'icon' => 'fab fa-pinterest-p', 'name' => 'Pinterest', 'url' => get_theme_mod( 'magpro_social_pinterest', '#' ) ),
+		'linkedin'  => array( 'icon' => 'fab fa-linkedin-in', 'name' => 'LinkedIn', 'url' => get_theme_mod( 'magpro_social_linkedin', '' ) ),
+		'telegram'  => array( 'icon' => 'fab fa-telegram-plane', 'name' => 'Telegram', 'url' => get_theme_mod( 'magpro_social_telegram', '' ) ),
+		'whatsapp'  => array( 'icon' => 'fab fa-whatsapp', 'name' => 'WhatsApp', 'url' => get_theme_mod( 'magpro_social_whatsapp', '' ) ),
+	);
 	?>
 	<header id="magpro-pro-header-wrapper" class="magpro-header-wrapper">
 		<!-- 1. Topbar Wrap (Height: 32px) -->
-		<nav class="topbar-wrap">
-			<div class="container row-x1">
-				<div class="main-navbar-menu">
-					<?php if ( has_nav_menu( 'top' ) ) : ?>
-						<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'top',
-								'menu_class'     => 'top-menu-list',
-								'depth'          => 1,
-								'container'      => false,
-							)
-						);
-						?>
-					<?php else : ?>
-						<ul class="top-menu-list">
-							<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'mag-pro' ); ?></a></li>
-							<li><a href="#"><?php esc_html_e( 'About Us', 'mag-pro' ); ?></a></li>
-							<li><a href="#"><?php esc_html_e( 'Contact Us', 'mag-pro' ); ?></a></li>
-						</ul>
-					<?php endif; ?>
-				</div>
-
-				<div class="main-navbar-social">
-					<ul class="social">
-						<li class="facebook"><a class="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-						<li class="twitter"><a class="twitter" href="#" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a></li>
-						<li class="youtube"><a class="youtube" href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a></li>
-						<li class="instagram"><a class="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
-						<li class="pinterest"><a class="pinterest" href="#" target="_blank" rel="noopener" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
-		<!-- 2. Header Content (Logo + 728x90 Header Ad) -->
-		<div class="header-content">
-			<div class="container row-x1">
-				<div class="header-logo-wrap">
-					<div class="logo-content">
-						<?php if ( has_custom_logo() ) : ?>
-							<div class="logo-img"><?php the_custom_logo(); ?></div>
+		<?php if ( $show_topbar ) : ?>
+			<nav class="topbar-wrap">
+				<div class="container row-x1">
+					<div class="main-navbar-menu">
+						<?php if ( has_nav_menu( 'top' ) ) : ?>
+							<?php
+							wp_nav_menu(
+								array(
+									'theme_location' => 'top',
+									'menu_class'     => 'top-menu-list',
+									'depth'          => 1,
+									'container'      => false,
+								)
+							);
+							?>
 						<?php else : ?>
-							<h1 class="blog-title">
-								<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
-							</h1>
+							<ul class="top-menu-list">
+								<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'mag-pro' ); ?></a></li>
+								<li><a href="#"><?php esc_html_e( 'About Us', 'mag-pro' ); ?></a></li>
+								<li><a href="#"><?php esc_html_e( 'Contact Us', 'mag-pro' ); ?></a></li>
+							</ul>
 						<?php endif; ?>
+					</div>
 
-						<!-- Mobile Action Toggles -->
-						<div class="toggle-content">
-							<a class="mobile-darkmode-toggle" href="javascript:;" title="<?php esc_attr_e( 'Toggle Dark Mode', 'mag-pro' ); ?>"></a>
-							<a class="mobile-menu-toggle" href="javascript:;" title="<?php esc_attr_e( 'Toggle Menu', 'mag-pro' ); ?>"><i class="fas fa-bars"></i></a>
-						</div>
+					<div class="main-navbar-social">
+						<ul class="social">
+							<?php
+							foreach ( $social_networks as $network => $data ) :
+								if ( ! empty( $data['url'] ) ) :
+									?>
+									<li class="<?php echo esc_attr( $network ); ?>">
+										<a class="<?php echo esc_attr( $network ); ?>" href="<?php echo esc_url( $data['url'] ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( $data['name'] ); ?>">
+											<i class="<?php echo esc_attr( $data['icon'] ); ?>"></i>
+										</a>
+									</li>
+									<?php
+								endif;
+							endforeach;
+							?>
+						</ul>
 					</div>
 				</div>
+			</nav>
+		<?php endif; ?>
 
-				<div class="header-ads-wrap">
-					<?php if ( is_active_sidebar( 'magpro-header-ad' ) ) : ?>
-						<div class="header-ads">
-							<?php dynamic_sidebar( 'magpro-header-ad' ); ?>
-						</div>
-					<?php else : ?>
-						<div class="header-ads">
-							<div class="header-ad-placeholder">
-								<span><?php esc_html_e( 'Responsive Advertisement 728x90', 'mag-pro' ); ?></span>
+		<!-- 2. Header Content (Logo + 728x90 Header Ad) -->
+		<?php if ( $show_middle_header ) : ?>
+			<div class="header-content">
+				<div class="container row-x1">
+					<div class="header-logo-wrap">
+						<div class="logo-content">
+							<?php
+							$light_logo_id = get_theme_mod( 'custom_logo' );
+							$dark_logo_url = get_theme_mod( 'magpro_dark_logo' );
+
+							if ( $light_logo_id && $dark_logo_url ) :
+								$light_logo_url = wp_get_attachment_image_url( $light_logo_id, 'full' );
+								?>
+								<div class="logo-img">
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="custom-logo-link" rel="home">
+										<img src="<?php echo esc_url( $light_logo_url ); ?>" class="magpro-logo-light" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
+										<img src="<?php echo esc_url( $dark_logo_url ); ?>" class="magpro-logo-dark" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
+									</a>
+								</div>
+							<?php elseif ( has_custom_logo() ) : ?>
+								<div class="logo-img"><?php the_custom_logo(); ?></div>
+							<?php else : ?>
+								<h1 class="blog-title">
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a>
+								</h1>
+							<?php endif; ?>
+
+							<!-- Mobile Action Toggles -->
+							<div class="toggle-content">
+								<a class="mobile-darkmode-toggle" href="javascript:;" title="<?php esc_attr_e( 'Toggle Dark Mode', 'mag-pro' ); ?>"></a>
+								<a class="mobile-menu-toggle" href="javascript:;" title="<?php esc_attr_e( 'Toggle Menu', 'mag-pro' ); ?>"><i class="fas fa-bars"></i></a>
 							</div>
 						</div>
-					<?php endif; ?>
+					</div>
+
+					<div class="header-ads-wrap">
+						<?php
+						$custom_ad = get_theme_mod( 'magpro_header_ad_code' );
+						if ( ! empty( $custom_ad ) ) :
+							?>
+							<div class="header-ads">
+								<?php echo do_shortcode( $custom_ad ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</div>
+						<?php elseif ( is_active_sidebar( 'magpro-header-ad' ) ) : ?>
+							<div class="header-ads">
+								<?php dynamic_sidebar( 'magpro-header-ad' ); ?>
+							</div>
+						<?php else : ?>
+							<div class="header-ads">
+								<div class="header-ad-placeholder">
+									<span><?php esc_html_e( 'Responsive Advertisement 728x90', 'mag-pro' ); ?></span>
+								</div>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
 			</div>
-		</div>
+		<?php endif; ?>
 
 		<!-- 3. Main Navigation Bar (Red 50px bar with Home icon, Search, Dark mode) -->
 		<nav class="main-menu-wrap">

@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define Constants
-define( 'MAGPRO_THEME_VERSION', '2.1.0' );
+define( 'MAGPRO_THEME_VERSION', '2.2.0' );
 define( 'MAGPRO_THEME_DIR', get_template_directory() );
 define( 'MAGPRO_THEME_URI', get_template_directory_uri() );
 
@@ -167,6 +167,9 @@ require_once MAGPRO_THEME_DIR . '/inc/class-magpro-core.php';
 
 // Include Header & Footer Builder
 require_once MAGPRO_THEME_DIR . '/inc/class-magpro-header-footer.php';
+
+// Include Customizer Options
+require_once MAGPRO_THEME_DIR . '/inc/class-magpro-customizer.php';
 
 // Include TGM Plugin Activation
 if ( file_exists( MAGPRO_THEME_DIR . '/inc/plugins/tgm-config.php' ) ) {

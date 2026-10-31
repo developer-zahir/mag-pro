@@ -16,6 +16,21 @@ get_header();
 	<div class="content-wrapper">
 		<main id="main-wrapper" class="blog-posts">
 
+			<!-- MagPro Archive Breadcrumbs -->
+			<nav id="breadcrumb">
+				<a class="home" href="<?php echo esc_url( home_url( '/' ) ); ?>"><i class="fas fa-home"></i> <?php esc_html_e( 'Home', 'mag-pro' ); ?></a>
+				<em class="delimiter"></em>
+				<?php if ( is_category() ) : ?>
+					<span class="current"><?php single_cat_title(); ?></span>
+				<?php elseif ( is_tag() ) : ?>
+					<span class="current">#<?php single_tag_title(); ?></span>
+				<?php elseif ( is_author() ) : ?>
+					<span class="current"><?php the_author(); ?></span>
+				<?php else : ?>
+					<span class="current"><?php echo wp_strip_all_tags( get_the_archive_title() ); ?></span>
+				<?php endif; ?>
+			</nav>
+
 			<?php if ( have_posts() ) : ?>
 
 				<header class="page-header magpro-archive-header" style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 25px; border-left: 4px solid var(--main-color);">
