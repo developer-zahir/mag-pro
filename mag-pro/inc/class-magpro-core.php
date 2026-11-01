@@ -415,3 +415,89 @@ function magpro_render_fallback_footer() {
 	</footer>
 	<?php
 }
+
+/**
+ * Render archive post meta according to customizer options.
+ */
+function magpro_render_archive_post_meta() {
+	$show_author   = get_theme_mod( 'magpro_archive_show_author', 1 );
+	$show_date     = get_theme_mod( 'magpro_archive_show_date', 1 );
+	$show_views    = get_theme_mod( 'magpro_archive_show_views', 1 );
+	$show_comments = get_theme_mod( 'magpro_archive_show_comments', 1 );
+
+	if ( ! $show_author && ! $show_date && ! $show_views && ! $show_comments ) {
+		return;
+	}
+	?>
+	<div class="entry-meta">
+		<?php if ( $show_author ) : ?>
+			<span class="entry-author">
+				<i class="far fa-user"></i>
+				<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php echo esc_html( get_the_author() ); ?></a>
+			</span>
+		<?php endif; ?>
+
+		<?php if ( $show_date ) : ?>
+			<span class="entry-time">
+				<i class="far fa-clock"></i>
+				<?php echo esc_html( get_the_date() ); ?>
+			</span>
+		<?php endif; ?>
+
+		<?php if ( $show_views ) : ?>
+			<span class="entry-views">
+				<i class="far fa-eye"></i>
+				<?php echo esc_html( magpro_get_post_views() ); ?>
+			</span>
+		<?php endif; ?>
+
+		<?php if ( $show_comments && ( comments_open() || get_comments_number() ) ) : ?>
+			<span class="entry-comments">
+				<i class="far fa-comment-alt"></i>
+				<?php comments_number( '0', '1', '%' ); ?>
+			</span>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Render archive pagination (numeric, ajax load more, or infinite scroll).
+ */
+function magpro_render_archive_pagination() {
+	global $wp_query;
+	$pagination_type = get_theme_mod( 'magpro_pagination_type', 'numeric' );
+
+	if ( 'numeric' === $pagination_type ) {
+		echo '<div class="blog-pager">';
+		the_posts_pagination(
+			array(
+				'prev_text' => '<i class="fas fa-chevron-left"></i>',
+				'next_text' => '<i class="fas fa-chevron-right"></i>',
+			)
+		);
+		echo '</div>';
+	} else {
+		$max_pages = $wp_query->max_num_pages;
+		$next_page = ( get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1 ) + 1;
+		if ( $next_page <= $max_pages ) {
+			$next_link   = next_posts( $max_pages, false );
+			$is_infinite = ( 'infinite_scroll' === $pagination_type );
+			?>
+			<div class="magpro-ajax-pager" data-type="<?php echo esc_attr( $pagination_type ); ?>" data-next="<?php echo esc_url( $next_link ); ?>" data-max="<?php echo esc_attr( $max_pages ); ?>">
+				<?php if ( $is_infinite ) : ?>
+					<div class="magpro-infinite-loader">
+						<span class="magpro-spinner"></span>
+						<span><?php esc_html_e( 'Loading more posts...', 'mag-pro' ); ?></span>
+					</div>
+				<?php else : ?>
+					<button type="button" class="magpro-load-more-btn">
+						<span class="magpro-btn-text"><i class="fas fa-sync-alt"></i> <?php esc_html_e( 'Load More Posts', 'mag-pro' ); ?></span>
+						<span class="magpro-btn-loading" style="display:none;"><span class="magpro-spinner"></span> <?php esc_html_e( 'Loading...', 'mag-pro' ); ?></span>
+					</button>
+				<?php endif; ?>
+			</div>
+			<?php
+		}
+	}
+}

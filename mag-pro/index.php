@@ -25,7 +25,12 @@ get_header();
 					</header>
 				<?php endif; ?>
 
-				<div class="index-post-wrap">
+				<?php
+$archive_layout = get_theme_mod( 'magpro_archive_layout', 'list' );
+$hover_effect   = get_theme_mod( 'magpro_archive_hover_effect', 0 ) ? 'has-hover-effect' : 'no-hover-effect';
+$wrap_classes   = 'index-post-wrap layout-' . esc_attr( $archive_layout ) . ' ' . $hover_effect;
+?>
+				<div class="<?php echo esc_attr( $wrap_classes ); ?>">
 					<?php
 					while ( have_posts() ) :
 						the_post();
@@ -53,29 +58,7 @@ get_header();
 									<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 								</h2>
 
-								<div class="entry-meta">
-									<span class="entry-author">
-										<i class="far fa-user"></i>
-										<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php echo esc_html( get_the_author() ); ?></a>
-									</span>
-
-									<span class="entry-time">
-										<i class="far fa-clock"></i>
-										<?php echo esc_html( get_the_date() ); ?>
-									</span>
-
-									<span class="entry-views">
-										<i class="far fa-eye"></i>
-										<?php echo esc_html( magpro_get_post_views() ); ?>
-									</span>
-
-									<?php if ( comments_open() || get_comments_number() ) : ?>
-										<span class="entry-comments">
-											<i class="far fa-comment-alt"></i>
-											<?php comments_number( '0', '1', '%' ); ?>
-										</span>
-									<?php endif; ?>
-								</div>
+								<?php magpro_render_archive_post_meta(); ?>
 
 								<p class="excerpt">
 									<?php echo wp_trim_words( get_the_excerpt(), 24, '...' ); ?>
@@ -87,16 +70,7 @@ get_header();
 					?>
 				</div>
 
-				<div class="blog-pager">
-					<?php
-					the_posts_pagination(
-						array(
-							'prev_text' => '<i class="fas fa-chevron-left"></i>',
-							'next_text' => '<i class="fas fa-chevron-right"></i>',
-						)
-					);
-					?>
-				</div>
+				<?php magpro_render_archive_pagination(); ?>
 
 			<?php else : ?>
 

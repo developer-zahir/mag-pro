@@ -3,7 +3,7 @@
  * Mag Pro functions and definitions
  *
  * @package MagPro
- * @version 2.1.0
+ * @version 2.4.0
  * @author Developer Zahir (https://developerzahir.com/)
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define Constants
-define( 'MAGPRO_THEME_VERSION', '2.3.0' );
+define( 'MAGPRO_THEME_VERSION', '2.4.0' );
 define( 'MAGPRO_THEME_DIR', get_template_directory() );
 define( 'MAGPRO_THEME_URI', get_template_directory_uri() );
 

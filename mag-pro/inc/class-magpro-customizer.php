@@ -343,6 +343,147 @@ class MagPro_Customizer {
 		);
 
 		// =====================================================================
+				// =====================================================================
+		// Section 4: Archive & Blog Page Options
+		// =====================================================================
+		$wp_customize->add_section(
+			'magpro_archive_section',
+			array(
+				'title'    => __( 'Archive & Blog Options', 'mag-pro' ),
+				'panel'    => 'magpro_theme_panel',
+				'priority' => 22,
+			)
+		);
+
+		// Archive Layout Style
+		$wp_customize->add_setting(
+			'magpro_archive_layout',
+			array(
+				'default'           => 'list',
+				'sanitize_callback' => array( $this, 'sanitize_select' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_archive_layout',
+			array(
+				'label'   => __( 'Archive Post Layout', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'select',
+				'choices' => array(
+					'list'   => __( 'Classic MagPro List (Horizontal Card)', 'mag-pro' ),
+					'grid_2' => __( 'Grid (2 Columns)', 'mag-pro' ),
+					'grid_3' => __( 'Grid (3 Columns)', 'mag-pro' ),
+				),
+			)
+		);
+
+		// Pagination Type
+		$wp_customize->add_setting(
+			'magpro_pagination_type',
+			array(
+				'default'           => 'numeric',
+				'sanitize_callback' => array( $this, 'sanitize_select' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_pagination_type',
+			array(
+				'label'   => __( 'Pagination Type', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'select',
+				'choices' => array(
+					'numeric'         => __( 'Numbered Pagination (1, 2, 3...)', 'mag-pro' ),
+					'load_more'       => __( 'AJAX Load More Button', 'mag-pro' ),
+					'infinite_scroll' => __( 'Auto Load (Infinite Scroll)', 'mag-pro' ),
+				),
+			)
+		);
+
+		// Archive Image Hover Effect
+		$wp_customize->add_setting(
+			'magpro_archive_hover_effect',
+			array(
+				'default'           => 0,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_archive_hover_effect',
+			array(
+				'label'   => __( 'Enable Thumbnail Zoom on Hover', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'checkbox',
+			)
+		);
+
+		// Show Author Meta
+		$wp_customize->add_setting(
+			'magpro_archive_show_author',
+			array(
+				'default'           => 1,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_archive_show_author',
+			array(
+				'label'   => __( 'Show Author', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'checkbox',
+			)
+		);
+
+		// Show Date Meta
+		$wp_customize->add_setting(
+			'magpro_archive_show_date',
+			array(
+				'default'           => 1,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_archive_show_date',
+			array(
+				'label'   => __( 'Show Date', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'checkbox',
+			)
+		);
+
+		// Show Views Meta
+		$wp_customize->add_setting(
+			'magpro_archive_show_views',
+			array(
+				'default'           => 1,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_archive_show_views',
+			array(
+				'label'   => __( 'Show Post Views Count', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'checkbox',
+			)
+		);
+
+		// Show Comments Meta
+		$wp_customize->add_setting(
+			'magpro_archive_show_comments',
+			array(
+				'default'           => 1,
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
+			)
+		);
+		$wp_customize->add_control(
+			'magpro_archive_show_comments',
+			array(
+				'label'   => __( 'Show Comments Count', 'mag-pro' ),
+				'section' => 'magpro_archive_section',
+				'type'    => 'checkbox',
+			)
+		);
+
 		// Section 4: Post FAQ / Details Accordion Options
 		// =====================================================================
 		$wp_customize->add_section(
@@ -561,7 +702,13 @@ class MagPro_Customizer {
 		<?php
 	}
 
-	public function sanitize_checkbox( $checked ) {
+		public function sanitize_select( $input, $setting ) {
+		$input = sanitize_key( $input );
+		$choices = $setting->manager->get_control( $setting->id )->choices;
+		return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
+	}
+
+public function sanitize_checkbox( $checked ) {
 		return ( ( isset( $checked ) && true == $checked ) ? 1 : 0 );
 	}
 

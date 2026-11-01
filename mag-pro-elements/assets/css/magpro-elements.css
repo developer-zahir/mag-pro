@@ -71,14 +71,17 @@
 }
 
 .magpro-cat-badge {
-  display: inline-block;
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 0 !important;
+  vertical-align: middle;
   background-color: var(--mp-primary, #ff2232);
   color: #ffffff;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 3px 8px;
+  padding: 6px 8px;
   border-radius: 2px;
   text-decoration: none;
   z-index: 2;
@@ -710,6 +713,10 @@
 
 .magpro-tab-button {
   flex: 1;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
   background: transparent;
   border: none;
   padding: 12px 10px;
@@ -721,6 +728,12 @@
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease;
+}
+
+.magpro-tab-button i,
+.magpro-tab-button svg {
+  display: inline-block !important;
+  line-height: 1 !important;
 }
 
 .magpro-tab-button:hover {
@@ -804,7 +817,7 @@ html[data-theme="dark"] .magpro-list-card,
 html[data-theme="dark"] .magpro-tabs-wrap {
   background-color: var(--mp-surface, #212530) !important;
   border-color: var(--mp-border, rgba(255,255,255,0.08)) !important;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+  box-shadow: none !important;
 }
 
 html[data-theme="dark"] .magpro-tabs-nav {
@@ -1601,4 +1614,42 @@ html[data-theme="dark"] .magpro-search-replace-close:hover {
 
 .magpro-dm-btn:hover {
   background: var(--magpro-border, #e2e8f0);
+}
+
+/* Global Post Widgets Box-Shadow & Background Reset */
+.magpro-hero-wrap,
+.magpro-hero-lead,
+.magpro-hero-sub,
+.magpro-ticker-wrap,
+.magpro-block1-wrap,
+.magpro-block1-lead,
+.magpro-block1-lead-thumb,
+.magpro-block1-item,
+.magpro-block2-wrap,
+.magpro-block2-card,
+.magpro-grid-wrap,
+.magpro-grid-card,
+.magpro-grid-thumb,
+.magpro-list-wrap,
+.magpro-list-card,
+.magpro-list-thumb,
+.magpro-slider-wrap,
+.magpro-slider-slide,
+.magpro-video-wrap,
+.magpro-video-hero,
+.magpro-video-item,
+.magpro-tabs-wrap,
+.magpro-tab-panel,
+.magpro-compact-item {
+  box-shadow: none !important;
+}
+
+/* Category Badge line-height zero guarantee across all elements */
+.magpro-cat-badge,
+.magpro-badge,
+.entry-category {
+  display: inline-flex !important;
+  align-items: center !important;
+  line-height: 0 !important;
+  vertical-align: middle;
 }

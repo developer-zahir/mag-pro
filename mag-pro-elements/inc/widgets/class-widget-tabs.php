@@ -148,6 +148,18 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'show_tab_icons',
+			array(
+				'label'        => esc_html__( 'Show Tab Icons', 'mag-pro-elements' ),
+				'type'         => \Elementor\Controls_Manager::SWITCHER,
+				'label_on'     => esc_html__( 'Yes', 'mag-pro-elements' ),
+				'label_off'    => esc_html__( 'No', 'mag-pro-elements' ),
+				'default'      => 'yes',
+				'return_value' => 'yes',
+			)
+		);
+
 		$this->end_controls_section();
 
 		// Meta & Visibility Controls
@@ -600,15 +612,16 @@ class MagPro_Widget_Tabs extends \Elementor\Widget_Base {
 			?>
 
 			<div class="magpro-tabs-wrap" style="box-shadow: none;">
+				<?php $show_tab_icons = ( 'yes' === ( $settings['show_tab_icons'] ?? 'yes' ) ); ?>
 				<div class="magpro-tabs-nav">
 					<button type="button" class="magpro-tab-button active" data-tab="recent">
-						<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro-elements' ); ?>
+						<?php if ( $show_tab_icons ) : ?><i class="far fa-clock"></i><?php endif; ?><span><?php esc_html_e( 'Recent', 'mag-pro-elements' ); ?></span>
 					</button>
 					<button type="button" class="magpro-tab-button" data-tab="popular">
-						<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro-elements' ); ?>
+						<?php if ( $show_tab_icons ) : ?><i class="fas fa-fire"></i><?php endif; ?><span><?php esc_html_e( 'Popular', 'mag-pro-elements' ); ?></span>
 					</button>
 					<button type="button" class="magpro-tab-button" data-tab="comments">
-						<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro-elements' ); ?>
+						<?php if ( $show_tab_icons ) : ?><i class="fas fa-random"></i><?php endif; ?><span><?php esc_html_e( 'Trending', 'mag-pro-elements' ); ?></span>
 					</button>
 				</div>
 
