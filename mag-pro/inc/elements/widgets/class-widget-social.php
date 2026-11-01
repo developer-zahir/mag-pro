@@ -20,7 +20,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'MagPro - Social Follow Us', 'mag-pro-elements' );
+		return esc_html__( 'MagPro - Social Follow Us', 'mag-pro' );
 	}
 
 	public function get_icon() {
@@ -36,32 +36,32 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			array(
-				'label' => esc_html__( 'Social Profiles', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Social Profiles', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'widget_title',
 			array(
-				'label'   => esc_html__( 'Widget Title', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Widget Title', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Follow Us', 'mag-pro-elements' ),
+				'default' => esc_html__( 'Follow Us', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'title_style',
 			array(
-				'label'   => esc_html__( 'Section Title Style', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Section Title Style', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => array(
-					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
-					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
-					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
-					'style-4' => esc_html__( 'Style 4: Refined Bordered Box', 'mag-pro-elements' ),
-					'style-5' => esc_html__( 'Style 5: Sleek Line Divider', 'mag-pro-elements' ),
-					'style-6' => esc_html__( 'Style 6: Gradient Accent Bar', 'mag-pro-elements' ),
+					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro' ),
+					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro' ),
+					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro' ),
+					'style-4' => esc_html__( 'Style 4: Refined Bordered Box', 'mag-pro' ),
+					'style-5' => esc_html__( 'Style 5: Sleek Line Divider', 'mag-pro' ),
+					'style-6' => esc_html__( 'Style 6: Gradient Accent Bar', 'mag-pro' ),
 				),
 				'condition' => array(
 					'widget_title!' => '',
@@ -72,7 +72,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'section_icon',
 			array(
-				'label'   => esc_html__( 'Section Icon', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Section Icon', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => array(),
 			)
@@ -82,7 +82,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'facebook_url',
 			array(
-				'label'   => esc_html__( 'Facebook URL', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Facebook URL', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => 'https://facebook.com/',
 			)
@@ -91,7 +91,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'twitter_url',
 			array(
-				'label'   => esc_html__( 'Twitter / X URL', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Twitter / X URL', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => 'https://twitter.com/',
 			)
@@ -100,7 +100,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'youtube_url',
 			array(
-				'label'   => esc_html__( 'YouTube URL', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'YouTube URL', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => 'https://youtube.com/',
 			)
@@ -109,7 +109,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'instagram_url',
 			array(
-				'label'   => esc_html__( 'Instagram URL', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Instagram URL', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => 'https://instagram.com/',
 			)
@@ -118,7 +118,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'pinterest_url',
 			array(
-				'label'   => esc_html__( 'Pinterest URL', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Pinterest URL', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => '',
 			)
@@ -127,7 +127,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'telegram_url',
 			array(
-				'label'   => esc_html__( 'Telegram URL', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Telegram URL', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
 				'default' => '',
 			)
@@ -139,7 +139,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_header',
 			array(
-				'label' => esc_html__( 'Widget Title', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Widget Title', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -147,7 +147,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'header_title_color',
 			array(
-				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Title Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-widget-title' => 'color: {{VALUE}};',
@@ -169,7 +169,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_buttons',
 			array(
-				'label' => esc_html__( 'Buttons & Layout', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Buttons & Layout', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -177,13 +177,13 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'columns',
 			array(
-				'label'     => esc_html__( 'Columns', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Columns', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::SELECT,
 				'default'   => '2',
 				'options'   => array(
-					'1' => esc_html__( '1 Column', 'mag-pro-elements' ),
-					'2' => esc_html__( '2 Columns', 'mag-pro-elements' ),
-					'3' => esc_html__( '3 Columns', 'mag-pro-elements' ),
+					'1' => esc_html__( '1 Column', 'mag-pro' ),
+					'2' => esc_html__( '2 Columns', 'mag-pro' ),
+					'3' => esc_html__( '3 Columns', 'mag-pro' ),
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-social-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
@@ -194,7 +194,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'button_gap',
 			array(
-				'label'      => esc_html__( 'Grid Gap', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Grid Gap', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -216,7 +216,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_control(
 			'button_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -228,7 +228,7 @@ class MagPro_Widget_Social extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'button_padding',
 			array(
-				'label'      => esc_html__( 'Button Padding', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Button Padding', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em' ),
 				'selectors'  => array(

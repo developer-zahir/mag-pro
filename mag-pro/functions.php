@@ -3,7 +3,7 @@
  * Mag Pro functions and definitions
  *
  * @package MagPro
- * @version 2.4.0
+ * @version 2.5.0
  * @author Developer Zahir (https://developerzahir.com/)
  */
 
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define Constants
-define( 'MAGPRO_THEME_VERSION', '2.4.0' );
+define( 'MAGPRO_THEME_VERSION', '2.5.0' );
 define( 'MAGPRO_THEME_DIR', get_template_directory() );
 define( 'MAGPRO_THEME_URI', get_template_directory_uri() );
 
@@ -153,6 +153,10 @@ function magpro_scripts() {
 	// Mag Pro Complete Theme Stylesheet
 	wp_enqueue_style( 'magpro-theme', MAGPRO_THEME_URI . '/assets/css/magpro-theme.css', array( 'magpro-fontawesome', 'magpro-font-hind' ), MAGPRO_THEME_VERSION );
 
+	// Mag Pro Elements Stylesheet & Script (Embedded All-in-One)
+	wp_enqueue_style( 'magpro-elements-css', MAGPRO_THEME_URI . '/assets/css/magpro-elements.css', array( 'magpro-theme' ), MAGPRO_THEME_VERSION );
+	wp_enqueue_script( 'magpro-elements-js', MAGPRO_THEME_URI . '/assets/js/magpro-elements.js', array( 'jquery' ), MAGPRO_THEME_VERSION, true );
+
 	// Mag Pro Theme JavaScript
 	wp_enqueue_script( 'magpro-theme-js', MAGPRO_THEME_URI . '/assets/js/magpro-theme.js', array(), MAGPRO_THEME_VERSION, true );
 
@@ -161,6 +165,26 @@ function magpro_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'magpro_scripts' );
+
+/**
+ * Enqueue editor assets for Elementor
+ */
+function magpro_elementor_editor_assets() {
+	wp_enqueue_style(
+		'magpro-fontawesome',
+		'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+		array(),
+		'5.15.4'
+	);
+	wp_enqueue_style(
+		'magpro-elements-editor-css',
+		MAGPRO_THEME_URI . '/assets/css/magpro-elements.css',
+		array(),
+		MAGPRO_THEME_VERSION
+	);
+}
+add_action( 'elementor/editor/after_enqueue_styles', 'magpro_elementor_editor_assets' );
+
 
 // Include Core Functionality
 require_once MAGPRO_THEME_DIR . '/inc/class-magpro-core.php';
@@ -171,7 +195,12 @@ require_once MAGPRO_THEME_DIR . '/inc/class-magpro-header-footer.php';
 // Include Customizer Options
 require_once MAGPRO_THEME_DIR . '/inc/class-magpro-customizer.php';
 
-// Include TGM Plugin Activation
-if ( file_exists( MAGPRO_THEME_DIR . '/inc/plugins/tgm-config.php' ) ) {
-	require_once MAGPRO_THEME_DIR . '/inc/plugins/tgm-config.php';
-}
+// Include Elementor & Widget Components (All-in-One Embedded)
+require_once MAGPRO_THEME_DIR . '/inc/elements/class-magpro-helpers.php';
+require_once MAGPRO_THEME_DIR . '/inc/elements/class-magpro-elementor-loader.php';
+require_once MAGPRO_THEME_DIR . '/inc/elements/class-magpro-shortcodes.php';
+require_once MAGPRO_THEME_DIR . '/inc/elements/class-magpro-wp-widgets.php';
+
+// Initialize Components
+MagPro_Shortcodes::init();
+MagPro_Elementor_Loader::instance();

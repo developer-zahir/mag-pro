@@ -20,7 +20,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'MagPro - News Ticker', 'mag-pro-elements' );
+		return esc_html__( 'MagPro - News Ticker', 'mag-pro' );
 	}
 
 	public function get_icon() {
@@ -36,19 +36,19 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			array(
-				'label' => esc_html__( 'Ticker Settings', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Ticker Settings', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'ticker_style',
 			array(
-				'label'   => esc_html__( 'Ticker Animation Style', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Ticker Animation Style', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'marquee',
 				'options' => array(
-					'marquee' => esc_html__( 'Continuous Marquee Ribbon', 'mag-pro-elements' ),
-					'slide'   => esc_html__( 'Slide / Fade Rotator', 'mag-pro-elements' ),
+					'marquee' => esc_html__( 'Continuous Marquee Ribbon', 'mag-pro' ),
+					'slide'   => esc_html__( 'Slide / Fade Rotator', 'mag-pro' ),
 				),
 			)
 		);
@@ -56,16 +56,16 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'label_text',
 			array(
-				'label'   => esc_html__( 'Label Text', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Label Text', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Trending News', 'mag-pro-elements' ),
+				'default' => esc_html__( 'Trending News', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'category',
 			array(
-				'label'   => esc_html__( 'Category', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Category', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => '',
 				'options' => \MagPro_Helpers::get_categories_list(),
@@ -75,7 +75,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'posts_per_page',
 			array(
-				'label'   => esc_html__( 'Number of Posts', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Number of Posts', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => 8,
 				'min'     => 1,
@@ -86,12 +86,12 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'marquee_speed',
 			array(
-				'label'       => esc_html__( 'Marquee Loop Duration (Seconds)', 'mag-pro-elements' ),
+				'label'       => esc_html__( 'Marquee Loop Duration (Seconds)', 'mag-pro' ),
 				'type'        => \Elementor\Controls_Manager::NUMBER,
 				'default'     => 25,
 				'min'         => 10,
 				'max'         => 90,
-				'description' => esc_html__( 'Lower numbers scroll faster, higher numbers scroll smoother/slower.', 'mag-pro-elements' ),
+				'description' => esc_html__( 'Lower numbers scroll faster, higher numbers scroll smoother/slower.', 'mag-pro' ),
 				'condition'   => array(
 					'ticker_style' => 'marquee',
 				),
@@ -104,14 +104,14 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_meta_visibility',
 			array(
-				'label' => esc_html__( 'Meta & Visibility Options', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Meta & Visibility Options', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'show_views',
 			array(
-				'label'        => esc_html__( 'Show Post View Count', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Post View Count', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -121,7 +121,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_badge',
 			array(
-				'label'        => esc_html__( 'Show Category Badge', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Category Badge', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'return_value' => 'yes',
@@ -131,7 +131,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_date',
 			array(
-				'label'        => esc_html__( 'Show Date', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Date', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'return_value' => 'yes',
@@ -144,7 +144,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_ticker_box',
 			array(
-				'label' => esc_html__( 'Ticker Container', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Ticker Container', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -152,7 +152,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'box_bg',
 			array(
-				'label'     => esc_html__( 'Background Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Background Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-wrap' => 'background-color: {{VALUE}};',
@@ -163,7 +163,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'box_border_color',
 			array(
-				'label'     => esc_html__( 'Border Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Border Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-wrap' => 'border-color: {{VALUE}};',
@@ -174,7 +174,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'box_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -186,7 +186,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'box_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Padding', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em' ),
 				'selectors'  => array(
@@ -201,7 +201,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_label',
 			array(
-				'label' => esc_html__( 'Label Badge', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Label Badge', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -209,7 +209,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'label_bg',
 			array(
-				'label'     => esc_html__( 'Label Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Label Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-label' => 'background: {{VALUE}};',
@@ -220,7 +220,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'label_color',
 			array(
-				'label'     => esc_html__( 'Label Text Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Label Text Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-label' => 'color: {{VALUE}};',
@@ -239,7 +239,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'label_radius',
 			array(
-				'label'      => esc_html__( 'Label Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Label Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -254,7 +254,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_news_titles',
 			array(
-				'label' => esc_html__( 'News Titles & Views', 'mag-pro-elements' ),
+				'label' => esc_html__( 'News Titles & Views', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -262,7 +262,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'title_color',
 			array(
-				'label'     => esc_html__( 'News Title Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'News Title Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-item a, {{WRAPPER}} .magpro-ticker-marquee-item a' => 'color: {{VALUE}};',
@@ -273,7 +273,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'title_hover_color',
 			array(
-				'label'     => esc_html__( 'News Title Hover Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'News Title Hover Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-item a:hover, {{WRAPPER}} .magpro-ticker-marquee-item a:hover' => 'color: {{VALUE}};',
@@ -292,7 +292,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'views_color',
 			array(
-				'label'     => esc_html__( 'Views Count Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Views Count Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-views' => 'color: {{VALUE}};',
@@ -303,7 +303,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'views_icon_color',
 			array(
-				'label'     => esc_html__( 'Views Icon Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Views Icon Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-views i' => 'color: {{VALUE}};',
@@ -317,7 +317,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_rotator_btns',
 			array(
-				'label'     => esc_html__( 'Prev/Next Buttons', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Prev/Next Buttons', 'mag-pro' ),
 				'tab'       => \Elementor\Controls_Manager::TAB_STYLE,
 				'condition' => array(
 					'ticker_style' => 'slide',
@@ -328,7 +328,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'btn_color',
 			array(
-				'label'     => esc_html__( 'Button Icon Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Button Icon Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-btn' => 'color: {{VALUE}};',
@@ -339,7 +339,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'btn_bg',
 			array(
-				'label'     => esc_html__( 'Button Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Button Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-btn' => 'background-color: {{VALUE}};',
@@ -350,7 +350,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		$this->add_control(
 			'btn_hover_bg',
 			array(
-				'label'     => esc_html__( 'Button Hover Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Button Hover Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-ticker-btn:hover' => 'background-color: {{VALUE}};',
@@ -372,7 +372,7 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 		);
 
 		if ( ! $query->have_posts() ) {
-			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro-elements' ) . '</p>';
+			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro' ) . '</p>';
 			return;
 		}
 
@@ -450,10 +450,10 @@ class MagPro_Widget_Ticker extends \Elementor\Widget_Base {
 					</div>
 
 					<div class="magpro-ticker-controls">
-						<button type="button" class="magpro-ticker-btn magpro-ticker-prev" aria-label="<?php esc_attr_e( 'Previous news', 'mag-pro-elements' ); ?>">
+						<button type="button" class="magpro-ticker-btn magpro-ticker-prev" aria-label="<?php esc_attr_e( 'Previous news', 'mag-pro' ); ?>">
 							<i class="fas fa-chevron-left"></i>
 						</button>
-						<button type="button" class="magpro-ticker-btn magpro-ticker-next" aria-label="<?php esc_attr_e( 'Next news', 'mag-pro-elements' ); ?>">
+						<button type="button" class="magpro-ticker-btn magpro-ticker-next" aria-label="<?php esc_attr_e( 'Next news', 'mag-pro' ); ?>">
 							<i class="fas fa-chevron-right"></i>
 						</button>
 					</div>

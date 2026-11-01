@@ -16,7 +16,7 @@ class MagPro_Helpers {
 	 */
 	public static function get_categories_list() {
 		$options = array(
-			'' => esc_html__( 'All Categories', 'mag-pro-elements' ),
+			'' => esc_html__( 'All Categories', 'mag-pro' ),
 		);
 
 		$categories = get_categories(
@@ -266,7 +266,7 @@ class MagPro_Helpers {
 			<?php if ( $show_view_all && ! empty( $view_all_url ) ) : ?>
 				<div class="magpro-view-all-wrap">
 					<a href="<?php echo esc_url( $view_all_url ); ?>" class="magpro-view-all">
-						<span class="magpro-view-all-text"><?php echo esc_html( ! empty( $view_all_text ) ? $view_all_text : esc_html__( 'View All', 'mag-pro-elements' ) ); ?></span>
+						<span class="magpro-view-all-text"><?php echo esc_html( ! empty( $view_all_text ) ? $view_all_text : esc_html__( 'View All', 'mag-pro' ) ); ?></span>
 						<i class="fas fa-angle-right" aria-hidden="true"></i>
 					</a>
 				</div>

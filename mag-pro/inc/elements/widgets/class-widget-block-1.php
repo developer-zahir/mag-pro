@@ -20,7 +20,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'MagPro - Block 1 (Lead + List)', 'mag-pro-elements' );
+		return esc_html__( 'MagPro - Block 1 (Lead + List)', 'mag-pro' );
 	}
 
 	public function get_icon() {
@@ -36,33 +36,33 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			array(
-				'label' => esc_html__( 'Block Query & Title', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Block Query & Title', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'widget_title',
 			array(
-				'label'       => esc_html__( 'Section Title', 'mag-pro-elements' ),
+				'label'       => esc_html__( 'Section Title', 'mag-pro' ),
 				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Latest Articles', 'mag-pro-elements' ),
-				'placeholder' => esc_html__( 'Enter block title', 'mag-pro-elements' ),
+				'default'     => esc_html__( 'Latest Articles', 'mag-pro' ),
+				'placeholder' => esc_html__( 'Enter block title', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'title_style',
 			array(
-				'label'   => esc_html__( 'Section Title Style', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Section Title Style', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'style-1',
 				'options' => array(
-					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ),
-					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro-elements' ),
-					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ),
-					'style-4' => esc_html__( 'Style 4: Refined Bordered Box', 'mag-pro-elements' ),
-					'style-5' => esc_html__( 'Style 5: Sleek Line Divider', 'mag-pro-elements' ),
-					'style-6' => esc_html__( 'Style 6: Gradient Accent Bar', 'mag-pro-elements' ),
+					'style-1' => esc_html__( 'Style 1: Modern Left Accent Bar', 'mag-pro' ),
+					'style-2' => esc_html__( 'Style 2: Solid Badge Header', 'mag-pro' ),
+					'style-3' => esc_html__( 'Style 3: Underline Dual-Color Bar', 'mag-pro' ),
+					'style-4' => esc_html__( 'Style 4: Refined Bordered Box', 'mag-pro' ),
+					'style-5' => esc_html__( 'Style 5: Sleek Line Divider', 'mag-pro' ),
+					'style-6' => esc_html__( 'Style 6: Gradient Accent Bar', 'mag-pro' ),
 				),
 			)
 		);
@@ -70,7 +70,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'section_icon',
 			array(
-				'label'   => esc_html__( 'Section Icon', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Section Icon', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => array(),
 			)
@@ -80,7 +80,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_view_all',
 			array(
-				'label'        => esc_html__( 'Show "View All" Button', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show "View All" Button', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -90,10 +90,10 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_auto_link',
 			array(
-				'label'        => esc_html__( 'Auto-Link to Category', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Auto-Link to Category', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'mag-pro-elements' ),
-				'label_off'    => esc_html__( 'No', 'mag-pro-elements' ),
+				'label_on'     => esc_html__( 'Yes', 'mag-pro' ),
+				'label_off'    => esc_html__( 'No', 'mag-pro' ),
 				'default'      => 'yes',
 				'return_value' => 'yes',
 				'condition'    => array(
@@ -106,9 +106,9 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_text',
 			array(
-				'label'     => esc_html__( '"View All" Text', 'mag-pro-elements' ),
+				'label'     => esc_html__( '"View All" Text', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::TEXT,
-				'default'   => esc_html__( 'View All', 'mag-pro-elements' ),
+				'default'   => esc_html__( 'View All', 'mag-pro' ),
 				'condition' => array(
 					'show_view_all' => 'yes',
 				),
@@ -118,9 +118,9 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_url',
 			array(
-				'label'         => esc_html__( '"View All" Link', 'mag-pro-elements' ),
+				'label'         => esc_html__( '"View All" Link', 'mag-pro' ),
 				'type'          => \Elementor\Controls_Manager::URL,
-				'placeholder'   => esc_html__( 'https://your-link.com', 'mag-pro-elements' ),
+				'placeholder'   => esc_html__( 'https://your-link.com', 'mag-pro' ),
 				'show_external' => true,
 				'default'       => array(
 					'url'         => '#',
@@ -135,7 +135,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'category',
 			array(
-				'label'   => esc_html__( 'Category', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Category', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => '',
 				'options' => \MagPro_Helpers::get_categories_list(),
@@ -145,7 +145,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'posts_per_page',
 			array(
-				'label'   => esc_html__( 'Number of Posts', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Number of Posts', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::NUMBER,
 				'default' => 5,
 				'min'     => 2,
@@ -156,13 +156,13 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'orderby',
 			array(
-				'label'   => esc_html__( 'Order By', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Order By', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'date',
 				'options' => array(
-					'date'          => esc_html__( 'Date', 'mag-pro-elements' ),
-					'comment_count' => esc_html__( 'Popularity (Comments)', 'mag-pro-elements' ),
-					'rand'          => esc_html__( 'Random', 'mag-pro-elements' ),
+					'date'          => esc_html__( 'Date', 'mag-pro' ),
+					'comment_count' => esc_html__( 'Popularity (Comments)', 'mag-pro' ),
+					'rand'          => esc_html__( 'Random', 'mag-pro' ),
 				),
 			)
 		);
@@ -173,14 +173,14 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_meta_visibility',
 			array(
-				'label' => esc_html__( 'Meta & Content Switches', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Meta & Content Switches', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'show_badge',
 			array(
-				'label'        => esc_html__( 'Show Category Badge', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Category Badge', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -190,7 +190,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_author',
 			array(
-				'label'        => esc_html__( 'Show Author', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Author', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -200,7 +200,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_date',
 			array(
-				'label'        => esc_html__( 'Show Date', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Date', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -210,7 +210,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_views',
 			array(
-				'label'        => esc_html__( 'Show Post View Count', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Post View Count', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -220,7 +220,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_comments',
 			array(
-				'label'        => esc_html__( 'Show Comments Count', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Comments Count', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'no',
 				'return_value' => 'yes',
@@ -230,7 +230,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_excerpt',
 			array(
-				'label'        => esc_html__( 'Show Lead Excerpt', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Lead Excerpt', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
 				'default'      => 'yes',
 				'return_value' => 'yes',
@@ -243,22 +243,22 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_big_image_settings',
 			array(
-				'label' => esc_html__( 'Big Image Controls (Lead Post)', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Big Image Controls (Lead Post)', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'big_aspect_ratio',
 			array(
-				'label'   => esc_html__( 'Aspect Ratio', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Aspect Ratio', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => '16:9',
 				'options' => array(
-					'16:9'   => esc_html__( '16:9 Widescreen', 'mag-pro-elements' ),
-					'4:3'    => esc_html__( '4:3 Standard', 'mag-pro-elements' ),
-					'1:1'    => esc_html__( '1:1 Square', 'mag-pro-elements' ),
-					'3:2'    => esc_html__( '3:2 Classic Magazine', 'mag-pro-elements' ),
-					'custom' => esc_html__( 'Custom Manual Height', 'mag-pro-elements' ),
+					'16:9'   => esc_html__( '16:9 Widescreen', 'mag-pro' ),
+					'4:3'    => esc_html__( '4:3 Standard', 'mag-pro' ),
+					'1:1'    => esc_html__( '1:1 Square', 'mag-pro' ),
+					'3:2'    => esc_html__( '3:2 Classic Magazine', 'mag-pro' ),
+					'custom' => esc_html__( 'Custom Manual Height', 'mag-pro' ),
 				),
 			)
 		);
@@ -266,7 +266,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'big_custom_height',
 			array(
-				'label'     => esc_html__( 'Manual Height (px)', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Manual Height (px)', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::NUMBER,
 				'default'   => 230,
 				'min'       => 140,
@@ -280,16 +280,16 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'big_hover_animation',
 			array(
-				'label'   => esc_html__( 'Hover Animation', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Hover Animation', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => array(
-					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro-elements' ),
-					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro-elements' ),
-					'slide-up'  => esc_html__( 'Slide Up', 'mag-pro-elements' ),
-					'grayscale' => esc_html__( 'Grayscale to Color', 'mag-pro-elements' ),
-					'blur'      => esc_html__( 'Blur to Sharp', 'mag-pro-elements' ),
-					'none'      => esc_html__( 'None', 'mag-pro-elements' ),
+					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro' ),
+					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro' ),
+					'slide-up'  => esc_html__( 'Slide Up', 'mag-pro' ),
+					'grayscale' => esc_html__( 'Grayscale to Color', 'mag-pro' ),
+					'blur'      => esc_html__( 'Blur to Sharp', 'mag-pro' ),
+					'none'      => esc_html__( 'None', 'mag-pro' ),
 				),
 			)
 		);
@@ -297,7 +297,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'big_image_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -312,14 +312,14 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_small_image_settings',
 			array(
-				'label' => esc_html__( 'Small Image Controls (Side List)', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Small Image Controls (Side List)', 'mag-pro' ),
 			)
 		);
 
 		$this->add_responsive_control(
 			'small_image_width',
 			array(
-				'label'      => esc_html__( 'Thumbnail Width (px)', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Thumbnail Width (px)', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -341,7 +341,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'small_image_height',
 			array(
-				'label'      => esc_html__( 'Thumbnail Height (px)', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Thumbnail Height (px)', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -363,16 +363,16 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'small_hover_animation',
 			array(
-				'label'   => esc_html__( 'Hover Animation', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Hover Animation', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => array(
-					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro-elements' ),
-					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro-elements' ),
-					'slide-up'  => esc_html__( 'Slide Up', 'mag-pro-elements' ),
-					'grayscale' => esc_html__( 'Grayscale to Color', 'mag-pro-elements' ),
-					'blur'      => esc_html__( 'Blur to Sharp', 'mag-pro-elements' ),
-					'none'      => esc_html__( 'None', 'mag-pro-elements' ),
+					'zoom-in'   => esc_html__( 'Zoom In (Scale Up)', 'mag-pro' ),
+					'zoom-out'  => esc_html__( 'Zoom Out', 'mag-pro' ),
+					'slide-up'  => esc_html__( 'Slide Up', 'mag-pro' ),
+					'grayscale' => esc_html__( 'Grayscale to Color', 'mag-pro' ),
+					'blur'      => esc_html__( 'Blur to Sharp', 'mag-pro' ),
+					'none'      => esc_html__( 'None', 'mag-pro' ),
 				),
 			)
 		);
@@ -380,7 +380,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'small_image_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -395,7 +395,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_header',
 			array(
-				'label' => esc_html__( 'Section Header', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Section Header', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -403,7 +403,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'header_title_color',
 			array(
-				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Title Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-widget-title' => 'color: {{VALUE}};',
@@ -422,7 +422,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'header_accent_color',
 			array(
-				'label'     => esc_html__( 'Accent / Bar Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Accent / Bar Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-header-style-1 .magpro-widget-title' => 'border-left-color: {{VALUE}};',
@@ -436,7 +436,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'section_icon_size',
 			array(
-				'label'      => esc_html__( 'Icon Size', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Icon Size', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', 'em' ),
 				'range'      => array(
@@ -455,7 +455,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'section_icon_color',
 			array(
-				'label'     => esc_html__( 'Icon Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Icon Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-section-icon'     => 'color: {{VALUE}};',
@@ -467,7 +467,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'section_icon_gap',
 			array(
-				'label'      => esc_html__( 'Icon Spacing', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Icon Spacing', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -486,7 +486,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_heading',
 			array(
-				'label'     => esc_html__( '"View All" Button Style', 'mag-pro-elements' ),
+				'label'     => esc_html__( '"View All" Button Style', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -495,7 +495,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_color',
 			array(
-				'label'     => esc_html__( 'Text Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Text Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-view-all' => 'color: {{VALUE}} !important;',
@@ -506,7 +506,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_hover_color',
 			array(
-				'label'     => esc_html__( 'Hover Text Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Hover Text Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-view-all:hover' => 'color: {{VALUE}} !important;',
@@ -517,7 +517,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_bg',
 			array(
-				'label'     => esc_html__( 'Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-view-all' => 'background-color: {{VALUE}};',
@@ -528,7 +528,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'view_all_hover_bg',
 			array(
-				'label'     => esc_html__( 'Hover Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Hover Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-view-all:hover' => 'background-color: {{VALUE}}; border-color: {{VALUE}};',
@@ -547,7 +547,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'view_all_border_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -559,7 +559,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'view_all_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Padding', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em' ),
 				'selectors'  => array(
@@ -583,7 +583,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_lead',
 			array(
-				'label' => esc_html__( 'Lead Post Styling', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Lead Post Styling', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -591,7 +591,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'lead_bg',
 			array(
-				'label'     => esc_html__( 'Background Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Background Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-block1-lead' => 'background-color: {{VALUE}};',
@@ -602,7 +602,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'lead_border_color',
 			array(
-				'label'     => esc_html__( 'Border Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Border Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-block1-lead' => 'border-color: {{VALUE}};',
@@ -613,7 +613,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'lead_title_color',
 			array(
-				'label'     => esc_html__( 'Lead Title Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Lead Title Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-block1-lead .magpro-post-title a' => 'color: {{VALUE}} !important;',
@@ -624,7 +624,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'lead_title_hover_color',
 			array(
-				'label'     => esc_html__( 'Lead Title Hover Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Lead Title Hover Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-block1-lead .magpro-post-title a:hover' => 'color: {{VALUE}} !important;',
@@ -643,7 +643,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'lead_excerpt_color',
 			array(
-				'label'     => esc_html__( 'Excerpt Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Excerpt Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-block1-excerpt' => 'color: {{VALUE}};',
@@ -665,7 +665,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_style_compact_list',
 			array(
-				'label' => esc_html__( 'Side List Items', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Side List Items', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -673,7 +673,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'compact_item_bg',
 			array(
-				'label'     => esc_html__( 'Item Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Item Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-compact-item' => 'background-color: {{VALUE}};',
@@ -684,7 +684,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'compact_item_border',
 			array(
-				'label'     => esc_html__( 'Item Border Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Item Border Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-compact-item' => 'border-color: {{VALUE}};',
@@ -695,7 +695,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'compact_title_color',
 			array(
-				'label'     => esc_html__( 'Title Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Title Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-compact-content .magpro-post-title a' => 'color: {{VALUE}} !important;',
@@ -706,7 +706,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'compact_title_hover_color',
 			array(
-				'label'     => esc_html__( 'Title Hover Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Title Hover Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-compact-content .magpro-post-title a:hover' => 'color: {{VALUE}} !important;',
@@ -725,7 +725,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'meta_color',
 			array(
-				'label'     => esc_html__( 'Meta Text Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Meta Text Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-post-meta, {{WRAPPER}} .magpro-post-meta a' => 'color: {{VALUE}} !important;',
@@ -736,7 +736,7 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		$this->add_control(
 			'meta_icon_color',
 			array(
-				'label'     => esc_html__( 'Meta Icon Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Meta Icon Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-post-meta i' => 'color: {{VALUE}} !important;',
@@ -759,14 +759,14 @@ class MagPro_Widget_Block_1 extends \Elementor\Widget_Base {
 		);
 
 		if ( ! $query->have_posts() ) {
-			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro-elements' ) . '</p>';
+			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro' ) . '</p>';
 			return;
 		}
 
 		$posts         = $query->posts;
 		$title_style   = $settings['title_style'] ?? 'style-1';
 		$show_view_all = ( 'yes' === ( $settings['show_view_all'] ?? 'yes' ) );
-		$view_all_text = $settings['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = $settings['view_all_text'] ?? esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = ! empty( $settings['view_all_url']['url'] ) ? $settings['view_all_url']['url'] : '';
 
 		$show_badge    = ( 'yes' === ( $settings['show_badge'] ?? 'yes' ) );

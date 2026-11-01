@@ -35,7 +35,7 @@ class MagPro_Elementor_Loader {
 		$elements_manager->add_category(
 			'magpro-elements',
 			array(
-				'title' => esc_html__( 'Mag Pro Elements', 'mag-pro-elements' ),
+				'title' => esc_html__( 'Mag Pro Elements', 'mag-pro' ),
 				'icon'  => 'fa fa-newspaper',
 			)
 		);
@@ -45,18 +45,18 @@ class MagPro_Elementor_Loader {
 	 * Include widget class files
 	 */
 	private function include_widgets() {
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-featured-hero.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-block-1.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-block-2.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-grid.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-list.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-videos.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-ticker.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-tabs.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-social.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-slider.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-search.php';
-		require_once MAGPRO_ELEMENTS_DIR . 'inc/widgets/class-widget-dark-mode.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-featured-hero.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-block-1.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-block-2.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-grid.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-list.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-videos.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-ticker.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-tabs.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-social.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-slider.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-search.php';
+		require_once MAGPRO_THEME_DIR . '/inc/elements/widgets/class-widget-dark-mode.php';
 	}
 
 	/**

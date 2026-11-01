@@ -22,7 +22,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'MagPro - Header Search', 'mag-pro-elements' );
+		return esc_html__( 'MagPro - Header Search', 'mag-pro' );
 	}
 
 	public function get_icon() {
@@ -40,20 +40,20 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_search_content',
 			array(
-				'label' => esc_html__( 'Search Settings', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Search Settings', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'search_style',
 			array(
-				'label'   => esc_html__( 'Search Style', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Search Style', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::SELECT,
 				'default' => 'full-screen',
 				'options' => array(
-					'full-screen'    => esc_html__( 'Full Screen Modal (Center Center)', 'mag-pro-elements' ),
-					'slide-down'     => esc_html__( 'Slide Down', 'mag-pro-elements' ),
-					'header-replace' => esc_html__( 'Header Replace', 'mag-pro-elements' ),
+					'full-screen'    => esc_html__( 'Full Screen Modal (Center Center)', 'mag-pro' ),
+					'slide-down'     => esc_html__( 'Slide Down', 'mag-pro' ),
+					'header-replace' => esc_html__( 'Header Replace', 'mag-pro' ),
 				),
 			)
 		);
@@ -61,7 +61,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'search_icon',
 			array(
-				'label'   => esc_html__( 'Search Trigger Icon', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Search Trigger Icon', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::ICONS,
 				'default' => array(
 					'value'   => 'fas fa-search',
@@ -73,10 +73,10 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'show_label',
 			array(
-				'label'        => esc_html__( 'Show Trigger Label', 'mag-pro-elements' ),
+				'label'        => esc_html__( 'Show Trigger Label', 'mag-pro' ),
 				'type'         => \Elementor\Controls_Manager::SWITCHER,
-				'label_on'     => esc_html__( 'Yes', 'mag-pro-elements' ),
-				'label_off'    => esc_html__( 'No', 'mag-pro-elements' ),
+				'label_on'     => esc_html__( 'Yes', 'mag-pro' ),
+				'label_off'    => esc_html__( 'No', 'mag-pro' ),
 				'return_value' => 'yes',
 				'default'      => 'no',
 			)
@@ -85,9 +85,9 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'trigger_label',
 			array(
-				'label'     => esc_html__( 'Trigger Label Text', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Trigger Label Text', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Search', 'mag-pro-elements' ),
+				'default'   => esc_html__( 'Search', 'mag-pro' ),
 				'condition' => array(
 					'show_label' => 'yes',
 				),
@@ -97,18 +97,18 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'placeholder',
 			array(
-				'label'   => esc_html__( 'Search Placeholder', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Search Placeholder', 'mag-pro' ),
 				'type'    => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Type to search and hit enter...', 'mag-pro-elements' ),
+				'default' => esc_html__( 'Type to search and hit enter...', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'hint_text',
 			array(
-				'label'     => esc_html__( 'Modal Hint Text', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Modal Hint Text', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::TEXT,
-				'default'   => esc_html__( 'Press ESC to close or click outside', 'mag-pro-elements' ),
+				'default'   => esc_html__( 'Press ESC to close or click outside', 'mag-pro' ),
 				'condition' => array(
 					'search_style' => 'full-screen',
 				),
@@ -123,7 +123,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_trigger_style',
 			array(
-				'label' => esc_html__( 'Trigger Button', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Trigger Button', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -131,7 +131,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'icon_size',
 			array(
-				'label'      => esc_html__( 'Icon Size', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Icon Size', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => array( 'px', 'em' ),
 				'range'      => array(
@@ -152,14 +152,14 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_trigger_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Normal', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'trigger_color',
 			array(
-				'label'     => esc_html__( 'Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-search-trigger' => 'color: {{VALUE}};',
@@ -170,7 +170,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'trigger_bg_color',
 			array(
-				'label'     => esc_html__( 'Background Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Background Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-search-trigger' => 'background-color: {{VALUE}};',
@@ -183,14 +183,14 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->start_controls_tab(
 			'tab_trigger_hover',
 			array(
-				'label' => esc_html__( 'Hover', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Hover', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'trigger_hover_color',
 			array(
-				'label'     => esc_html__( 'Hover Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Hover Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-search-trigger:hover' => 'color: {{VALUE}};',
@@ -201,7 +201,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'trigger_hover_bg',
 			array(
-				'label'     => esc_html__( 'Hover Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Hover Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-search-trigger:hover' => 'background-color: {{VALUE}};',
@@ -216,7 +216,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'trigger_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Padding', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', 'em' ),
 				'selectors'  => array(
@@ -229,7 +229,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_responsive_control(
 			'trigger_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Border Radius', 'mag-pro' ),
 				'type'       => \Elementor\Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -246,7 +246,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_modal_style',
 			array(
-				'label' => esc_html__( 'Modal / Field Style', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Modal / Field Style', 'mag-pro' ),
 				'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -254,7 +254,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'overlay_bg',
 			array(
-				'label'     => esc_html__( 'Backdrop Background', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Backdrop Background', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'.magpro-search-modal-backdrop' => 'background-color: {{VALUE}};',
@@ -266,7 +266,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'input_typography',
-				'label'    => esc_html__( 'Input Typography', 'mag-pro-elements' ),
+				'label'    => esc_html__( 'Input Typography', 'mag-pro' ),
 				'selector' => '.magpro-search-modal-input, .magpro-search-cover-input',
 			)
 		);
@@ -274,7 +274,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'input_text_color',
 			array(
-				'label'     => esc_html__( 'Input Text Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Input Text Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'.magpro-search-modal-input, .magpro-search-cover-input' => 'color: {{VALUE}};',
@@ -285,7 +285,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'input_placeholder_color',
 			array(
-				'label'     => esc_html__( 'Placeholder Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Placeholder Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'.magpro-search-modal-input::placeholder, .magpro-search-cover-input::placeholder' => 'color: {{VALUE}};',
@@ -296,7 +296,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'input_border_color',
 			array(
-				'label'     => esc_html__( 'Input Border Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Input Border Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'.magpro-search-modal .magpro-search-input-wrap' => 'border-color: {{VALUE}};',
@@ -308,7 +308,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'submit_btn_color',
 			array(
-				'label'     => esc_html__( 'Submit Button Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Submit Button Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'.magpro-search-modal-submit, .magpro-search-cover-submit' => 'color: {{VALUE}};',
@@ -319,7 +319,7 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 		$this->add_control(
 			'close_btn_color',
 			array(
-				'label'     => esc_html__( 'Close Button Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Close Button Color', 'mag-pro' ),
 				'type'      => \Elementor\Controls_Manager::COLOR,
 				'selectors' => array(
 					'.magpro-search-modal-close, .magpro-search-cover-close' => 'color: {{VALUE}};',
@@ -333,15 +333,15 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 	protected function render() {
 		$settings     = $this->get_settings_for_display();
 		$search_style = ! empty( $settings['search_style'] ) ? $settings['search_style'] : 'full-screen';
-		$placeholder  = ! empty( $settings['placeholder'] ) ? $settings['placeholder'] : esc_html__( 'Type to search and hit enter...', 'mag-pro-elements' );
-		$hint_text    = ! empty( $settings['hint_text'] ) ? $settings['hint_text'] : esc_html__( 'Press ESC to close or click outside', 'mag-pro-elements' );
+		$placeholder  = ! empty( $settings['placeholder'] ) ? $settings['placeholder'] : esc_html__( 'Type to search and hit enter...', 'mag-pro' );
+		$hint_text    = ! empty( $settings['hint_text'] ) ? $settings['hint_text'] : esc_html__( 'Press ESC to close or click outside', 'mag-pro' );
 		$show_label   = ! empty( $settings['show_label'] ) && 'yes' === $settings['show_label'];
 		$label_text   = ! empty( $settings['trigger_label'] ) ? $settings['trigger_label'] : '';
 		$icon         = ! empty( $settings['search_icon'] ) ? $settings['search_icon'] : array( 'value' => 'fas fa-search', 'library' => 'fa-solid' );
 		$unique_id    = $this->get_id();
 		?>
 		<div class="magpro-widget-search-wrap" data-search-style="<?php echo esc_attr( $search_style ); ?>">
-			<button type="button" class="magpro-search-trigger" data-target-style="<?php echo esc_attr( $search_style ); ?>" aria-label="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>" title="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>">
+			<button type="button" class="magpro-search-trigger" data-target-style="<?php echo esc_attr( $search_style ); ?>" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>" title="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>">
 				<span class="magpro-search-trigger-icon">
 					<?php
 					if ( ! empty( $icon['value'] ) && class_exists( '\Elementor\Icons_Manager' ) ) {
@@ -363,10 +363,10 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 						<form role="search" method="get" class="magpro-search-slide-down-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<i class="fas fa-search magpro-search-slide-icon" aria-hidden="true"></i>
 							<input type="search" class="magpro-search-slide-down-input" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
-							<button type="submit" class="magpro-search-slide-down-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>">
-								<?php esc_html_e( 'Search', 'mag-pro-elements' ); ?>
+							<button type="submit" class="magpro-search-slide-down-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>">
+								<?php esc_html_e( 'Search', 'mag-pro' ); ?>
 							</button>
-							<button type="button" class="magpro-search-slide-down-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
+							<button type="button" class="magpro-search-slide-down-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
 						</form>
 					</div>
 				</div>
@@ -377,10 +377,10 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 						<form role="search" method="get" class="magpro-search-replace-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 							<i class="fas fa-search magpro-search-replace-icon" aria-hidden="true"></i>
 							<input type="search" class="magpro-search-replace-input" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
-							<button type="submit" class="magpro-search-replace-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro-elements' ); ?>">
+							<button type="submit" class="magpro-search-replace-submit" aria-label="<?php esc_attr_e( 'Search', 'mag-pro' ); ?>">
 								<i class="fas fa-arrow-right" aria-hidden="true"></i>
 							</button>
-							<button type="button" class="magpro-search-replace-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
+							<button type="button" class="magpro-search-replace-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
 						</form>
 					</div>
 				</div>
@@ -388,14 +388,14 @@ class MagPro_Widget_Search extends \Elementor\Widget_Base {
 				<!-- Style 1: Full-Screen Modal Search (Center Center) -->
 				<div class="magpro-search-modal" id="magpro-modal-<?php echo esc_attr( $unique_id ); ?>" aria-hidden="true" role="dialog" aria-modal="true">
 					<div class="magpro-search-modal-backdrop"></div>
-					<button type="button" class="magpro-search-modal-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro-elements' ); ?>">&times;</button>
+					<button type="button" class="magpro-search-modal-close" aria-label="<?php esc_attr_e( 'Close search', 'mag-pro' ); ?>">&times;</button>
 					<div class="magpro-search-modal-inner">
 						<form role="search" method="get" class="magpro-search-modal-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<label class="screen-reader-text" for="magpro-search-input-<?php echo esc_attr( $unique_id ); ?>"><?php esc_html_e( 'Search for:', 'mag-pro-elements' ); ?></label>
+							<label class="screen-reader-text" for="magpro-search-input-<?php echo esc_attr( $unique_id ); ?>"><?php esc_html_e( 'Search for:', 'mag-pro' ); ?></label>
 							<div class="magpro-search-input-wrap">
 								<i class="fas fa-search magpro-search-modal-icon" aria-hidden="true"></i>
 								<input type="search" id="magpro-search-input-<?php echo esc_attr( $unique_id ); ?>" class="magpro-search-modal-input" placeholder="<?php echo esc_attr( $placeholder ); ?>" value="<?php echo get_search_query(); ?>" name="s" autocomplete="off" />
-								<button type="submit" class="magpro-search-modal-submit" aria-label="<?php esc_attr_e( 'Submit search', 'mag-pro-elements' ); ?>">
+								<button type="submit" class="magpro-search-modal-submit" aria-label="<?php esc_attr_e( 'Submit search', 'mag-pro' ); ?>">
 									<i class="fas fa-arrow-right" aria-hidden="true"></i>
 								</button>
 							</div>

@@ -206,7 +206,7 @@ class MagPro_Shortcodes {
 									<p class="magpro-grid-excerpt"><?php echo esc_html( \MagPro_Helpers::get_excerpt( $p_id, 14 ) ); ?></p>
 								<?php endif; ?>
 								<a href="<?php the_permalink(); ?>" class="magpro-read-more">
-									<?php esc_html_e( 'Read More', 'mag-pro-elements' ); ?> <i class="fas fa-arrow-right"></i>
+									<?php esc_html_e( 'Read More', 'mag-pro' ); ?> <i class="fas fa-arrow-right"></i>
 								</a>
 							</div>
 						</article>
@@ -699,13 +699,13 @@ class MagPro_Shortcodes {
 		<div class="magpro-tabs-wrap">
 			<div class="magpro-tabs-nav">
 				<button type="button" class="magpro-tab-button active" data-tab="recent">
-					<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro-elements' ); ?>
+					<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro' ); ?>
 				</button>
 				<button type="button" class="magpro-tab-button" data-tab="popular">
-					<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro-elements' ); ?>
+					<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro' ); ?>
 				</button>
 				<button type="button" class="magpro-tab-button" data-tab="comments">
-					<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro-elements' ); ?>
+					<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro' ); ?>
 				</button>
 			</div>
 
@@ -796,7 +796,7 @@ class MagPro_Shortcodes {
 
 	private static function render_compact_items( $query, $atts = array() ) {
 		if ( ! $query->have_posts() ) {
-			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro-elements' ) . '</p>';
+			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro' ) . '</p>';
 			return;
 		}
 
@@ -879,7 +879,7 @@ class MagPro_Shortcodes {
 						$atts['title'],
 						$atts['title_style'],
 						( 'yes' === $atts['view_all'] ),
-						esc_html__( 'View All', 'mag-pro-elements' ),
+						esc_html__( 'View All', 'mag-pro' ),
 						$atts['view_url'],
 						'fas fa-sliders-h'
 					);

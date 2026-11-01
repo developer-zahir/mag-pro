@@ -20,9 +20,9 @@ class MagPro_WP_Widget_Tabs extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'magpro_wp_tabs',
-			esc_html__( 'MagPro - Tabbed Posts (Sidebar)', 'mag-pro-elements' ),
+			esc_html__( 'MagPro - Tabbed Posts (Sidebar)', 'mag-pro' ),
 			array(
-				'description' => esc_html__( 'Display tabbed posts (Recent, Popular, Trending) in sidebars.', 'mag-pro-elements' ),
+				'description' => esc_html__( 'Display tabbed posts (Recent, Popular, Trending) in sidebars.', 'mag-pro' ),
 			)
 		);
 	}
@@ -33,7 +33,7 @@ class MagPro_WP_Widget_Tabs extends WP_Widget {
 		$title         = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$title_style   = ! empty( $instance['title_style'] ) ? $instance['title_style'] : 'style-1';
 		$show_view_all = ! empty( $instance['show_view_all'] );
-		$view_all_text = ! empty( $instance['view_all_text'] ) ? $instance['view_all_text'] : esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = ! empty( $instance['view_all_text'] ) ? $instance['view_all_text'] : esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = ! empty( $instance['view_all_url'] ) ? $instance['view_all_url'] : '';
 
 		$count         = ! empty( $instance['count'] ) ? intval( $instance['count'] ) : 4;
@@ -56,13 +56,13 @@ class MagPro_WP_Widget_Tabs extends WP_Widget {
 		<div class="magpro-tabs-wrap" style="box-shadow: none;">
 			<div class="magpro-tabs-nav">
 				<button type="button" class="magpro-tab-button active" data-tab="recent">
-					<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro-elements' ); ?>
+					<i class="far fa-clock"></i> <?php esc_html_e( 'Recent', 'mag-pro' ); ?>
 				</button>
 				<button type="button" class="magpro-tab-button" data-tab="popular">
-					<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro-elements' ); ?>
+					<i class="fas fa-fire"></i> <?php esc_html_e( 'Popular', 'mag-pro' ); ?>
 				</button>
 				<button type="button" class="magpro-tab-button" data-tab="comments">
-					<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro-elements' ); ?>
+					<i class="fas fa-random"></i> <?php esc_html_e( 'Trending', 'mag-pro' ); ?>
 				</button>
 			</div>
 
@@ -84,7 +84,7 @@ class MagPro_WP_Widget_Tabs extends WP_Widget {
 
 	private function render_items( $query, $show_author, $show_date, $show_views, $show_comments, $thumb_w, $thumb_h ) {
 		if ( ! $query->have_posts() ) {
-			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro-elements' ) . '</p>';
+			echo '<p>' . esc_html__( 'No posts found.', 'mag-pro' ) . '</p>';
 			return;
 		}
 		while ( $query->have_posts() ) :
@@ -111,10 +111,10 @@ class MagPro_WP_Widget_Tabs extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$title         = $instance['title'] ?? esc_html__( 'Popular Posts', 'mag-pro-elements' );
+		$title         = $instance['title'] ?? esc_html__( 'Popular Posts', 'mag-pro' );
 		$title_style   = $instance['title_style'] ?? 'style-1';
 		$show_view_all = ! empty( $instance['show_view_all'] );
-		$view_all_text = $instance['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = $instance['view_all_text'] ?? esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = $instance['view_all_url'] ?? '';
 		$count         = $instance['count'] ?? 4;
 		$show_author   = ! empty( $instance['show_author'] );
@@ -125,46 +125,46 @@ class MagPro_WP_Widget_Tabs extends WP_Widget {
 		$thumb_h       = $instance['thumb_h'] ?? 65;
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Widget Title:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Widget Title:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title_style' ) ); ?>">
-				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ); ?></option>
-				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro-elements' ); ?></option>
-				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ); ?></option>
+				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro' ); ?></option>
+				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro' ); ?></option>
+				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro' ); ?></option>
 			</select>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_view_all ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_view_all' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>"><?php esc_html_e( 'Show "View All" Button', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>"><?php esc_html_e( 'Show "View All" Button', 'mag-pro' ); ?></label>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>"><?php esc_html_e( '"View All" URL:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>"><?php esc_html_e( '"View All" URL:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'view_all_url' ) ); ?>" type="text" value="<?php echo esc_attr( $view_all_url ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Posts Per Tab:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Posts Per Tab:', 'mag-pro' ); ?></label>
 			<input class="tiny-text" id="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'count' ) ); ?>" type="number" step="1" min="1" max="10" value="<?php echo esc_attr( $count ); ?>" size="3">
 		</p>
 		<p>
-			<label><?php esc_html_e( 'Thumbnail Size (W x H px):', 'mag-pro-elements' ); ?></label><br>
+			<label><?php esc_html_e( 'Thumbnail Size (W x H px):', 'mag-pro' ); ?></label><br>
 			<input class="tiny-text" name="<?php echo esc_attr( $this->get_field_name( 'thumb_w' ) ); ?>" type="number" value="<?php echo esc_attr( $thumb_w ); ?>" size="3"> px &times;
 			<input class="tiny-text" name="<?php echo esc_attr( $this->get_field_name( 'thumb_h' ) ); ?>" type="number" value="<?php echo esc_attr( $thumb_h ); ?>" size="3"> px
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_views ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_views' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_date ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_date' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php esc_html_e( 'Show Date', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php esc_html_e( 'Show Date', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_author ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_author' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_author' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_author' ) ); ?>"><?php esc_html_e( 'Show Author', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_author' ) ); ?>"><?php esc_html_e( 'Show Author', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_comments ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_comments' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_comments' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_comments' ) ); ?>"><?php esc_html_e( 'Show Comments', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_comments' ) ); ?>"><?php esc_html_e( 'Show Comments', 'mag-pro' ); ?></label>
 		</p>
 		<?php
 	}
@@ -195,9 +195,9 @@ class MagPro_WP_Widget_List extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'magpro_wp_list',
-			esc_html__( 'MagPro - Post List (Sidebar)', 'mag-pro-elements' ),
+			esc_html__( 'MagPro - Post List (Sidebar)', 'mag-pro' ),
 			array(
-				'description' => esc_html__( 'Display recent or category post list with thumbnails in sidebars.', 'mag-pro-elements' ),
+				'description' => esc_html__( 'Display recent or category post list with thumbnails in sidebars.', 'mag-pro' ),
 			)
 		);
 	}
@@ -208,7 +208,7 @@ class MagPro_WP_Widget_List extends WP_Widget {
 		$title         = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$title_style   = ! empty( $instance['title_style'] ) ? $instance['title_style'] : 'style-1';
 		$show_view_all = ! empty( $instance['show_view_all'] );
-		$view_all_text = ! empty( $instance['view_all_text'] ) ? $instance['view_all_text'] : esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = ! empty( $instance['view_all_text'] ) ? $instance['view_all_text'] : esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = ! empty( $instance['view_all_url'] ) ? $instance['view_all_url'] : '';
 
 		$category      = ! empty( $instance['category'] ) ? $instance['category'] : '';
@@ -265,10 +265,10 @@ class MagPro_WP_Widget_List extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$title         = $instance['title'] ?? esc_html__( 'Recent Posts', 'mag-pro-elements' );
+		$title         = $instance['title'] ?? esc_html__( 'Recent Posts', 'mag-pro' );
 		$title_style   = $instance['title_style'] ?? 'style-1';
 		$show_view_all = ! empty( $instance['show_view_all'] );
-		$view_all_text = $instance['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = $instance['view_all_text'] ?? esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = $instance['view_all_url'] ?? '';
 		$category      = $instance['category'] ?? '';
 		$count         = $instance['count'] ?? 5;
@@ -282,27 +282,27 @@ class MagPro_WP_Widget_List extends WP_Widget {
 		$categories    = \MagPro_Helpers::get_categories_list();
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Widget Title:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Widget Title:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title_style' ) ); ?>">
-				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ); ?></option>
-				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro-elements' ); ?></option>
-				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ); ?></option>
+				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro' ); ?></option>
+				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro' ); ?></option>
+				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro' ); ?></option>
 			</select>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_view_all ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_view_all' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>"><?php esc_html_e( 'Show "View All" Button', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>"><?php esc_html_e( 'Show "View All" Button', 'mag-pro' ); ?></label>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>"><?php esc_html_e( '"View All" URL:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>"><?php esc_html_e( '"View All" URL:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'view_all_url' ) ); ?>" type="text" value="<?php echo esc_attr( $view_all_url ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_html_e( 'Category:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_html_e( 'Category:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'category' ) ); ?>">
 				<?php foreach ( $categories as $cat_id => $cat_name ) : ?>
 					<option value="<?php echo esc_attr( $cat_id ); ?>" <?php selected( $category, $cat_id ); ?>><?php echo esc_html( $cat_name ); ?></option>
@@ -310,29 +310,29 @@ class MagPro_WP_Widget_List extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of Posts:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of Posts:', 'mag-pro' ); ?></label>
 			<input class="tiny-text" id="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'count' ) ); ?>" type="number" step="1" min="1" max="15" value="<?php echo esc_attr( $count ); ?>" size="3">
 		</p>
 		<p>
-			<label><?php esc_html_e( 'Thumbnail Size (W x H px):', 'mag-pro-elements' ); ?></label><br>
+			<label><?php esc_html_e( 'Thumbnail Size (W x H px):', 'mag-pro' ); ?></label><br>
 			<input class="tiny-text" name="<?php echo esc_attr( $this->get_field_name( 'thumb_w' ) ); ?>" type="number" value="<?php echo esc_attr( $thumb_w ); ?>" size="3"> px &times;
 			<input class="tiny-text" name="<?php echo esc_attr( $this->get_field_name( 'thumb_h' ) ); ?>" type="number" value="<?php echo esc_attr( $thumb_h ); ?>" size="3"> px
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_views ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_views' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_date ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_date' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php esc_html_e( 'Show Date', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php esc_html_e( 'Show Date', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_author ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_author' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_author' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_author' ) ); ?>"><?php esc_html_e( 'Show Author', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_author' ) ); ?>"><?php esc_html_e( 'Show Author', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_badge ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_badge' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_badge' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_badge' ) ); ?>"><?php esc_html_e( 'Show Category Badge', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_badge' ) ); ?>"><?php esc_html_e( 'Show Category Badge', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_comments ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_comments' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_comments' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_comments' ) ); ?>"><?php esc_html_e( 'Show Comments', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_comments' ) ); ?>"><?php esc_html_e( 'Show Comments', 'mag-pro' ); ?></label>
 		</p>
 		<?php
 	}
@@ -365,9 +365,9 @@ class MagPro_WP_Widget_Social extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'magpro_wp_social',
-			esc_html__( 'MagPro - Social Follow (Sidebar)', 'mag-pro-elements' ),
+			esc_html__( 'MagPro - Social Follow (Sidebar)', 'mag-pro' ),
 			array(
-				'description' => esc_html__( 'Display social media follow buttons in sidebars.', 'mag-pro-elements' ),
+				'description' => esc_html__( 'Display social media follow buttons in sidebars.', 'mag-pro' ),
 			)
 		);
 	}
@@ -428,7 +428,7 @@ class MagPro_WP_Widget_Social extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$title       = $instance['title'] ?? esc_html__( 'Follow Us', 'mag-pro-elements' );
+		$title       = $instance['title'] ?? esc_html__( 'Follow Us', 'mag-pro' );
 		$title_style = $instance['title_style'] ?? 'style-1';
 		$columns     = $instance['columns'] ?? 2;
 		$fb          = $instance['facebook'] ?? 'https://facebook.com/';
@@ -439,19 +439,19 @@ class MagPro_WP_Widget_Social extends WP_Widget {
 		$tg          = $instance['telegram'] ?? '';
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title_style' ) ); ?>">
-				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ); ?></option>
-				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro-elements' ); ?></option>
-				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ); ?></option>
+				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro' ); ?></option>
+				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro' ); ?></option>
+				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro' ); ?></option>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'columns' ) ); ?>"><?php esc_html_e( 'Columns:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'columns' ) ); ?>"><?php esc_html_e( 'Columns:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'columns' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'columns' ) ); ?>">
 				<option value="1" <?php selected( $columns, 1 ); ?>>1 Column</option>
 				<option value="2" <?php selected( $columns, 2 ); ?>>2 Columns</option>
@@ -489,9 +489,9 @@ class MagPro_WP_Widget_Slider extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'magpro_wp_slider',
-			esc_html__( 'MagPro - Post Slider (Sidebar)', 'mag-pro-elements' ),
+			esc_html__( 'MagPro - Post Slider (Sidebar)', 'mag-pro' ),
 			array(
-				'description' => esc_html__( 'Display a responsive touch carousel/slider in sidebars.', 'mag-pro-elements' ),
+				'description' => esc_html__( 'Display a responsive touch carousel/slider in sidebars.', 'mag-pro' ),
 			)
 		);
 	}
@@ -502,7 +502,7 @@ class MagPro_WP_Widget_Slider extends WP_Widget {
 		$title         = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$title_style   = ! empty( $instance['title_style'] ) ? $instance['title_style'] : 'style-1';
 		$show_view_all = ! empty( $instance['show_view_all'] );
-		$view_all_text = ! empty( $instance['view_all_text'] ) ? $instance['view_all_text'] : esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = ! empty( $instance['view_all_text'] ) ? $instance['view_all_text'] : esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = ! empty( $instance['view_all_url'] ) ? $instance['view_all_url'] : '';
 
 		$category      = ! empty( $instance['category'] ) ? $instance['category'] : '';
@@ -562,10 +562,10 @@ class MagPro_WP_Widget_Slider extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$title         = $instance['title'] ?? esc_html__( 'Featured Carousel', 'mag-pro-elements' );
+		$title         = $instance['title'] ?? esc_html__( 'Featured Carousel', 'mag-pro' );
 		$title_style   = $instance['title_style'] ?? 'style-1';
 		$show_view_all = ! empty( $instance['show_view_all'] );
-		$view_all_text = $instance['view_all_text'] ?? esc_html__( 'View All', 'mag-pro-elements' );
+		$view_all_text = $instance['view_all_text'] ?? esc_html__( 'View All', 'mag-pro' );
 		$view_all_url  = $instance['view_all_url'] ?? '';
 		$category      = $instance['category'] ?? '';
 		$count         = $instance['count'] ?? 4;
@@ -576,27 +576,27 @@ class MagPro_WP_Widget_Slider extends WP_Widget {
 		$categories    = \MagPro_Helpers::get_categories_list();
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Widget Title:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Widget Title:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>"><?php esc_html_e( 'Title Style:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title_style' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title_style' ) ); ?>">
-				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro-elements' ); ?></option>
-				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro-elements' ); ?></option>
-				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro-elements' ); ?></option>
+				<option value="style-1" <?php selected( $title_style, 'style-1' ); ?>><?php esc_html_e( 'Style 1: Modern Left Accent Bar', 'mag-pro' ); ?></option>
+				<option value="style-2" <?php selected( $title_style, 'style-2' ); ?>><?php esc_html_e( 'Style 2: Solid Badge Header', 'mag-pro' ); ?></option>
+				<option value="style-3" <?php selected( $title_style, 'style-3' ); ?>><?php esc_html_e( 'Style 3: Underline Dual-Color Bar', 'mag-pro' ); ?></option>
 			</select>
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_view_all ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_view_all' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>"><?php esc_html_e( 'Show "View All" Button', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_view_all' ) ); ?>"><?php esc_html_e( 'Show "View All" Button', 'mag-pro' ); ?></label>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>"><?php esc_html_e( '"View All" URL:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>"><?php esc_html_e( '"View All" URL:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'view_all_url' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'view_all_url' ) ); ?>" type="text" value="<?php echo esc_attr( $view_all_url ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_html_e( 'Category:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_html_e( 'Category:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'category' ) ); ?>">
 				<?php foreach ( $categories as $cat_id => $cat_name ) : ?>
 					<option value="<?php echo esc_attr( $cat_id ); ?>" <?php selected( $category, $cat_id ); ?>><?php echo esc_html( $cat_name ); ?></option>
@@ -604,18 +604,18 @@ class MagPro_WP_Widget_Slider extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'slide_height' ) ); ?>"><?php esc_html_e( 'Slide Height (px):', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'slide_height' ) ); ?>"><?php esc_html_e( 'Slide Height (px):', 'mag-pro' ); ?></label>
 			<input class="tiny-text" id="<?php echo esc_attr( $this->get_field_id( 'slide_height' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'slide_height' ) ); ?>" type="number" value="<?php echo esc_attr( $slide_height ); ?>" size="3"> px
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_views ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_views' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_date ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_date' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php esc_html_e( 'Show Date', 'mag-pro-elements' ); ?></label><br>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_date' ) ); ?>"><?php esc_html_e( 'Show Date', 'mag-pro' ); ?></label><br>
 
 			<input class="checkbox" type="checkbox" <?php checked( $show_badge ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_badge' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_badge' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_badge' ) ); ?>"><?php esc_html_e( 'Show Category Badge', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_badge' ) ); ?>"><?php esc_html_e( 'Show Category Badge', 'mag-pro' ); ?></label>
 		</p>
 		<?php
 	}
@@ -645,9 +645,9 @@ class MagPro_WP_Widget_Ticker extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 			'magpro_wp_ticker',
-			esc_html__( 'MagPro - News Ticker (Sidebar)', 'mag-pro-elements' ),
+			esc_html__( 'MagPro - News Ticker (Sidebar)', 'mag-pro' ),
 			array(
-				'description' => esc_html__( 'Display breaking news ticker in sidebars.', 'mag-pro-elements' ),
+				'description' => esc_html__( 'Display breaking news ticker in sidebars.', 'mag-pro' ),
 			)
 		);
 	}
@@ -655,7 +655,7 @@ class MagPro_WP_Widget_Ticker extends WP_Widget {
 	public function widget( $args, $instance ) {
 		echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-		$label_text = ! empty( $instance['label_text'] ) ? $instance['label_text'] : esc_html__( 'Trending News', 'mag-pro-elements' );
+		$label_text = ! empty( $instance['label_text'] ) ? $instance['label_text'] : esc_html__( 'Trending News', 'mag-pro' );
 		$category   = ! empty( $instance['category'] ) ? $instance['category'] : '';
 		$count      = ! empty( $instance['count'] ) ? intval( $instance['count'] ) : 6;
 		$style      = ! empty( $instance['style'] ) ? $instance['style'] : 'marquee';
@@ -730,7 +730,7 @@ class MagPro_WP_Widget_Ticker extends WP_Widget {
 	}
 
 	public function form( $instance ) {
-		$label_text = $instance['label_text'] ?? esc_html__( 'Trending News', 'mag-pro-elements' );
+		$label_text = $instance['label_text'] ?? esc_html__( 'Trending News', 'mag-pro' );
 		$category   = $instance['category'] ?? '';
 		$count      = $instance['count'] ?? 6;
 		$style      = $instance['style'] ?? 'marquee';
@@ -738,18 +738,18 @@ class MagPro_WP_Widget_Ticker extends WP_Widget {
 		$categories = \MagPro_Helpers::get_categories_list();
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'label_text' ) ); ?>"><?php esc_html_e( 'Label Text:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'label_text' ) ); ?>"><?php esc_html_e( 'Label Text:', 'mag-pro' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'label_text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'label_text' ) ); ?>" type="text" value="<?php echo esc_attr( $label_text ); ?>">
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'style' ) ); ?>"><?php esc_html_e( 'Style:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'style' ) ); ?>"><?php esc_html_e( 'Style:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'style' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'style' ) ); ?>">
-				<option value="marquee" <?php selected( $style, 'marquee' ); ?>><?php esc_html_e( 'Continuous Marquee Ribbon', 'mag-pro-elements' ); ?></option>
-				<option value="slide" <?php selected( $style, 'slide' ); ?>><?php esc_html_e( 'Slide / Fade Rotator', 'mag-pro-elements' ); ?></option>
+				<option value="marquee" <?php selected( $style, 'marquee' ); ?>><?php esc_html_e( 'Continuous Marquee Ribbon', 'mag-pro' ); ?></option>
+				<option value="slide" <?php selected( $style, 'slide' ); ?>><?php esc_html_e( 'Slide / Fade Rotator', 'mag-pro' ); ?></option>
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_html_e( 'Category:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php esc_html_e( 'Category:', 'mag-pro' ); ?></label>
 			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'category' ) ); ?>">
 				<?php foreach ( $categories as $cat_id => $cat_name ) : ?>
 					<option value="<?php echo esc_attr( $cat_id ); ?>" <?php selected( $category, $cat_id ); ?>><?php echo esc_html( $cat_name ); ?></option>
@@ -757,12 +757,12 @@ class MagPro_WP_Widget_Ticker extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of Posts:', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>"><?php esc_html_e( 'Number of Posts:', 'mag-pro' ); ?></label>
 			<input class="tiny-text" id="<?php echo esc_attr( $this->get_field_id( 'count' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'count' ) ); ?>" type="number" value="<?php echo esc_attr( $count ); ?>" size="3">
 		</p>
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $show_views ); ?> id="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'show_views' ) ); ?>" />
-			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro-elements' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'show_views' ) ); ?>"><?php esc_html_e( 'Show View Count', 'mag-pro' ); ?></label>
 		</p>
 		<?php
 	}

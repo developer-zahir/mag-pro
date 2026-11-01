@@ -21,7 +21,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'MagPro Dark Mode Switcher', 'mag-pro-elements' );
+		return esc_html__( 'MagPro Dark Mode Switcher', 'mag-pro' );
 	}
 
 	public function get_icon() {
@@ -41,20 +41,20 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			array(
-				'label' => esc_html__( 'Switcher Settings', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Switcher Settings', 'mag-pro' ),
 			)
 		);
 
 		$this->add_control(
 			'switcher_style',
 			array(
-				'label'   => esc_html__( 'Style', 'mag-pro-elements' ),
+				'label'   => esc_html__( 'Style', 'mag-pro' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'circle',
 				'options' => array(
-					'circle' => esc_html__( 'Circle Icon Button', 'mag-pro-elements' ),
-					'pill'   => esc_html__( 'Pill Toggle Switch', 'mag-pro-elements' ),
-					'button' => esc_html__( 'Button with Text', 'mag-pro-elements' ),
+					'circle' => esc_html__( 'Circle Icon Button', 'mag-pro' ),
+					'pill'   => esc_html__( 'Pill Toggle Switch', 'mag-pro' ),
+					'button' => esc_html__( 'Button with Text', 'mag-pro' ),
 				),
 			)
 		);
@@ -62,9 +62,9 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'light_text',
 			array(
-				'label'       => esc_html__( 'Light Label', 'mag-pro-elements' ),
+				'label'       => esc_html__( 'Light Label', 'mag-pro' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Light', 'mag-pro-elements' ),
+				'default'     => esc_html__( 'Light', 'mag-pro' ),
 				'condition'   => array(
 					'switcher_style' => 'button',
 				),
@@ -74,9 +74,9 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'dark_text',
 			array(
-				'label'       => esc_html__( 'Dark Label', 'mag-pro-elements' ),
+				'label'       => esc_html__( 'Dark Label', 'mag-pro' ),
 				'type'        => Controls_Manager::TEXT,
-				'default'     => esc_html__( 'Dark', 'mag-pro-elements' ),
+				'default'     => esc_html__( 'Dark', 'mag-pro' ),
 				'condition'   => array(
 					'switcher_style' => 'button',
 				),
@@ -86,19 +86,19 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->add_responsive_control(
 			'alignment',
 			array(
-				'label'     => esc_html__( 'Alignment', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Alignment', 'mag-pro' ),
 				'type'      => Controls_Manager::CHOOSE,
 				'options'   => array(
 					'left'   => array(
-						'title' => esc_html__( 'Left', 'mag-pro-elements' ),
+						'title' => esc_html__( 'Left', 'mag-pro' ),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
-						'title' => esc_html__( 'Center', 'mag-pro-elements' ),
+						'title' => esc_html__( 'Center', 'mag-pro' ),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
-						'title' => esc_html__( 'Right', 'mag-pro-elements' ),
+						'title' => esc_html__( 'Right', 'mag-pro' ),
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
@@ -115,7 +115,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->start_controls_section(
 			'section_style',
 			array(
-				'label' => esc_html__( 'Style & Colors', 'mag-pro-elements' ),
+				'label' => esc_html__( 'Style & Colors', 'mag-pro' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -123,7 +123,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->add_responsive_control(
 			'btn_size',
 			array(
-				'label'      => esc_html__( 'Size (px)', 'mag-pro-elements' ),
+				'label'      => esc_html__( 'Size (px)', 'mag-pro' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -146,7 +146,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'icon_color',
 			array(
-				'label'     => esc_html__( 'Icon Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Icon Color', 'mag-pro' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-theme-toggle svg, {{WRAPPER}} .magpro-dm-btn svg' => 'stroke: {{VALUE}}; color: {{VALUE}};',
@@ -157,7 +157,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 		$this->add_control(
 			'btn_bg',
 			array(
-				'label'     => esc_html__( 'Background Color', 'mag-pro-elements' ),
+				'label'     => esc_html__( 'Background Color', 'mag-pro' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .magpro-theme-toggle, {{WRAPPER}} .magpro-dm-btn, {{WRAPPER}} .magpro-dm-pill' => 'background-color: {{VALUE}};',
@@ -169,7 +169,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'btn_border',
-				'label'    => esc_html__( 'Border', 'mag-pro-elements' ),
+				'label'    => esc_html__( 'Border', 'mag-pro' ),
 				'selector' => '{{WRAPPER}} .magpro-theme-toggle, {{WRAPPER}} .magpro-dm-btn, {{WRAPPER}} .magpro-dm-pill',
 			)
 		);
@@ -207,7 +207,7 @@ class MagPro_Widget_Dark_Mode extends Widget_Base {
 					<span style="display:inline-flex;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
 				</div>
 			<?php else : ?>
-				<button type="button" class="magpro-theme-toggle" data-magpro-toggle="theme" aria-label="<?php esc_attr_e( 'Toggle dark and light theme', 'mag-pro-elements' ); ?>">
+				<button type="button" class="magpro-theme-toggle" data-magpro-toggle="theme" aria-label="<?php esc_attr_e( 'Toggle dark and light theme', 'mag-pro' ); ?>">
 					<span class="magpro-icon-sun">
 						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
 					</span>
